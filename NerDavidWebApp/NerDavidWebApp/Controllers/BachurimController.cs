@@ -5,16 +5,21 @@ using NerDavidWebApp.Models;
 
 namespace NerDavidWebApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
+
     [ApiController]
     public class BachurimController : ControllerBase
     {
         IBachurim bachurim;
-        
-        public List<ShiurTbl> GetShiur()
-        {
-            return bachurim.GetShiur();
-        }
 
+        [HttpGet]
+        //public List<ShiurTbl> GetShiur()
+        //{
+        //    return bachurim.GetShiur();
+        //}
+        public int Hellow()
+        {
+            return 3;
+        }
     }
 }
