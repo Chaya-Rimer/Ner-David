@@ -6,22 +6,30 @@ import { RouterModule } from '@angular/router';
 import { Router } from 'express';
 import { routes } from '../app.routes';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BachurimTableComponent } from '../bachurim-table/bachurim-table.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BachurimTableComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
+    SharedModule
     
   ],
   bootstrap:[
     AppComponent
+  ],
+  providers: [
+    provideAnimationsAsync()
   ]
 })
 export class AppModule { }

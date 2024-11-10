@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +9,7 @@ import { AppService } from './app.service';
 })
 export class AppComponent {
   title = 'NerDavid';
-  constructor(private ser: AppService) { }
+  constructor() { }
   ngOnInit() {
-    this.ser.getstring().subscribe(x => { alert('massage:' + x) });
   }
 }

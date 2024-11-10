@@ -7,13 +7,16 @@ namespace NerDavidWebApp.Services
     {
        
             NerDavidDbContext db=new NerDavidDbContext();
-        
 
-        //public List<ShiurTbl> GetShiur()
-        //{
-        //    db.ShiurTbls.Tolist();
-        //}
 
+        public List<ShiurTbl> GetShiur()
+        {
+           return db.ShiurTbls.ToList();
+        }
+        public List<BachurimTbl> GetBachurimTable()
+        {
+            return db.BachurimTbls.ToList();
+        }
 
     }
 }

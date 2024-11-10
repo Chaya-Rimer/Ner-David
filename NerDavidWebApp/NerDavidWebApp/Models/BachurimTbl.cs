@@ -27,7 +27,11 @@ public partial class BachurimTbl
 
     public virtual CityTbl? City { get; set; }
 
+    public virtual ICollection<LimudTbl> LimudTbls { get; set; } = new List<LimudTbl>();
+
     public virtual ShiurTbl? Shiur { get; set; }
+
+    public virtual ICollection<TestsTbl> TestsTbls { get; set; } = new List<TestsTbl>();
 
     public virtual YeshivaTbl? Yeshiva { get; set; }
 }

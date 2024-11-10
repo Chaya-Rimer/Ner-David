@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NerDavidWebApp.Intarfaces;
 using NerDavidWebApp.Models;
+using NerDavidWebApp.Services;
 
 namespace NerDavidWebApp.Controllers
 {
@@ -10,16 +11,19 @@ namespace NerDavidWebApp.Controllers
     [ApiController]
     public class BachurimController : ControllerBase
     {
-        IBachurim bachurim;
+     
+        public readonly BachurimService BachurimService=new BachurimService();
+
 
         [HttpGet]
-        //public List<ShiurTbl> GetShiur()
-        //{
-        //    return bachurim.GetShiur();
-        //}
-        public int Hellow()
+        public List<ShiurTbl> GetShiur()
         {
-            return 3;
+            return BachurimService.GetShiur();
+        }
+        [HttpGet]
+        public List<BachurimTbl> GetBachurimTable()
+        {
+            return BachurimService.GetBachurimTable();
         }
     }
 }

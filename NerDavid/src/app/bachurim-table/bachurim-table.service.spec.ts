@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AppService } from './app.service';
+import { BachurimTableService } from './bachurim-table.service';
 
-describe('AppService', () => {
-  let service: AppService;
+describe('BachurimTableService', () => {
+  let service: BachurimTableService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AppService);
+    service = TestBed.inject(BachurimTableService);
   });
 
   it('should be created', () => {

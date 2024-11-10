@@ -9,5 +9,7 @@ public partial class ShiurTbl
 
     public string? ShiurName { get; set; }
 
+    public string? ShiurType { get; set; }
+
     public virtual ICollection<BachurimTbl> BachurimTbls { get; set; } = new List<BachurimTbl>();
 }

@@ -19,13 +19,25 @@ public partial class NerDavidDbContext : DbContext
 
     public virtual DbSet<CityTbl> CityTbls { get; set; }
 
+    public virtual DbSet<LimudTbl> LimudTbls { get; set; }
+
+    public virtual DbSet<MasechetTbl> MasechetTbls { get; set; }
+
+    public virtual DbSet<QuestionsTbl> QuestionsTbls { get; set; }
+
     public virtual DbSet<ShiurTbl> ShiurTbls { get; set; }
+
+    public virtual DbSet<TestsTbl> TestsTbls { get; set; }
+
+    public virtual DbSet<YearsTbl> YearsTbls { get; set; }
 
     public virtual DbSet<YeshivaTbl> YeshivaTbls { get; set; }
 
+    public virtual DbSet<ZmanTbl> ZmanTbls { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=NerDavidDB;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=SHANSUN\\MSSQLSERVER03;Database=NerDavidDB;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -81,6 +93,75 @@ public partial class NerDavidDbContext : DbContext
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<LimudTbl>(entity =>
+        {
+            entity.HasKey(e => e.LimudId).HasName("Limud_ID_pk");
+
+            entity.ToTable("LimudTbl");
+
+            entity.Property(e => e.EndValue)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.Perek)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.StartValue)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Bachur).WithMany(p => p.LimudTbls)
+                .HasForeignKey(d => d.BachurId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Limud_Bach_fk");
+
+            entity.HasOne(d => d.Masechet).WithMany(p => p.LimudTbls)
+                .HasForeignKey(d => d.MasechetId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Limud_Mas_fk");
+
+            entity.HasOne(d => d.Year).WithMany(p => p.LimudTbls)
+                .HasForeignKey(d => d.YearId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Limud_Year_fk");
+
+            entity.HasOne(d => d.Zman).WithMany(p => p.LimudTbls)
+                .HasForeignKey(d => d.ZmanId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Limud_Zman_fk");
+        });
+
+        modelBuilder.Entity<MasechetTbl>(entity =>
+        {
+            entity.HasKey(e => e.MasechetId).HasName("Madechet_ID_pk");
+
+            entity.ToTable("MasechetTbl");
+
+            entity.Property(e => e.MasechetName).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<QuestionsTbl>(entity =>
+        {
+            entity.HasKey(e => e.QuestionId).HasName("Ques_ID_pk");
+
+            entity.ToTable("QuestionsTbl");
+
+            entity.Property(e => e.Answer1).IsUnicode(false);
+            entity.Property(e => e.Answer2).IsUnicode(false);
+            entity.Property(e => e.Answer3).IsUnicode(false);
+            entity.Property(e => e.Daf)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.Perek)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.Question).IsUnicode(false);
+
+            entity.HasOne(d => d.Masechet).WithMany(p => p.QuestionsTbls)
+                .HasForeignKey(d => d.MasechetId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Ques_Mas_fk");
+        });
+
         modelBuilder.Entity<ShiurTbl>(entity =>
         {
             entity.HasKey(e => e.ShiurId).HasName("Shiur_ID_pk");
@@ -90,6 +171,40 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.ShiurId).HasColumnName("ShiurID");
             entity.Property(e => e.ShiurName)
                 .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.ShiurType)
+                .HasMaxLength(50)
+                .IsFixedLength();
+        });
+
+        modelBuilder.Entity<TestsTbl>(entity =>
+        {
+            entity.HasKey(e => e.TestId).HasName("Test_ID_pk");
+
+            entity.ToTable("TestsTbl");
+
+            entity.Property(e => e.CommentTest).IsUnicode(false);
+            entity.Property(e => e.TestFile).IsUnicode(false);
+
+            entity.HasOne(d => d.Bachur).WithMany(p => p.TestsTbls)
+                .HasForeignKey(d => d.BachurId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Test_Bach_fk");
+
+            entity.HasOne(d => d.Year).WithMany(p => p.TestsTbls)
+                .HasForeignKey(d => d.YearId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Test_Year_fk");
+        });
+
+        modelBuilder.Entity<YearsTbl>(entity =>
+        {
+            entity.HasKey(e => e.YearId).HasName("Year_ID_pk");
+
+            entity.ToTable("YearsTbl");
+
+            entity.Property(e => e.YearName)
+                .HasMaxLength(20)
                 .IsUnicode(false);
         });
 
@@ -102,6 +217,17 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.YeshivaId).HasColumnName("YeshivaID");
             entity.Property(e => e.YeshivaName)
                 .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<ZmanTbl>(entity =>
+        {
+            entity.HasKey(e => e.ZmanId).HasName("Zman_ID_pk");
+
+            entity.ToTable("ZmanTbl");
+
+            entity.Property(e => e.ZmanName)
+                .HasMaxLength(20)
                 .IsUnicode(false);
         });
 
