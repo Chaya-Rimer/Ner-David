@@ -9,10 +9,11 @@ import { IbachurimTable } from './IBachurimTable';
 export class BachurimTableService {
 
   constructor(private http:HttpClient) { }
-  url='https://localhost:7178/Bachurim/'
+  url='https://localhost:7178/BachurimTable/'
 
-  getBachurim():Observable<IbachurimTable[]>{
+  getBachurimTable():Observable<IbachurimTable[]>{
    return this.http.get<IbachurimTable[]>(this.url+'GetBachurimTable')
  }
+//  getTableColumns():Observable<>
 
 }

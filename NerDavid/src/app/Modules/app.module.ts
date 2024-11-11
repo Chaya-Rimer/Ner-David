@@ -9,13 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BachurimTableComponent } from '../bachurim-table/bachurim-table.component';
+import { DisplayDataComponent } from '../display-data/display-data.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BachurimTableComponent
+    BachurimTableComponent,
+    DisplayDataComponent
   ],
   imports: [
     CommonModule,

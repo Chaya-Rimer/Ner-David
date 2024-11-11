@@ -17,6 +17,7 @@ namespace NerDavidWebApp.Services
         {
             return db.BachurimTbls.ToList();
         }
+        
 
     }
 }

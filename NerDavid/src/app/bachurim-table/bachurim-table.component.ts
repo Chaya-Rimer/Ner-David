@@ -18,12 +18,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class BachurimTableComponent {
   constructor(private BachurimTableSer: BachurimTableService) { }
   dataSource: IbachurimTable[] = []
-  expandedElement: IbachurimTable | null|undefined;
-  columnsToDisplay = [ 'bachurId','firstName','lastName','cityId','adress',
-    'phone1','phone2','phone3','yeshivaId','shiurId' ]
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+  
   ngOnInit() {
-    this.BachurimTableSer.getBachurim().subscribe(x => this.dataSource = x)
+    this.BachurimTableSer.getBachurimTable().subscribe(x => this.dataSource = x)
+    }
   }
 
-}
+

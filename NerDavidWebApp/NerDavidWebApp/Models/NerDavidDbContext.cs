@@ -19,6 +19,8 @@ public partial class NerDavidDbContext : DbContext
 
     public virtual DbSet<CityTbl> CityTbls { get; set; }
 
+    public virtual DbSet<DisplayDataTbl> DisplayDataTbls { get; set; }
+
     public virtual DbSet<LimudTbl> LimudTbls { get; set; }
 
     public virtual DbSet<MasechetTbl> MasechetTbls { get; set; }
@@ -26,6 +28,8 @@ public partial class NerDavidDbContext : DbContext
     public virtual DbSet<QuestionsTbl> QuestionsTbls { get; set; }
 
     public virtual DbSet<ShiurTbl> ShiurTbls { get; set; }
+
+    public virtual DbSet<StatusTbl> StatusTbls { get; set; }
 
     public virtual DbSet<TestsTbl> TestsTbls { get; set; }
 
@@ -89,6 +93,21 @@ public partial class NerDavidDbContext : DbContext
 
             entity.Property(e => e.CityId).HasColumnName("CityID");
             entity.Property(e => e.CityName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<DisplayDataTbl>(entity =>
+        {
+            entity.HasKey(e => e.DisplayDataId).HasName("Disp_ID_pk");
+
+            entity.ToTable("DisplayDataTbl");
+
+            entity.Property(e => e.DisplayDataId).HasColumnName("DisplayDataID");
+            entity.Property(e => e.Columns)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Title)
                 .HasMaxLength(50)
                 .IsUnicode(false);
         });
@@ -173,6 +192,20 @@ public partial class NerDavidDbContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.ShiurType)
+                .HasMaxLength(50)
+                .IsFixedLength();
+        });
+
+        modelBuilder.Entity<StatusTbl>(entity =>
+        {
+            entity.HasKey(e => e.StatusId).HasName("Stat_ID_pk");
+
+            entity.ToTable("StatusTbl");
+
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.StatusSymbol)
                 .HasMaxLength(50)
                 .IsFixedLength();
         });
