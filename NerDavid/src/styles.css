@@ -15,3 +15,6 @@ body { margin: 1%; font-family: Roboto, "Helvetica Neue", sans-serif; background
     background-color: rgb(141, 141, 141); /* Yellow thumb */
     border-radius: 4px;
 }
+.color{
+    color:rgb(7, 224, 152);
+}

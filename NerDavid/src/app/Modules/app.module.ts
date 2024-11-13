@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DisplayDataComponent } from '../display-data/display-data.component';
+import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
 import { BachurimTableComponent } from '../Bachurim/bachurim-table/bachurim-table.component';
 import { BachurimDesktopComponent } from '../Bachurim/bachurim-desktop/bachurim-desktop.component';
 import { BachurDetailsComponent } from '../Bachurim/bachur-details/bachur-details.component';
@@ -19,9 +20,10 @@ import { BachurDetailsComponent } from '../Bachurim/bachur-details/bachur-detail
   declarations: [
     AppComponent,
     BachurimTableComponent,
+    BachurDetailsComponent
     DisplayDataComponent,
     BachurimDesktopComponent,
-    BachurDetailsComponent
+    AddBachurComponent
   ],
   imports: [
     CommonModule,
