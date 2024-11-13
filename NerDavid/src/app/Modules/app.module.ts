@@ -8,8 +8,10 @@ import { routes } from '../app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { BachurimTableComponent } from '../bachurim-table/bachurim-table.component';
+import { BachurimTableComponent } from '../Bachurim/bachurim-table/bachurim-table.component';
 import { DisplayDataComponent } from '../display-data/display-data.component';
+import { BachurimDesktopComponent } from '../Bachurim/bachurim-desktop/bachurim-desktop.component';
+import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
 
 
 
@@ -17,7 +19,9 @@ import { DisplayDataComponent } from '../display-data/display-data.component';
   declarations: [
     AppComponent,
     BachurimTableComponent,
-    DisplayDataComponent
+    DisplayDataComponent,
+    BachurimDesktopComponent,
+    AddBachurComponent
   ],
   imports: [
     CommonModule,
