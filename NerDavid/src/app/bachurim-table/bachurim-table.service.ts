@@ -14,6 +14,5 @@ export class BachurimTableService {
   getBachurimTable():Observable<IbachurimTable[]>{
    return this.http.get<IbachurimTable[]>(this.url+'GetBachurimTable')
  }
-//  getTableColumns():Observable<>
 
 }

@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* html, body { height: 100%; }
-body { margin: 1%; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+html, body { height: 100%; }
+
+body { margin: 1%; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f0f2f5; }
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* ::-webkit-scrollbar-track {
+    background: #ccc; 
+} */
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(141, 141, 141); /* Yellow thumb */
+    border-radius: 4px;
+}
