@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NerDavidWebApp.Classes;
 using NerDavidWebApp.Intarfaces;
 using NerDavidWebApp.Models;
 using NerDavidWebApp.Services;
@@ -24,6 +25,11 @@ namespace NerDavidWebApp.Controllers
         public List<BachurimTbl> GetBachurimTable()
         {
             return BachurimService.GetBachurimTable();
+        }
+        [HttpGet]
+        public List<KeyValuePair<char, string[]>> GetBachurimNames()
+        {
+            return BachurimService.GetBachurimNames(); 
         }
     }
 }

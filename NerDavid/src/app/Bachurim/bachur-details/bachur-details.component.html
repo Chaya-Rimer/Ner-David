@@ -1,1 +1,21 @@
-<p>bachur-details works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>פרטים:</mat-card-title>
+        <button class="button" mat-icon-button (click)="openDialog()">
+            <mat-icon>edit_note</mat-icon>
+          </button>
+    </mat-card-header>
+    <mat-card-content>
+        <b>משפחה: </b>{{bachurDetails.lastName}}<br>
+        <b>שם: </b>{{bachurDetails.firstName}}<br>
+        <b>ישיבה: </b>{{bachurDetails.yeshiva}}<br>
+        <b>שיעור: </b>{{bachurDetails.shiur}}<br>
+        <b>סוג ישיבה: </b>{{bachurDetails.yeshivaType}}<br>
+        <b>עיר: </b>{{bachurDetails.city}}<br>
+        <b>כתובת: </b>{{bachurDetails.adress}}<br>
+        <b>טלפון 1: </b>{{bachurDetails.phone1}}<br>
+        <b>טלפון 2: </b>{{bachurDetails.phone2}}<br>
+        <b>טלפון 3: </b>{{bachurDetails.phone3}}<br>
+    </mat-card-content>
+</mat-card>
+

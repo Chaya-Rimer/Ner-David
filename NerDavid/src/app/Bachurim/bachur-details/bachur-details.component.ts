@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { IbachurimTable } from '../bachurim-table/IBachurimTable';
+import { MatDialog } from '@angular/material/dialog';
+import { AddBachurComponent } from '../add-bachur/add-bachur.component';
 
 @Component({
   selector: 'nd-bachur-details',
@@ -6,5 +9,15 @@ import { Component } from '@angular/core';
   styleUrl: './bachur-details.component.scss'
 })
 export class BachurDetailsComponent {
-
+  @Input() bachurDetails!:IbachurimTable;
+  readonly dialog = inject(MatDialog);
+  openDialog() {
+    this.dialog.open(AddBachurComponent, {
+      width: '350px',
+      height:'550px',
+      data: {
+      },
+     
+    });
+  }
 }

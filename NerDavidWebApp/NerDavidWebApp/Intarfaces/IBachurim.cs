@@ -1,4 +1,5 @@
-﻿using NerDavidWebApp.Models;
+﻿using NerDavidWebApp.Classes;
+using NerDavidWebApp.Models;
 
 namespace NerDavidWebApp.Intarfaces
 {
@@ -7,6 +8,7 @@ namespace NerDavidWebApp.Intarfaces
 
         public List<ShiurTbl> GetShiur();
         public List<BachurimTbl> GetBachurimTable();
+        public List<KeyValuePair<char, string[]>> GetBachurimNames();
 
     }
 }
