@@ -16,4 +16,6 @@ public partial class DisplayDataTbl
     public int? Colspan { get; set; }
 
     public int? DisplayType { get; set; }
+
+    public string? Component { get; set; }
 }

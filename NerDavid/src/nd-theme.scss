@@ -1,0 +1,18 @@
+// @use '~@angular/material' as mat ;
+// // @import '~@angular/material/theming';
+// // @import "@angular/material/prebuilt-themes/azure-blue.css";
+// @import '../node_modules/@material/theme';
+// @include mat-core();
+
+// $nd-primary: mat-palette(mat.rgb(23, 194, 137));
+// $nd-accent: mat-palette(mat.rgb(246, 121, 4));
+// $nd-warn: mat-palette($mat-red);
+
+// $nd-theme:mat-light-theme((
+//   color: (
+//     primary: $nd-primary,
+//     accent: $nd-accent,
+//     warn: $nd-warn
+//   )
+// ));
+// @include angular-material-themes($nd-theme);

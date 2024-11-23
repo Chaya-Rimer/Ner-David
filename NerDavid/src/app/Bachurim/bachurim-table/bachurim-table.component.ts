@@ -11,7 +11,6 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class BachurimTableComponent {
   constructor(private BachurimTableSer: BachurimTableService) { }
   dataSource: IbachurimTable[] = []
-  
   ngOnInit() {
     this.BachurimTableSer.getBachurimTable().subscribe(x => this.dataSource = x)
     }

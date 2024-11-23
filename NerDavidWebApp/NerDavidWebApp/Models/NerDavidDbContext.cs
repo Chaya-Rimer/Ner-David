@@ -25,6 +25,8 @@ public partial class NerDavidDbContext : DbContext
 
     public virtual DbSet<MasechetTbl> MasechetTbls { get; set; }
 
+    public virtual DbSet<PhonesTbl> PhonesTbls { get; set; }
+
     public virtual DbSet<QuestionsTbl> QuestionsTbls { get; set; }
 
     public virtual DbSet<ShiurTbl> ShiurTbls { get; set; }
@@ -70,6 +72,7 @@ public partial class NerDavidDbContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.ShiurId).HasColumnName("ShiurID");
+            entity.Property(e => e.StatusId).HasColumnName("StatusID");
             entity.Property(e => e.YeshivaId).HasColumnName("YeshivaID");
 
             entity.HasOne(d => d.City).WithMany(p => p.BachurimTbls)
@@ -79,6 +82,10 @@ public partial class NerDavidDbContext : DbContext
             entity.HasOne(d => d.Shiur).WithMany(p => p.BachurimTbls)
                 .HasForeignKey(d => d.ShiurId)
                 .HasConstraintName("Bach_Shiur_fk");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.BachurimTbls)
+                .HasForeignKey(d => d.StatusId)
+                .HasConstraintName("bach_ID_fk");
 
             entity.HasOne(d => d.Yeshiva).WithMany(p => p.BachurimTbls)
                 .HasForeignKey(d => d.YeshivaId)
@@ -107,6 +114,9 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.Columns)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.Component)
+                .HasMaxLength(50)
+                .IsFixedLength();
             entity.Property(e => e.Title)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -156,6 +166,26 @@ public partial class NerDavidDbContext : DbContext
             entity.ToTable("MasechetTbl");
 
             entity.Property(e => e.MasechetName).HasMaxLength(50);
+            entity.Property(e => e.PrakimNum)
+                .HasMaxLength(10)
+                .IsFixedLength();
+        });
+
+        modelBuilder.Entity<PhonesTbl>(entity =>
+        {
+            entity.HasKey(e => e.PhoneId).HasName("ph_ID_pk");
+
+            entity.ToTable("PhonesTbl");
+
+            entity.Property(e => e.PhoneId).HasColumnName("PhoneID");
+            entity.Property(e => e.BachurId).HasColumnName("BachurID");
+            entity.Property(e => e.Phone)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Bachur).WithMany(p => p.PhonesTbls)
+                .HasForeignKey(d => d.BachurId)
+                .HasConstraintName("phbachur_ID_fk");
         });
 
         modelBuilder.Entity<QuestionsTbl>(entity =>
@@ -192,7 +222,7 @@ public partial class NerDavidDbContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.ShiurType)
-                .HasMaxLength(50)
+                .HasMaxLength(10)
                 .IsFixedLength();
         });
 
@@ -251,6 +281,9 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.YeshivaName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.YeshivaType)
+                .HasMaxLength(10)
+                .IsFixedLength();
         });
 
         modelBuilder.Entity<ZmanTbl>(entity =>

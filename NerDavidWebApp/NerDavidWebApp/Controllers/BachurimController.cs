@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NerDavidWebApp.Classes;
 using NerDavidWebApp.Intarfaces;
 using NerDavidWebApp.Models;
 using NerDavidWebApp.Services;
@@ -16,14 +17,24 @@ namespace NerDavidWebApp.Controllers
 
 
         [HttpGet]
-        public List<ShiurTbl> GetShiur()
+        public List<Shiur> GetShiurByYeshivaId(int yeshivaId)
         {
-            return BachurimService.GetShiur();
+            return BachurimService.GetShiur(yeshivaId);
         }
         [HttpGet]
-        public List<BachurimTbl> GetBachurimTable()
+        public List<YeshivaTbl> GetYeshiva()
         {
-            return BachurimService.GetBachurimTable();
+            return BachurimService.GetYeshiva();
+        }
+        [HttpGet]
+        public List<CityTbl> GetCity()
+        {
+            return BachurimService.GetCity();
+        }
+        [HttpGet]
+        public List<PhonesTbl> GetPhones(int bachurId)
+        {
+            return BachurimService.GetPhones(bachurId);
         }
     }
 }

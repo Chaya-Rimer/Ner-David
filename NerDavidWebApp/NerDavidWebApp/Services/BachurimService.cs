@@ -1,4 +1,5 @@
-﻿using NerDavidWebApp.Intarfaces;
+﻿using NerDavidWebApp.Classes;
+using NerDavidWebApp.Intarfaces;
 using NerDavidWebApp.Models;
 
 namespace NerDavidWebApp.Services
@@ -9,15 +10,27 @@ namespace NerDavidWebApp.Services
             NerDavidDbContext db=new NerDavidDbContext();
 
 
-        public List<ShiurTbl> GetShiur()
+        public List<Shiur> GetShiur(int yeshivaId)
         {
-           return db.ShiurTbls.ToList();
+           return db.ShiurTbls.Where(x=>x.ShiurType== 
+                  db.YeshivaTbls.First(a => a.YeshivaId == yeshivaId).YeshivaType).Select(x=>new Shiur
+                  {
+                      ShiurId=x.ShiurId,
+                      ShiurName=x.ShiurName,
+                  }).ToList();
         }
-        public List<BachurimTbl> GetBachurimTable()
+        public List<YeshivaTbl> GetYeshiva()
         {
-            return db.BachurimTbls.ToList();
+            return db.YeshivaTbls.ToList();
         }
-        
+        public List<CityTbl> GetCity()
+        {
+            return db.CityTbls.ToList();
+        }
+        public List<PhonesTbl> GetPhones(int bachurId) 
+        { 
+            return db.PhonesTbls.Where(x=>x.BachurId== bachurId).ToList();
+        }
 
     }
 }

@@ -1,8 +1,14 @@
-<div (click)="openDialog()" class="addBachur" >
-    <mat-icon class="color">person_add</mat-icon>
-    <b class="text">בחור חדש</b>
-</div>
-<div class="section">
+<!-- <mat-form-field appearance="fill">
+    <mat-label>חיפוש</mat-label>
+    <input matInput >
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field> -->
 
+
+  <button mat-icon-button (click)="openDialog()"       
+       matTooltip="בחור חדש" color="primery">
+    <mat-icon>person_add</mat-icon>
+  </button>   
+<div class="section">
 </div>
 <app-bachurim-table></app-bachurim-table>

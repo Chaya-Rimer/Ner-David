@@ -5,4 +5,5 @@ export interface IDisplayData {
     orderBy?: number
     colspan?: number
     displayType?: number
+    component?:string
 }

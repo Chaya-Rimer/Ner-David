@@ -1,12 +1,16 @@
-﻿using NerDavidWebApp.Models;
+﻿using NerDavidWebApp.Classes;
+using NerDavidWebApp.Models;
 
 namespace NerDavidWebApp.Intarfaces
 {
     public interface IBachurim
     {
 
-        public List<ShiurTbl> GetShiur();
-        public List<BachurimTbl> GetBachurimTable();
+        public List<Shiur> GetShiur(int yeshivaId);
+        public List<YeshivaTbl> GetYeshiva();
+        public List<CityTbl> GetCity();
+        public List<PhonesTbl> GetPhones(int bachurId);
+
 
     }
 }
