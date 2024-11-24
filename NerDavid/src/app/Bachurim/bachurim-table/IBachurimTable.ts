@@ -4,4 +4,5 @@ export interface IbachurimTable{
     firstName ?:string
     yeshiva?:string
     shiur?:string
+    status?:string
 }

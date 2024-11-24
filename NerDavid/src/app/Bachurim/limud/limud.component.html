@@ -1,0 +1,38 @@
+<form [formGroup]="form">
+  <div formArrayName="formArray">
+    <div *ngFor="let formGroup of  formArray.controls; let i = index">
+      <div [formGroupName]="i">
+        <mat-form-field>
+          <mat-label> מסכת</mat-label>
+          <mat-select formControlName="masechet">
+            <mat-option *ngFor="let item of masecetOption" (onSelectionChange)="getPrakim($event)" [value]="item">
+              {{item.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+       
+        <mat-form-field>
+          <mat-label> פרק</mat-label>
+          <mat-select formControlName="perek">
+            <mat-option *ngFor="let item of prakimNumArray" (onSelectionChange)="getPrakim($event)" [value]="item">
+              {{item.letter}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="daf">
+          <mat-label>מדף</mat-label>
+          <input matInput type="text" [pattern]="hebrewLettersPattern" formControlName="start">
+        </mat-form-field>
+
+        <mat-form-field class="daf">
+          <mat-label>עד דף</mat-label>
+          <input matInput type="text" [pattern]="hebrewLettersPattern" formControlName="end">
+        </mat-form-field>
+
+        <mat-icon (click)="deletForm(i)">delete_forever</mat-icon>
+      </div>
+    </div>
+  </div>
+</form>
+<u (click)="addForm()" class="addLimud">הוסף לימוד +</u>

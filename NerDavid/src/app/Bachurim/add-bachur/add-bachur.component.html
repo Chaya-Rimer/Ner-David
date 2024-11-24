@@ -1,6 +1,65 @@
+<!-- <dialog> -->
 <div class="allForm">
-    <h4 class="color">בחור חדש</h4>
-<form>
+    <h5><b> הוספת בחור חדש </b></h5>
+    <form [formGroup]="newBachurForm">
+        <mat-form-field>
+            <mat-label>שם פרטי</mat-label>
+            <input matInput formControlName="firstName">
+        </mat-form-field>
 
-</form>
+        <mat-form-field>
+            <mat-label>שם משפחה</mat-label>
+            <input matInput formControlName="lastName">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>עיר</mat-label>
+            <input #input type="text" matInput formControlName="city" [matAutocomplete]="auto" (input)="filter()"
+                (focus)="filter()">
+            <mat-autocomplete requireSelection #auto="matAutocomplete">
+                @for (option of filteredOptions; track option) {
+                <mat-option [value]="option">{{option}}</mat-option>
+                }
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>כתובת </mat-label>
+            <input matInput formControlName="address">
+        </mat-form-field>
+
+       
+
+        <mat-form-field>
+            <mat-label> ישיבה</mat-label>
+            <mat-select formControlName="yeshiva">
+                <mat-option *ngFor="let item of yeshivaOption" (onSelectionChange)="getShiur($event)" [value]="item">
+                    {{ item.yeshivaName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label> שיעור</mat-label>
+            <mat-select formControlName="shiur">
+                <mat-option *ngFor="let i of shiurOption" value="i.shiurName">
+                    {{ i.shiurName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="telForm">
+            <mat-label>טלפון 1</mat-label>
+            <!-- <span matTextPrefix class="span">+1 &nbsp;</span> -->
+            <input type="tel" matInput placeholder="555-555-1234">
+            <mat-icon matSuffix>call</mat-icon>
+          </mat-form-field>
+          <br>
+        <hr>
+        <nd-limud></nd-limud>
+        <br>
+        <button mat-flat-button (click)="save()"
+            [disabled]="newBachurForm.invalid ">שמירה</button>
+    </form>
 </div>
+<!-- </dialog> -->
