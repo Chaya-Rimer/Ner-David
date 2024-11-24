@@ -15,12 +15,6 @@ public partial class BachurimTbl
 
     public string? Adress { get; set; }
 
-    public string? Phone1 { get; set; }
-
-    public string? Phone2 { get; set; }
-
-    public string? Phone3 { get; set; }
-
     public int? YeshivaId { get; set; }
 
     public int? ShiurId { get; set; }
@@ -34,4 +28,5 @@ public partial class BachurimTbl
     public virtual ICollection<TestsTbl> TestsTbls { get; set; } = new List<TestsTbl>();
 
     public virtual YeshivaTbl? Yeshiva { get; set; }
+    public virtual ICollection<PhonesTbl> PhonesTbl { get; set; } = new List<PhonesTbl>();
 }

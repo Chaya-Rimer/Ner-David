@@ -21,11 +21,11 @@ namespace NerDavidWebApp.Controllers
         {
             return BachurimService.GetShiur();
         }
-        [HttpGet]
-        public List<BachurimTbl> GetBachurimTable()
-        {
-            return BachurimService.GetBachurimTable();
-        }
+        //[HttpGet]
+        //public List<BachurimTbl> GetBachurimTable()
+        //{
+        //    return BachurimService.GetBachurimTable();
+        //}
         [HttpGet]
         public List<KeyValuePair<char, string[]>> GetBachurimNames()
         {

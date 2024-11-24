@@ -1,3 +1,5 @@
+import { IPhones } from "./IPhones";
+
 export interface IbachurimTable {
     bachurId: number;
     lastName?: string;
@@ -7,7 +9,5 @@ export interface IbachurimTable {
     yeshivaType?: string;
     adress?: string;
     city?: string;
-    phone1?: string;
-    phone2?: string;
-    phone3?: string;
+    phones: IPhones[];
 }

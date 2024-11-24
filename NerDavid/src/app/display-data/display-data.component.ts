@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 import { DisplayDataService } from './display-data.service';
 import { IDisplayData } from './IDisplayData';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { DISPLAY_ROW_CONTENT, DisplayRowContent } from './display-row-content.directive';
 
 @Component({
   selector: 'nd-display-data',
@@ -18,6 +19,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class DisplayDataComponent {
   @Input() dataSource: any;
   @Input() displayDataType!: number;
+  @ContentChild(DISPLAY_ROW_CONTENT, { read: TemplateRef, static: true }) contentTemplate!: TemplateRef<DisplayRowContent>;
+
   expandedElement: any | null | undefined;
   columnsToDisplay!: IDisplayData[];
   columnsToDisplayWithExpand:any[]=[]

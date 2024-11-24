@@ -18,9 +18,7 @@ namespace NerDavidWebApp.Services
                 YeshivaType = x.Yeshiva.YeshivaType,
                 Adress = x.Adress,
                 City = x.City.CityName,
-                Phone1 = x.Phone1,
-                Phone2 = x.Phone2,
-                Phone3 = x.Phone3
+                //Phones = x.PhonesTbl.Select(y => y.PhoneNumber).ToList()
             }).ToList();
         }
 
