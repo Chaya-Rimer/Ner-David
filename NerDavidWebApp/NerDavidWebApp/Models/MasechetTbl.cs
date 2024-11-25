@@ -9,8 +9,6 @@ public partial class MasechetTbl
 
     public string MasechetName { get; set; } = null!;
 
-    public string? PrakimNum { get; set; }
-
     public virtual ICollection<LimudTbl> LimudTbls { get; set; } = new List<LimudTbl>();
 
     public virtual ICollection<QuestionsTbl> QuestionsTbls { get; set; } = new List<QuestionsTbl>();

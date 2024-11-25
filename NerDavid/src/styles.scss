@@ -9,9 +9,11 @@ html,
  body {
     direction: rtl;
     height: 100%;
+}
 
+body {
     margin: 1%;
-    font-family:Roboto,"Helvetica Naue" , sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #f0f2f5;
     // color:$gn-primary;
     color: rgb(23, 194, 137);
@@ -26,19 +28,13 @@ html,
 } */
 
 ::-webkit-scrollbar-thumb {
-
-    background-color: rgb(141, 141, 141);
+    background-color: rgb(246, 121, 4);
     border-radius: 4px;
 }
 
 
-
-.mat-dialog-container {
-    border: 5px solid;
-    border-color:  rgb(23, 194, 137);
-    /* border-color: mat.get-color-from-palette($gn-primary); */
-    box-sizing:border-box;
-    padding:45px !important;
+.color {
+    color: rgb(7, 224, 152);
 }
 
 // @media (max-width: 1279px) {

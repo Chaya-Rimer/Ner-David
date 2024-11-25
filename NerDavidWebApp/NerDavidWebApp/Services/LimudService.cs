@@ -11,7 +11,7 @@ namespace NerDavidWebApp.Services
             {
                 MasechetId=x.MasechetId,
                 MasechetName=x.MasechetName,
-                PrakimNum=x.PrakimNum.Trim()
+                //PrakimNum=x.PrakimNum.Trim()
             }).ToList();
         }
     }
