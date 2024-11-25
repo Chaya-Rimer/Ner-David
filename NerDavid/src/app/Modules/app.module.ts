@@ -29,7 +29,6 @@ import { BachurDetailsComponent } from '../Bachurim/bachur-details/bachur-detail
     AddBachurComponent,
     LimudComponent,
     DisplayRowContent,
-    AddBachurComponent,
     BachurimDesktopComponent
   ],
   imports: [
