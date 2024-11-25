@@ -43,7 +43,7 @@ public partial class NerDavidDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=SHANSUN\\MSSQLSERVER03;Database=NerDavidDB;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=localhost;Database=NerDavidDB;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -179,6 +179,21 @@ public partial class NerDavidDbContext : DbContext
                 .HasConstraintName("phbachur_ID_fk");
         });
 
+        modelBuilder.Entity<PhonesTbl>(entity =>
+        {
+            entity.HasKey(e => e.PhoneId).HasName("Phone_Id_pk");
+
+            entity.ToTable("PhonesTbl");
+
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Bachur).WithMany(p => p.PhonesTbls)
+                .HasForeignKey(d => d.BachurId)
+                .HasConstraintName("Phone_Bach_fk");
+        });
+
         modelBuilder.Entity<QuestionsTbl>(entity =>
         {
             entity.HasKey(e => e.QuestionId).HasName("Ques_ID_pk");
@@ -228,7 +243,7 @@ public partial class NerDavidDbContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.StatusSymbol)
                 .HasMaxLength(50)
-                .IsFixedLength();
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<TestsTbl>(entity =>

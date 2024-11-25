@@ -9,6 +9,7 @@ html,
  body {
     direction: rtl;
     height: 100%;
+
     margin: 1%;
     font-family: 'Heebo';
     background-color: #f0f2f5;
@@ -25,9 +26,11 @@ html,
 } */
 
 ::-webkit-scrollbar-thumb {
+
     background-color: rgb(141, 141, 141);
     border-radius: 4px;
 }
+
 
 
 .mat-dialog-container {

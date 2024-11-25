@@ -1,14 +1,9 @@
 <div class="table">
-
     <nd-display-data [displayDataType]="1" [data]="dataSource">
         <!-- תצוגת טבלה נפתחת -->
-        <ng-template innerRowComponent="status" let-element let-data="data">
-           <div style="cursor: pointer; background-color: red;"> bvc</div>
-        </ng-template>
         <ng-template display-row-content let-element>
-           <nd-phones></nd-phones>
+                <nd-bachur-details [bachurDetails]="element" ></nd-bachur-details>
         </ng-template>
     </nd-display-data>
-
-
 </div>
+

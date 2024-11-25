@@ -1,14 +1,30 @@
-<!-- <mat-form-field appearance="fill">
-    <mat-label>חיפוש</mat-label>
-    <input matInput >
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field> -->
+<div (click)="openDialog()" class="addBachur"  >
+    <mat-icon class="color">person_add</mat-icon>
+    <b class="text">בחור חדש</b>
+</div>
+
+<form [formGroup]="stateForm">
+    <mat-form-field>
+      <mat-label>States Group</mat-label>
+      <input type="text"
+             matInput
+             formControlName="stateGroup"
+             required
+             [matAutocomplete]="autoGroup">
+        <mat-autocomplete #autoGroup="matAutocomplete">
+          @for (group of stateGroupOptions | async; track group) {
+            <mat-optgroup [label]="group.key">
+              @for (name of group.value; track name) {
+                <mat-option [value]="name">{{name}}</mat-option>
+              }
+            </mat-optgroup>
+          }
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
 
 
-  <button mat-icon-button (click)="openDialog()"       
-       matTooltip="בחור חדש" color="primery">
-    <mat-icon>person_add</mat-icon>
-  </button>   
+
 <div class="section">
 </div>
 <app-bachurim-table></app-bachurim-table>

@@ -33,6 +33,7 @@
         <mat-form-field>
             <mat-label> ישיבה</mat-label>
             <mat-select formControlName="yeshiva">
+
                 <mat-option *ngFor="let item of yeshivaOption" (onSelectionChange)="getShiur($event)" [value]="item.yeshivaId">
                     {{ item.yeshivaName }}
                 </mat-option>
@@ -42,12 +43,14 @@
         <mat-form-field>
             <mat-label> שיעור</mat-label>
             <mat-select formControlName="shiur">
+
                 <mat-option *ngFor="let i of shiurOption" [value]="i.shiurId">
                     {{ i.shiurName }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <br>
+
         <nd-phones></nd-phones>
         <br>
         <hr>

@@ -3,9 +3,13 @@ import { AppComponent } from '../app.component';
 import { routes } from '../app.routes';
 import { SharedModule } from './shared.module';
 import { BachurimTableComponent } from '../Bachurim/bachurim-table/bachurim-table.component';
-import { DisplayDataComponent } from '../display-data/display-data.component';
 import { BachurimDesktopComponent } from '../Bachurim/bachurim-desktop/bachurim-desktop.component';
+import { DisplayDataComponent } from '../display-data/display-data.component';
+import { LimudComponent } from '../Bachurim/limud/limud.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DisplayRowContent } from '../display-data/display-row-content.directive';
 import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
+import { BachurDetailsComponent } from '../Bachurim/bachur-details/bachur-details.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,6 +25,7 @@ import { PhonesComponent } from '../Bachurim/add-bachur/phones/phones.component'
   declarations: [
     AppComponent,
     BachurimTableComponent,
+    BachurDetailsComponent,
     DisplayDataComponent,
     BachurimDesktopComponent,
     AddBachurComponent,
@@ -35,8 +40,9 @@ import { PhonesComponent } from '../Bachurim/add-bachur/phones/phones.component'
     FormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    SharedModule
-    
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   bootstrap:[
     AppComponent

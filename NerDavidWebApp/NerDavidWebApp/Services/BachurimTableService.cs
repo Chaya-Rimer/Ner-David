@@ -14,7 +14,8 @@ namespace NerDavidWebApp.Services
                 LastName=x.LastName,
                 FirstName=x.FirstName,
                 Yeshiva=x.Yeshiva.YeshivaName,
-                Shiur=x.Shiur.ShiurName+ " "+x.Shiur.ShiurType,
+                Shiur=x.Shiur.ShiurName,
+                YeshivaType = x.Yeshiva.YeshivaType,
                 Status=x.Status.StatusSymbol
             }).ToList();
         }

@@ -7,6 +7,7 @@ import { IbachurimTable } from '../Bachurim/bachurim-table/IBachurimTable';
 import { MatTableDataSource } from '@angular/material/table';
 import { DISPLAY_ROW_CONTENT, DisplayRowContent } from './display-row-content.directive';
 import { read } from 'fs';
+
 import { INNER_ROW_COMPONENT, InnerRowComponent } from './inner-row-component.directive';
 
 @Component({
@@ -37,6 +38,7 @@ export class DisplayDataComponent {
   columnsToDisplay!: IDisplayData[];
   columnsToDisplayWithExpand:any[]=[]
   @Input() disSelectColumn = (element: any) => false;
+
 @ContentChild(DISPLAY_ROW_CONTENT ,{read:TemplateRef,static:true}) contentTemplate!:TemplateRef<DisplayRowContent>
 @ContentChildren(INNER_ROW_COMPONENT) innerComponents!: QueryList<InnerRowComponent>;
 
@@ -57,6 +59,7 @@ constructor(private _displayService: DisplayDataService) {}
   setDataSource() {
     this.dataSource = new MatTableDataSource(this.data);
   }
+
   getComponent(name: string|undefined): TemplateRef<any> | null {
     let temp = this.innerComponents.find(x => x.innerRowComponent == name);
     if (temp)

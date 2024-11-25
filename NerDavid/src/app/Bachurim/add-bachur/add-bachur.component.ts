@@ -1,3 +1,4 @@
+
 import { Component, ElementRef, Inject, viewChild, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BachurimService } from '../bachurim.service';
@@ -17,9 +18,9 @@ export class AddBachurComponent {
   yeshivaOption!: IYeshiva[];
   shiurOption!: IShiur[];
   newBachur: INewEditBachur = {} as INewEditBachur;
+
   options: string[] = [];
   filteredOptions!: string[];
-  // phones!:IPhones[];
   @ViewChild(LimudComponent) limudComponent: LimudComponent | undefined;
   @ViewChild(PhonesComponent) phonesComponent: PhonesComponent | undefined;
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
