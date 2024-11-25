@@ -6,7 +6,6 @@ export interface IbachurimTable {
     firstName?: string;
     yeshiva?: string;
     shiur?: string;
-    status?:string
     yeshivaType?: string;
     adress?: string;
     city?: string;

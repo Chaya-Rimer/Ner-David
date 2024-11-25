@@ -8,8 +8,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DISPLAY_ROW_CONTENT, DisplayRowContent } from './display-row-content.directive';
 import { read } from 'fs';
 
-import { INNER_ROW_COMPONENT, InnerRowComponent } from './inner-row-component.directive';
-
 @Component({
   selector: 'nd-display-data',
   templateUrl: './display-data.component.html',
@@ -38,17 +36,13 @@ export class DisplayDataComponent {
   columnsToDisplay!: IDisplayData[];
   columnsToDisplayWithExpand:any[]=[]
   @Input() disSelectColumn = (element: any) => false;
-
-@ContentChild(DISPLAY_ROW_CONTENT ,{read:TemplateRef,static:true}) contentTemplate!:TemplateRef<DisplayRowContent>
-@ContentChildren(INNER_ROW_COMPONENT) innerComponents!: QueryList<InnerRowComponent>;
-
-constructor(private _displayService: DisplayDataService) {}
+@ContentChild(DISPLAY_ROW_CONTENT ,{read:TemplateRef,static:true}) contentTemplate!:TemplateRef<DisplayRowContent>;
+  constructor(private _displayService: DisplayDataService) {}
   ngOnInit() {
     this._displayService.getColumnsToTable(this.displayDataType).subscribe(x =>{
       this.columnsToDisplay = x,
       this.columnsToDisplayWithExpand = [...this.columnsToDisplay.map(x=>x.columns),'expand'] ;
-  console.log(this.columnsToDisplay,"co");
-  
+
     })
   }
   
@@ -60,12 +54,6 @@ constructor(private _displayService: DisplayDataService) {}
     this.dataSource = new MatTableDataSource(this.data);
   }
 
-  getComponent(name: string|undefined): TemplateRef<any> | null {
-    let temp = this.innerComponents.find(x => x.innerRowComponent == name);
-    if (temp)
-        return temp.template;
-    return null;
-}
 //   selectAll() {
 //     this.dataSource.forEach(x => x.select = !this.disSelectColumn(x) && this.allSelected);
 // }
