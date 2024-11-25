@@ -31,10 +31,6 @@ namespace NerDavidWebApp.Controllers
         {
             return BachurimService.GetCity();
         }
-        [HttpGet]
-        public List<PhonesTbl> GetPhones(int bachurId)
-        {
-            return BachurimService.GetPhones(bachurId);
-        }
+
     }
 }

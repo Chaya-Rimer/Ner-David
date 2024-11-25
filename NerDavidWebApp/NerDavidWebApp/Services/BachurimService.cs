@@ -31,6 +31,17 @@ namespace NerDavidWebApp.Services
         { 
             return db.PhonesTbls.Where(x=>x.BachurId== bachurId).ToList();
         }
+        //public void NewBachur(NewBachur newBachur)
+        //{
+        //    //BachurimTbl bachur = new BachurimTbl();
+        //    //bachur.
+        //   var newbachur= db.BachurimTbls.Add(newBachur.Bachur);
+        //    PhonesTbl phones = new PhonesTbl();
+        //    phones.BachurId = newbachur.Entity;
+        //    db.PhonesTbls.Add()
+        //}
+        
 
+        
     }
 }
