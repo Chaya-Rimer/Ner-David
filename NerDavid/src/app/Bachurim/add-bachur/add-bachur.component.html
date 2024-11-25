@@ -28,12 +28,13 @@
             <input matInput formControlName="address">
         </mat-form-field>
 
-       
+
 
         <mat-form-field>
             <mat-label> ישיבה</mat-label>
             <mat-select formControlName="yeshiva">
-                <mat-option *ngFor="let item of yeshivaOption" (onSelectionChange)="getShiur($event)" [value]="item">
+
+                <mat-option *ngFor="let item of yeshivaOption" (onSelectionChange)="getShiur($event)" [value]="item.yeshivaId">
                     {{ item.yeshivaName }}
                 </mat-option>
             </mat-select>
@@ -42,24 +43,20 @@
         <mat-form-field>
             <mat-label> שיעור</mat-label>
             <mat-select formControlName="shiur">
-                <mat-option *ngFor="let i of shiurOption" value="i.shiurName">
+
+                <mat-option *ngFor="let i of shiurOption" [value]="i.shiurId">
                     {{ i.shiurName }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <br>
-        <mat-form-field class="telForm">
-            <mat-label>טלפון 1</mat-label>
-            <!-- <span matTextPrefix class="span">+1 &nbsp;</span> -->
-            <input type="tel" matInput placeholder="555-555-1234">
-            <mat-icon matSuffix>call</mat-icon>
-          </mat-form-field>
-          <br>
+
+        <nd-phones></nd-phones>
+        <br>
         <hr>
         <nd-limud></nd-limud>
         <br>
-        <button mat-flat-button (click)="save()"
-            [disabled]="newBachurForm.invalid ">שמירה</button>
+        <button mat-flat-button (click)="save()" [disabled]="newBachurForm.invalid"> ">שמירה</button>
     </form>
 </div>
 <!-- </dialog> -->

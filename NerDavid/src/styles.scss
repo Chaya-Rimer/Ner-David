@@ -9,11 +9,9 @@ html,
  body {
     direction: rtl;
     height: 100%;
-}
 
-body {
     margin: 1%;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: 'Heebo';
     background-color: #f0f2f5;
     // color:$gn-primary;
     color: rgb(23, 194, 137);
@@ -28,13 +26,19 @@ body {
 } */
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(246, 121, 4);
+
+    background-color: rgb(141, 141, 141);
     border-radius: 4px;
 }
 
 
-.color {
-    color: rgb(7, 224, 152);
+
+.mat-dialog-container {
+    border: 5px solid;
+    border-color:  rgb(23, 194, 137);
+    /* border-color: mat.get-color-from-palette($gn-primary); */
+    box-sizing:border-box;
+    padding:45px !important;
 }
 
 // @media (max-width: 1279px) {

@@ -19,6 +19,8 @@ public partial class BachurimTbl
 
     public int? ShiurId { get; set; }
 
+    public int? StatusId { get; set; }
+
     public virtual CityTbl? City { get; set; }
 
     public virtual ICollection<LimudTbl> LimudTbls { get; set; } = new List<LimudTbl>();
@@ -26,6 +28,8 @@ public partial class BachurimTbl
     public virtual ICollection<PhonesTbl> PhonesTbls { get; set; } = new List<PhonesTbl>();
 
     public virtual ShiurTbl? Shiur { get; set; }
+
+    public virtual StatusTbl? Status { get; set; }
 
     public virtual ICollection<TestsTbl> TestsTbls { get; set; } = new List<TestsTbl>();
 
