@@ -7,5 +7,5 @@ export const DISPLAY_ROW_CONTENT = new InjectionToken<DisplayRowContent>('Displa
   providers: [{provide: DISPLAY_ROW_CONTENT, useExisting: DisplayRowContent}],
 })
 export class DisplayRowContent {
-    constructor(public template: TemplateRef<any>) {}
+    constructor(public $implicit: TemplateRef<any>) {}
 }

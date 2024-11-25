@@ -19,6 +19,7 @@ namespace NerDavidWebApp.Services
                 Adress = x.Adress,
                 City = x.City.CityName,
                 //Phones = x.PhonesTbl.Select(y => y.PhoneNumber).ToList()
+                //Status=x.Status.StatusSymbol
             }).ToList();
         }
 

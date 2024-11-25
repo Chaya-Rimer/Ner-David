@@ -11,6 +11,5 @@ public partial class PhonesTbl
 
     public string? PhoneNumber { get; set; }
 
-    public virtual BachurimTbl Bachur { get; set; } = null!;
-
+    public virtual BachurimTbl? Bachur { get; set; }
 }

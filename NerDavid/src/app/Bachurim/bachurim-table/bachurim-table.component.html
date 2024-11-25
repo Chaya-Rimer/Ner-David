@@ -1,8 +1,8 @@
 <div class="table">
-    <nd-display-data [displayDataType]="1" [dataSource]="dataSource">
-        <ng-template display-row-content>
-            <!-- תצוגת טבלה נפתחת -->dfghf
-            <nd-bachur-details></nd-bachur-details>
-          </ng-template>
+    <nd-display-data [displayDataType]="1" [data]="dataSource">
+        <!-- תצוגת טבלה נפתחת -->
+        <ng-template display-row-content let-element>
+                <nd-bachur-details [bachurDetails]="element" ></nd-bachur-details>
+        </ng-template>
     </nd-display-data>
 </div>

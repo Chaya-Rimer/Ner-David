@@ -23,10 +23,11 @@ public partial class BachurimTbl
 
     public virtual ICollection<LimudTbl> LimudTbls { get; set; } = new List<LimudTbl>();
 
+    public virtual ICollection<PhonesTbl> PhonesTbls { get; set; } = new List<PhonesTbl>();
+
     public virtual ShiurTbl? Shiur { get; set; }
 
     public virtual ICollection<TestsTbl> TestsTbls { get; set; } = new List<TestsTbl>();
 
     public virtual YeshivaTbl? Yeshiva { get; set; }
-    public virtual ICollection<PhonesTbl> PhonesTbl { get; set; } = new List<PhonesTbl>();
 }

@@ -17,9 +17,19 @@ namespace NerDavidWebApp.Controllers
 
 
         [HttpGet]
-        public List<ShiurTbl> GetShiur()
+        public List<Shiur> GetShiurByYeshivaId(int yeshivaId)
         {
-            return BachurimService.GetShiur();
+            return BachurimService.GetShiur(yeshivaId);
+        }
+        [HttpGet]
+        public List<YeshivaTbl> GetYeshiva()
+        {
+            return BachurimService.GetYeshiva();
+        }
+        [HttpGet]
+        public List<CityTbl> GetCity()
+        {
+            return BachurimService.GetCity();
         }
         //[HttpGet]
         //public List<BachurimTbl> GetBachurimTable()

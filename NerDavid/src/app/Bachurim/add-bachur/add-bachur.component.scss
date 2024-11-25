@@ -1,0 +1,39 @@
+:host::ng-deep {
+    direction: rtl;
+    border: 3px solid rgb(29, 226, 160);
+
+    .allForm {
+        padding: 10px;
+        text-align: right;
+    }
+
+    mat-select {
+        text-align: right;
+    }
+
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+        background-color: transparent !important
+    }
+    .telForm{
+        width: 180px;
+    }
+    mat-form-field {
+        margin-left: 10px;
+        width: 170px;
+        // width: 170px !important;
+    }
+    .cdk-overlay-pane{
+         background-color: transparent !important;
+    }
+    button{
+        cursor: pointer;
+        height: 30px;
+        float: left;
+    }
+    .addLimud {
+        cursor: pointer;
+    }
+}
+
+
+

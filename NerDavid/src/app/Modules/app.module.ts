@@ -8,12 +8,15 @@ import { routes } from '../app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { DisplayDataComponent } from '../display-data/display-data.component';
-import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
 import { BachurimTableComponent } from '../Bachurim/bachurim-table/bachurim-table.component';
 import { BachurimDesktopComponent } from '../Bachurim/bachurim-desktop/bachurim-desktop.component';
-import { BachurDetailsComponent } from '../Bachurim/bachur-details/bachur-details.component';
+import { DisplayDataComponent } from '../display-data/display-data.component';
+import { LimudComponent } from '../Bachurim/limud/limud.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DisplayRowContent } from '../display-data/display-row-content.directive';
+import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
+import { BachurDetailsComponent } from '../Bachurim/bachur-details/bachur-details.component';
+  
 
 
 
@@ -23,14 +26,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BachurimTableComponent,
     BachurDetailsComponent,
     DisplayDataComponent,
-    BachurimDesktopComponent,
     AddBachurComponent,
-    DisplayDataComponent,
-    
+    LimudComponent,
+    DisplayRowContent,
+    AddBachurComponent,
+    BachurimDesktopComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
     SharedModule,

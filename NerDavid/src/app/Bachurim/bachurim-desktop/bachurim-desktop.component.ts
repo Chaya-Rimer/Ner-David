@@ -71,7 +71,7 @@ export class BachurimDesktopComponent {
 
   openDialog() {
     this.dialog.open(AddBachurComponent, {
-      width: '350px',
+      width: '800px',
       height: '550px',
       data: {
         animal: 'panda',

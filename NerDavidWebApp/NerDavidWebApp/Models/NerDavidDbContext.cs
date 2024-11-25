@@ -25,6 +25,8 @@ public partial class NerDavidDbContext : DbContext
 
     public virtual DbSet<MasechetTbl> MasechetTbls { get; set; }
 
+    public virtual DbSet<PhonesTbl> PhonesTbls { get; set; }
+
     public virtual DbSet<QuestionsTbl> QuestionsTbls { get; set; }
 
     public virtual DbSet<ShiurTbl> ShiurTbls { get; set; }
@@ -38,8 +40,6 @@ public partial class NerDavidDbContext : DbContext
     public virtual DbSet<YeshivaTbl> YeshivaTbls { get; set; }
 
     public virtual DbSet<ZmanTbl> ZmanTbls { get; set; }
-
-    public virtual DbSet<PhonesTbl> PhonesTbl { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -151,6 +151,21 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.MasechetName).HasMaxLength(50);
         });
 
+        modelBuilder.Entity<PhonesTbl>(entity =>
+        {
+            entity.HasKey(e => e.PhoneId).HasName("Phone_Id_pk");
+
+            entity.ToTable("PhonesTbl");
+
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Bachur).WithMany(p => p.PhonesTbls)
+                .HasForeignKey(d => d.BachurId)
+                .HasConstraintName("Phone_Bach_fk");
+        });
+
         modelBuilder.Entity<QuestionsTbl>(entity =>
         {
             entity.HasKey(e => e.QuestionId).HasName("Ques_ID_pk");
@@ -200,7 +215,7 @@ public partial class NerDavidDbContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.StatusSymbol)
                 .HasMaxLength(50)
-                .IsFixedLength();
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<TestsTbl>(entity =>
@@ -244,6 +259,9 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.YeshivaName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.YeshivaType)
+                .HasMaxLength(11)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<ZmanTbl>(entity =>
@@ -255,20 +273,6 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.ZmanName)
                 .HasMaxLength(20)
                 .IsUnicode(false);
-        });
-        modelBuilder.Entity<PhonesTbl>(entity =>
-        {
-            entity.ToTable("PhonesTbl");    
-            entity.HasKey(e => e.PhoneId); 
-            entity.Property(e => e.PhoneId).ValueGeneratedOnAdd(); 
-            entity.Property(e => e.BachurId).IsRequired(false); 
-            entity.Property(e => e.PhoneNumber).HasMaxLength(20); 
-
-            entity.HasOne(d => d.Bachur)
-                .WithMany(p => p.PhonesTbl)
-                .HasForeignKey(d => d.BachurId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Phone_Bach_fk");
         });
 
         OnModelCreatingPartial(modelBuilder);
