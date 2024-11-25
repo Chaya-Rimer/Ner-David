@@ -1,10 +1,10 @@
-import { Component, ElementRef, Inject, ViewChild, viewChildren } from '@angular/core';
+import { Component, ElementRef, Inject, viewChild, ViewChild, viewChildren } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BachurimService } from '../bachurim.service';
-import { ICity, IPhones, IShiur, IYeshiva } from '../IBachurim';
+import { ICity, INewEditBachur, IPhones, IShiur, IYeshiva } from '../IBachurim';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { INewEditBachur } from '../limud/ILimud';
 import { LimudComponent } from '../limud/limud.component';
+import { PhonesComponent } from './phones/phones.component';
 
 @Component({
   selector: 'nd-add-bachur',
@@ -15,11 +15,12 @@ export class AddBachurComponent {
   newBachurForm!: FormGroup;
   yeshivaOption!: IYeshiva[];
   shiurOption!: IShiur[];
-  bachur:INewEditBachur={} as INewEditBachur;
+  newBachur: INewEditBachur = {} as INewEditBachur;
   options: string[] = [];
   filteredOptions!: string[];
   // phones!:IPhones[];
   @ViewChild(LimudComponent) limudComponent: LimudComponent | undefined;
+  @ViewChild (PhonesComponent) phoneComponent:PhonesComponent|undefined
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
 
   constructor(private _BachurimSer: BachurimService, public dialogRef: MatDialogRef<AddBachurComponent>,
@@ -45,11 +46,17 @@ export class AddBachurComponent {
   getShiur(event: any) {
     this._BachurimSer.getShiur(event.source.value.yeshivaId).subscribe(x => this.shiurOption = x)
   }
-  save() {
+ save() {
     console.log(this.limudComponent?.isFormValid, "llll" );
     const array=this.limudComponent?.getModel();
- 
-    
-    this.bachur.firstName=this.newBachurForm.controls['firstName'].value
+
+    const phoneArray = this.phoneComponent?.getModel();
+    const values= Object.values(phoneArray);
+    const phonesObject: IPhones[] = values.map(value => ({ phone: value as string }));
+
+    this.newBachur.bachur = this.newBachurForm.value
+    this.newBachur.limud = this.limudComponent?.getModel();
+    this.newBachur.phones=phonesObject;
+    console.log(this.newBachur,"new");
   }
 }

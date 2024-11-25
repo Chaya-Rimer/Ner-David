@@ -10,4 +10,6 @@ public partial class StatusTbl
     public string? Status { get; set; }
 
     public string? StatusSymbol { get; set; }
+
+    public virtual ICollection<BachurimTbl> BachurimTbls { get; set; } = new List<BachurimTbl>();
 }
