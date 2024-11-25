@@ -62,15 +62,6 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Phone1)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Phone2)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Phone3)
-                .HasMaxLength(50)
-                .IsUnicode(false);
             entity.Property(e => e.ShiurId).HasColumnName("ShiurID");
             entity.Property(e => e.StatusId).HasColumnName("StatusID");
             entity.Property(e => e.YeshivaId).HasColumnName("YeshivaID");

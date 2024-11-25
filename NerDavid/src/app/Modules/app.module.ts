@@ -6,7 +6,6 @@ import { BachurimTableComponent } from '../Bachurim/bachurim-table/bachurim-tabl
 import { DisplayDataComponent } from '../display-data/display-data.component';
 import { BachurimDesktopComponent } from '../Bachurim/bachurim-desktop/bachurim-desktop.component';
 import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
-import { LimudComponent } from '../Bachurim/limud/limud.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import { DisplayRowContent } from '../display-data/display-row-content.directive';
-  
+import { LimudComponent } from '../Bachurim/add-bachur/limud/limud.component';
+import { PhonesComponent } from '../Bachurim/add-bachur/phones/phones.component';
 
 
 @NgModule({
@@ -24,8 +24,9 @@ import { DisplayRowContent } from '../display-data/display-row-content.directive
     DisplayDataComponent,
     BachurimDesktopComponent,
     AddBachurComponent,
+    DisplayRowContent,
     LimudComponent,
-    DisplayRowContent
+    PhonesComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +40,9 @@ import { DisplayRowContent } from '../display-data/display-row-content.directive
   ],
   bootstrap:[
     AppComponent
+  ],
+  exports:[
+    DisplayRowContent
   ],
   providers: [
     provideAnimationsAsync()

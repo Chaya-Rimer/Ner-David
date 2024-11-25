@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LimudService } from './limud.service';
-import { IMasechet } from './ILimud';
+import { ILimud, IMasechet } from './ILimud';
 import { KeyValue } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { getGematriaArrayUpToLetter } from './function';

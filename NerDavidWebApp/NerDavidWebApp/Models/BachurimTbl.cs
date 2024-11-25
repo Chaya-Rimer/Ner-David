@@ -15,12 +15,6 @@ public partial class BachurimTbl
 
     public string? Adress { get; set; }
 
-    public string? Phone1 { get; set; }
-
-    public string? Phone2 { get; set; }
-
-    public string? Phone3 { get; set; }
-
     public int? YeshivaId { get; set; }
 
     public int? ShiurId { get; set; }
