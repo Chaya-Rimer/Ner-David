@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { Router } from 'express';
 import { routes } from '../app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared.module';
@@ -38,9 +37,7 @@ import { DisplayRowContent } from '../display-data/display-row-content.directive
     FormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    SharedModule,
-    ReactiveFormsModule,
-    FormsModule,
+    SharedModule
   ],
   bootstrap:[
     AppComponent
