@@ -39,7 +39,7 @@ import { PhonesComponent } from '../Bachurim/add-bachur/phones/phones.component'
     FormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    SharedModule,
+    SharedModule
   ],
   bootstrap:[
     AppComponent
