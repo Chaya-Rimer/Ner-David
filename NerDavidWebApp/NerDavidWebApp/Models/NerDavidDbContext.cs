@@ -115,7 +115,6 @@ public partial class NerDavidDbContext : DbContext
 
         modelBuilder.Entity<LimudTbl>(entity =>
         {
-
             entity.HasKey(e => e.LimudId).HasName("Limud_ID_pk");
 
             entity.ToTable("LimudTbl");
