@@ -16,11 +16,7 @@ namespace NerDavidWebApp.Controllers
         {
             return Service.GetBachurimTable();
         }
-        [HttpGet]
-        public int GetInt()
-        {
-            return 30;
-        }
+
 
 
     }
