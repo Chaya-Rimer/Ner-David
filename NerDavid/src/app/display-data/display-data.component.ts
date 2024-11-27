@@ -47,6 +47,8 @@ export class DisplayDataComponent {
   }
   
   ngOnChanges(){
+    console.log(this.data,"data");
+    
     this.setDataSource();
 
   }

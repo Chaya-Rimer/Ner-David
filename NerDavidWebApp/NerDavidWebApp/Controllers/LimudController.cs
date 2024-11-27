@@ -16,6 +16,11 @@ namespace NerDavidWebApp.Controllers
         {
             return service.GetMasechets();
         }
+        [HttpGet]
+        public List<LimudTbl> GetBachurLimudTable(int bachurId)
+        {
+            return service.GetBachurLimudTable(bachurId);
+        }
 
     }
 }

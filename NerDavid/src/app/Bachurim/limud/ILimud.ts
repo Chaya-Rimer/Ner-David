@@ -7,6 +7,7 @@ export interface ILimud{
     limudId?:number
     bachurId?:number
     masechetId?:number
+    masechetName?:string;
     perek?:string
     startValue?:string
     endValue?:string

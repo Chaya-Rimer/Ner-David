@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { BachurimTableService } from './bachurim-table.service';
 import { IbachurimTable } from './IBachurimTable';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -9,11 +9,26 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrl: './bachurim-table.component.scss'
 })
 export class BachurimTableComponent {
+  @Input() searchTerm: string = '';
   constructor(private BachurimTableSer: BachurimTableService) { }
   dataSource: IbachurimTable[] = []
+  filterData:IbachurimTable[]=[]
+
   ngOnInit() {
-    this.BachurimTableSer.getBachurimTable().subscribe(x => this.dataSource = x)
+    this.BachurimTableSer.getBachurimTable().subscribe(x => {
+      this.dataSource = x;
+      this.filterData = x;
+  })
+  }
+  ngOnChanges(change:SimpleChanges):void{
+    if(change['searchTerm']){
+      this.filterData = this.dataSource.filter(x=>{
+        const fullName = (x.firstName?x.firstName+" ":"") + (x.lastName?x.lastName:"")
+        return fullName?.includes(this.searchTerm)
+      })
     }
   }
+
+}
 
 

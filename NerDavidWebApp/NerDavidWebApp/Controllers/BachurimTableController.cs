@@ -16,8 +16,5 @@ namespace NerDavidWebApp.Controllers
         {
             return Service.GetBachurimTable();
         }
-
-
-
     }
 }

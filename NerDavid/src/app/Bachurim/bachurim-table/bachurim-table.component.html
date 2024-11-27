@@ -1,8 +1,10 @@
 <div class="table">
-    <nd-display-data [displayDataType]="1" [data]="dataSource">
+    <nd-display-data [displayDataType]="1" [data]="filterData">
         <!-- תצוגת טבלה נפתחת -->
         <ng-template display-row-content let-element>
+            <div class="details">
                 <nd-bachur-details [bachurDetails]="element" ></nd-bachur-details>
+            </div>
         </ng-template>
     </nd-display-data>
 </div>
