@@ -1,29 +1,18 @@
-<div (click)="openDialog()" class="addBachur" >
-   <button mat-icon-button class="button" matTooltip="בחור חדש"> <mat-icon >person_add</mat-icon></button>
-</div>
-
-<form [formGroup]="stateForm">
+<div class="header">
+  <div>
     <mat-form-field>
-      <mat-label>States Group</mat-label>
-      <input type="text"
-             matInput
-             formControlName="stateGroup"
-             required
-             [matAutocomplete]="autoGroup">
-        <mat-autocomplete #autoGroup="matAutocomplete">
-          @for (group of stateGroupOptions | async; track group) {
-            <mat-optgroup [label]="group.key">
-              @for (name of group.value; track name) {
-                <mat-option [value]="name">{{name}}</mat-option>
-              }
-            </mat-optgroup>
-          }
-      </mat-autocomplete>
+      <mat-label>חיפוש</mat-label>
+      <input matInput type="text" [(ngModel)]="searchValue">
+        <!-- <button matSuffix mat-icon-button> -->
+          <mat-icon matSuffix>search</mat-icon>
+        <!-- </button> -->
     </mat-form-field>
-  </form>
-
-
+ </div>
+  <div (click)="openDialog()" class="addBachur" >
+    <button mat-icon-button class="button" matTooltip="בחור חדש"> <mat-icon >person_add</mat-icon></button>
+ </div>
+</div>
 
 <div class="section">
 </div>
-<app-bachurim-table></app-bachurim-table>
+<app-bachurim-table [searchTerm]="searchValue"></app-bachurim-table>

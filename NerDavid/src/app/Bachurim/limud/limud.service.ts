@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IMasechet } from './ILimud';
+import { ILimud, IMasechet } from './ILimud';
 import { ICity } from '../IBachurim';
 
 @Injectable({
@@ -15,5 +15,8 @@ export class LimudService {
   getMasecet():Observable<IMasechet[]>{
    return this.http.get<IMasechet[]>(this.url+'GetMasechets')
  }
+ getBachurLimudTable(bachurId:number):Observable<ILimud[]>{
+  return this.http.get<ILimud[]>(this.url+`getBachurLimudTable?bachurId=${bachurId}`)
+}
  
 }

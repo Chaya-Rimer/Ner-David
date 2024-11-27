@@ -16,6 +16,7 @@ import { BachurDetailsComponent } from '../Bachurim/bachur-details/bachur-detail
 import { LimudComponent } from '../Bachurim/limud/limud.component';
 import { DisplayRowContent } from '../display-data/display-row-content.directive';
 import { PhonesComponent } from '../Bachurim/add-bachur/phones/phones.component';
+import { BachurLimudDetailsComponent } from '../Bachurim/bachur-details/bachur-limud-details/bachur-limud-details.component';
   
 
 
@@ -30,7 +31,8 @@ import { PhonesComponent } from '../Bachurim/add-bachur/phones/phones.component'
     LimudComponent,
     DisplayRowContent,
     BachurimDesktopComponent,
-    PhonesComponent
+    PhonesComponent,
+    BachurLimudDetailsComponent
   ],
   imports: [
     CommonModule,

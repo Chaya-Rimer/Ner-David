@@ -10,10 +10,11 @@ import { AddBachurComponent } from '../add-bachur/add-bachur.component';
 })
 export class BachurDetailsComponent {
   @Input() bachurDetails!:IbachurimTable;
+  
   readonly dialog = inject(MatDialog);
   openDialog() {
     this.dialog.open(AddBachurComponent, {
-      width: '350px',
+      width: '800px',
       height:'550px',
       data: {
       },

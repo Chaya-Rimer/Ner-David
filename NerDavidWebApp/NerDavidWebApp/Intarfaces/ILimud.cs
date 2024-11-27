@@ -5,6 +5,8 @@ namespace NerDavidWebApp.Intarfaces
     public interface ILimud
     {
         public List<MasechetTbl> GetMasechets();
+        public List<LimudTbl> GetBachurLimudTable(int bachurId);
+
 
     }
 }

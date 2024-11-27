@@ -14,5 +14,11 @@ namespace NerDavidWebApp.Services
                 //PrakimNum=x.PrakimNum.Trim()
             }).ToList();
         }
+        public List<LimudTbl> GetBachurLimudTable(int bachurId)
+        {
+
+            return db.LimudTbls.Where(x => x.BachurId == bachurId).ToList();
+        }
+
     }
 }
