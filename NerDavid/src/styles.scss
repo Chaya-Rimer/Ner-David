@@ -6,12 +6,9 @@
 
 html,
 
- body {
+body {
     direction: rtl;
     height: 100%;
-}
-
-body {
     margin: 1%;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #f0f2f5;
@@ -22,20 +19,15 @@ body {
 ::-webkit-scrollbar {
     width: 8px;
 }
-
+::-webkit-scrollbar-thumb {
+    background: rgb(163, 157, 157);
+    border-radius: 4px;
+    margin-left: 4px;
+}
 /* ::-webkit-scrollbar-track {
     background: #ccc; 
 } */
 
-::-webkit-scrollbar-thumb {
-    background-color: rgb(246, 121, 4);
-    border-radius: 4px;
-}
-
-
-.color {
-    color: rgb(7, 224, 152);
-}
 
 // @media (max-width: 1279px) {
 //     .mat-dialog-container {
@@ -157,11 +149,7 @@ body {
     z-index: 1;
 }
 
-::-webkit-scrollbar-thumb {
-    background: rgb(163, 157, 157);
-    border-radius: 4px;
-    margin-left: 4px;
-}
+
 
 .mat-button-base {
     .mat-icon {

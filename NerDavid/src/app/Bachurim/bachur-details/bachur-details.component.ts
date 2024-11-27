@@ -14,8 +14,6 @@ export class BachurDetailsComponent {
   readonly dialog = inject(MatDialog);
   openDialog() {
     this.dialog.open(AddBachurComponent, {
-      width: '800px',
-      height:'550px',
       data: {
       },
      

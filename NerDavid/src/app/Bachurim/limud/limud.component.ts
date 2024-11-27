@@ -4,22 +4,23 @@ import { IMasechet } from './ILimud';
 import { KeyValue } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { getGematriaArrayUpToLetter } from './function';
+import { AutocompleteComponent } from "../../autocomplete/autocomplete.component";
 
 @Component({
   selector: 'nd-limud',
   templateUrl: './limud.component.html',
-  styleUrl: './limud.component.scss'
+  styleUrl: './limud.component.scss',
 })
 export class LimudComponent {
-  masecetOption!: KeyValue<number, string>[];
+  masecetOption: KeyValue<number,string>[] = [];
   masechet!: IMasechet[];
   prakimNumE!: string;
-  prakimNumArray: { letter: string, gematria: number }[] = [];
+  prakimNumArray: { key: number, value: string }[] = [];
   dapimNum: { letter: string, gematria: number }[] = [];
   hebrewLettersPattern = /^[\u0590-\u05FF\s]*$/;
   form: FormGroup;
-  // limudForm!:FormGroup;
-
+  title: string = {} as string;
+  isFieldValid:boolean=false;
   constructor(private limudSer: LimudService, private fb: FormBuilder) {
     this.form = this.fb.group({
       formArray: this.fb.array([this.createForm()])
@@ -29,17 +30,18 @@ export class LimudComponent {
     this.limudSer.getMasecet().subscribe(x => {
       this.masechet = x
       this.masecetOption = this.masechet.map(({ masechetId, masechetName }) => ({ key: masechetId, value: masechetName }))
+      this.title = "מסכת";
     })
   }
   createForm(): FormGroup {
     return this.fb.group({
-      masechet: new FormControl(null, Validators.required),
+      masechetId: new FormControl(null,Validators.required),
       perek: new FormControl(null),
-      start: new FormControl(null),
-      end: new FormControl(null),
+      startValue: new FormControl(null),
+      endValue: new FormControl(null),
     });
   }
-  deletForm(index:number){
+  deletForm(index: number) {
     this.formArray.removeAt(index);
 
   }
@@ -51,16 +53,24 @@ export class LimudComponent {
   get formArray(): FormArray {
     return this.form.get('formArray') as FormArray;
   }
+  onSelectionChange(selected: { key: number, value: string },index:number) {
+    this.formArray.at(index).get('masechetId')?.setValue(selected.key);
 
-  getPrakim(event: any) {
-    console.log(event.source.value.key, "llll");
-    const p = this.masechet.find(x => x.masechetId == event.source.value.key)
-    if (p)
-      this.prakimNumE = p.prakimNum
-    this.prakimNumArray = getGematriaArrayUpToLetter(this.prakimNumE)
+    if (selected.key != 0) {
+      const p = this.masechet.find(x => x.masechetId == selected.key)
+      if (p) {
+        this.prakimNumE = p.prakimNum
+        this.prakimNumArray = getGematriaArrayUpToLetter(this.prakimNumE)
+      }
+    }
+    else
+      this.prakimNumArray = getGematriaArrayUpToLetter("כ")
   }
-  get isFormValid(): boolean {
-    return this.form.get('formArray')?.valid ?? false;
+  onValidityChange(isValid: boolean,index:number) {
+    this.isFieldValid = isValid; // עדכון מצב התקינות
+  }
+  get isLIiudFormValid(): boolean {
+       return this.isFieldValid??false ;
   }
   getModel() {
     if (this.form.get('formArray')?.valid)

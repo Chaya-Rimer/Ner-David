@@ -11,7 +11,7 @@ export interface IShiur{
     shiurType?:string
 }
  export interface ICity{
-    cityID:number
+    cityId:number
     cityName:string
 }
 export interface IPhones{
@@ -29,7 +29,7 @@ export interface IBachur{
     bachurID?:number
     firstName?:string
     lastName:string
-    cityID?:number
+    cityId?:number
     adress?:string
     yeshivaID?:number
     shiurID?:number

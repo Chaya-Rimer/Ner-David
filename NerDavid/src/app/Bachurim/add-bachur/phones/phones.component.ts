@@ -1,6 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { log } from 'console';
 
 @Component({
   selector: 'nd-phones',
@@ -13,21 +14,25 @@ export class PhonesComponent {
   phoneForm!: FormGroup;
   constructor(private fb: FormBuilder) { }
   ngOnInit() {
-    console.log(this.element,"elemnt");
-
     this.phoneForm = this.fb.group({
-      phone1: new FormControl('', [Validators.pattern(/^\d{0,10}$/), Validators.required])
+      telNumbers:  this.fb.array([this.fb.control('',Validators.required)])
     });
   }
-  addField() {
-    const controlName = 'phone' + (Object.keys(this.phoneForm.controls).length + 1);
-    this.phoneForm.addControl(controlName, new FormControl('', [Validators.pattern(/^\d{0,10}$/), Validators.required]));
+  get telNumbers(): FormArray {
+    return this.phoneForm.get('telNumbers') as FormArray;
   }
-  deletField(field: KeyValue<string, AbstractControl<any, any>>) {
-    this.phoneForm.removeControl(field.key)
+  get isValid():boolean{
+    return this.phoneForm.get('telNumbers')?.valid??false
+  }
+  addTelField(): void {
+    this.telNumbers.push(this.fb.control('',Validators.required));
+  }
+  removeItem(index: number): void {
+    this.telNumbers.removeAt(index);
+    
   }
   getModel() {
-    if (this.phoneForm.valid)
-      return this.phoneForm.value
+    if (this.phoneForm.get('telNumbers')?.valid)
+      return this.phoneForm.get('telNumbers')?.value
   }
 }

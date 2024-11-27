@@ -1,12 +1,17 @@
 :host::ng-deep {
     direction: rtl;
-    border: 3px solid rgb(29, 226, 160);
 
     .allForm {
         padding: 10px;
         text-align: right;
+        width: 800px;
+        height: 550px;
+        border: 2px solid rgb(29, 226, 160);
+        overflow-y: auto;
     }
-
+    .mdc-dialog--open .mat-mdc-dialog-inner-container.mdc-dialog__container {
+        border-radius: 1px !important;
+    }
     mat-select {
         text-align: right;
     }
@@ -14,26 +19,28 @@
     .mdc-text-field--filled:not(.mdc-text-field--disabled) {
         background-color: transparent !important
     }
-    .telForm{
-        width: 180px;
-    }
+
     mat-form-field {
         margin-left: 10px;
         width: 170px;
         // width: 170px !important;
     }
-    .cdk-overlay-pane{
-         background-color: transparent !important;
+
+    .cdk-overlay-pane {
+        background-color: transparent !important;
     }
-    button{
+
+    button {
         cursor: pointer;
-        height: 30px;
+        height: 20px;
         float: left;
+        // position: sticky;
+        bottom: 10px;
+        width: 100px;
+        margin: 0 auto;
     }
+
     .addLimud {
         cursor: pointer;
     }
 }
-
-
-
