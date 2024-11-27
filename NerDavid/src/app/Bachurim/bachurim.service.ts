@@ -14,8 +14,11 @@ export class BachurimService {
   getYeshiva():Observable<IYeshiva[]>{
    return this.http.get<IYeshiva[]>(this.url+'GetYeshiva')
  }
- getShiur(yeshivaId:number):Observable<IShiur[]>{
+ getShiurByYeshivaId(yeshivaId:number):Observable<IShiur[]>{
   return this.http.get<IShiur[]>(this.url+`GetShiurByYeshivaId?yeshivaId=${yeshivaId}`)
+}
+getShiur():Observable<IShiur[]>{
+  return this.http.get<IShiur[]>(this.url+'GetShiur')
 }
 getCity():Observable<ICity[]>{
   return this.http.get<ICity[]>(this.url+'GetCity')

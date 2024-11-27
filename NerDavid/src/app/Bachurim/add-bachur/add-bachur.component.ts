@@ -5,6 +5,7 @@ import { ICity, INewEditBachur, IPhones, IShiur, IYeshiva } from '../IBachurim';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { LimudComponent } from '../limud/limud.component';
 import { PhonesComponent } from './phones/phones.component';
+import { KeyValue } from '@angular/common';
 
 @Component({
   selector: 'nd-add-bachur',
@@ -16,11 +17,14 @@ export class AddBachurComponent {
   yeshivaOption!: IYeshiva[];
   shiurOption!: IShiur[];
   newBachur: INewEditBachur = {} as INewEditBachur;
-  options: string[] = [];
   filteredOptions!: string[];
-  // phones!:IPhones[];
+  title: string = {} as string;
+  titleCity: string = {} as string;
+  yeshivaKeyValueArray: KeyValue<number,string>[] = [];
+  cityArray: KeyValue<number,string>[]=[];
+  yeshivaSelected!:  KeyValue<number,string>;
   @ViewChild(LimudComponent) limudComponent: LimudComponent | undefined;
-  @ViewChild (PhonesComponent) phoneComponent:PhonesComponent|undefined
+  @ViewChild(PhonesComponent) phoneComponent: PhonesComponent | undefined
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
 
   constructor(private _BachurimSer: BachurimService, public dialogRef: MatDialogRef<AddBachurComponent>,
@@ -29,34 +33,52 @@ export class AddBachurComponent {
     this.newBachurForm = new FormGroup({
       firstName: new FormControl(null),
       lastName: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
+      // city: new FormControl('', Validators.required),
       address: new FormControl(''),
-      phone: new FormControl('', Validators.required),
-      yeshiva: new FormControl('', Validators.required),
-      shiur: new FormControl('', Validators.required),
+      // phone: new FormControl('', Validators.required),
+      // yeshiva: new FormControl('', Validators.required),
+      shiurID: new FormControl('', Validators.required),
     });
-    this._BachurimSer.getYeshiva().subscribe(x => this.yeshivaOption = x)
-    this._BachurimSer.getCity().subscribe(x=>this.options=x.map(x=>x.cityName))
-    // this._BachurimSer.getPhones(100).subscribe(x => this.phones = x)
+    this._BachurimSer.getYeshiva().subscribe(x => {
+      this.yeshivaOption = x,
+        this.yeshivaKeyValueArray = this.yeshivaOption.map(item => ({
+          key: item.yeshivaId,
+          value: item.yeshivaName
+        }));
+      this.title = "ישיבה";
+    })
+    this._BachurimSer.getCity().subscribe(x => {
+      this.cityArray = x.map(item => ({ key: item.cityId, value: item.cityName })),
+      console.log(this.cityArray,"arr");
+      
+      this.titleCity = "עיר"
+    })
+
   }
-  filter(): void {
-    const filterValue = this.input.nativeElement.value.toLocaleLowerCase();
-    this.filteredOptions = this.options.filter(o => o.toLowerCase().includes(filterValue));
+
+  onSelectionChange(selected: KeyValue<number, string>) {
+    this.yeshivaSelected = selected;
+    if (selected.key != 0)
+      this._BachurimSer.getShiurByYeshivaId(selected.key).subscribe(x => this.shiurOption = x)
+    else
+      this._BachurimSer.getShiur().subscribe(x => this.shiurOption = x)
   }
-  getShiur(event: any) {
-    this._BachurimSer.getShiur(event.source.value.yeshivaId).subscribe(x => this.shiurOption = x)
+  onSelectionCityChange(selected: KeyValue<number, string>) {
+    this.newBachur.bachur.cityId = selected.key
   }
- save() {
-    console.log(this.limudComponent?.isFormValid, "llll" );
-    const array=this.limudComponent?.getModel();
+  save() {
+    const array = this.limudComponent?.getModel();
 
     const phoneArray = this.phoneComponent?.getModel();
-    const values= Object.values(phoneArray);
+    console.log(phoneArray, "pharray");
+
+    const values = Object.values(phoneArray);
     const phonesObject: IPhones[] = values.map(value => ({ phone: value as string }));
 
     this.newBachur.bachur = this.newBachurForm.value
+    this.newBachur.bachur.yeshivaID = this.yeshivaSelected.key;
     this.newBachur.limud = this.limudComponent?.getModel();
-    this.newBachur.phones=phonesObject;
-    console.log(this.newBachur,"new");
+    this.newBachur.phones = phonesObject;
+    console.log(this.newBachur, "new");
   }
 }

@@ -1,14 +1,14 @@
-<div class="all">
-<mat-icon (click)="addField()">add</mat-icon>
-<form [formGroup]="phoneForm">
-    <div *ngFor="let control of phoneForm.controls | keyvalue; let index=index">
-        <mat-form-field class="telForm">
-            <mat-label>{{index+1}}</mat-label>
-            <!-- <span matTextPrefix class="span">+1 &nbsp;</span> -->
-            <input type="tel" matInput placeholder="555-555-1234" [formControlName]="control.key">
-            <mat-icon matSuffix>call</mat-icon>
-        </mat-form-field>
-        <mat-icon (click)="deletField(control)" style="color: black;">clear</mat-icon>
+<mat-icon (click)="addTelField()">add</mat-icon>
+<form [formGroup]="phoneForm" class="form-container">
+    <div formArrayName="telNumbers" class="tel-numbers-container">
+        <div *ngFor="let tel of telNumbers.controls; let i = index;" class="tel-field">
+            <mat-form-field class="telForm">
+                <mat-label>{{i+1}}</mat-label>
+                <!-- <span matTextPrefix class="span">+1 &nbsp;</span> -->
+                <input type="tel" matInput placeholder="555-555-1234" formControlName="{{i}}">
+                <mat-icon matSuffix>call</mat-icon>
+            </mat-form-field>
+            <mat-icon (click)="removeItem(i)" style="color: black;">clear</mat-icon>
+        </div>
     </div>
 </form>
-</div>

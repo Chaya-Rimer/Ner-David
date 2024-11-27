@@ -44,9 +44,7 @@ export class BachurimDesktopComponent {
   stateGroupOptions!: Observable< KeyValue<string,string[]>[]>;
   ngOnInit() {
     this._desktopService.getBachurimNames().subscribe(x=>{
-      console.log(x,"jhgfh"),
       this.stateGroups = x;
-      // this._filterGroup('');
       this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges.pipe(
         startWith(''),
         map(value => this._filterGroup(value || '')),
@@ -71,8 +69,6 @@ export class BachurimDesktopComponent {
 
   openDialog() {
     this.dialog.open(AddBachurComponent, {
-      width: '800px',
-      height: '550px',
       data: {
         animal: 'panda',
       },
