@@ -11,6 +11,7 @@ namespace NerDavidWebApp.Intarfaces
         public List<CityTbl> GetCity();
         public List<PhonesTbl> GetPhones(int bachurId);
         public List<Shiur> GetShiur();
+        public void NewBachur(NewOrEditBachur newBachur);
 
 
     }

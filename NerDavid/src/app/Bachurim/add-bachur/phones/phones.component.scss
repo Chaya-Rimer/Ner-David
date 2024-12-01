@@ -5,11 +5,12 @@
   .tel-numbers-container {
     display: flex; /* Flexbox for the tel fields */
     flex-wrap: wrap; /* Allow wrapping to the next line */
+    margin-right:10px;
   }
   .tel-field {
     display: flex;
     flex-direction: row; /* Column layout for the form */
-    margin-right: 8px; /* Space between fields */
+    margin-right: 10px; /* Space between fields */
     margin-bottom: 2px; /* Space below the fields */
     flex: 0 1 calc(33.33% - 10px); /* Allow up to 3 fields per row accounting for margin */
     box-sizing: border-box; /* Ensure padding and border are included in width */

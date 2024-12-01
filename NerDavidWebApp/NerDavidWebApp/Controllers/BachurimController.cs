@@ -36,5 +36,12 @@ namespace NerDavidWebApp.Controllers
         {
             return BachurimService.GetCity();
         }
+
+        [HttpPost]
+        public void NewBachur(NewOrEditBachur newBachur)
+        {
+             BachurimService.NewBachur(newBachur);
+        }
+
     }
 }

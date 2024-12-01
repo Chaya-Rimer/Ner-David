@@ -34,7 +34,7 @@ mat-spinner{
   }
   
 button  {
-    float: left;
+    // float: left;
     //  margin-top: 10vh;
     // margin-left: 3vh;
     color: rgb(29, 226, 160);
@@ -46,6 +46,9 @@ button  {
     cursor: pointer;
 
 }
+mat-form-field {
+    width: 200px;
+}
 mat-icon{
     color: rgb(29, 226, 160);
 }
@@ -55,6 +58,13 @@ mat-icon{
         background-color: transparent !important;
         padding: 0%;
         
+        
+    }
+    .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+        margin-right: -20px;
+    }
+    .mat-mdc-form-field-icon-prefix>.mat-icon, .mat-mdc-form-field-icon-suffix>.mat-icon {
+        padding: 0 !important;
     }
 
 }

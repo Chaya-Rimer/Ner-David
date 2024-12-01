@@ -8,6 +8,8 @@ import { IbachurimTable } from '../Bachurim/bachurim-table/IBachurimTable';
 import { MatTableDataSource } from '@angular/material/table';
 import { DISPLAY_ROW_CONTENT, DisplayRowContent } from './display-row-content.directive';
 import { read } from 'fs';
+import { INNER_ROW_COMPONENT, InnerRowComponent } from './inner-row-component.directive';
+import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
 
 
 @Component({
@@ -39,9 +41,10 @@ export class DisplayDataComponent {
   columnsToDisplayWithExpand: any[] = []
   @Input() disSelectColumn = (element: any) => false;
   @Input() tableClass!: 'fill-table' | 'line-table';
-  // @Input() expanded:boolean;
 
   @ContentChild(DISPLAY_ROW_CONTENT, { read: TemplateRef, static: true }) contentTemplate!: TemplateRef<DisplayRowContent>;
+  @ContentChildren(INNER_ROW_COMPONENT) innerComponents!: QueryList<InnerRowComponent>;  
+  
   constructor(private _displayService: DisplayDataService) { }
   ngOnInit() {
     this._displayService.getColumnsToTable(this.displayDataType).subscribe(x => {
@@ -50,20 +53,21 @@ export class DisplayDataComponent {
         this.columnsToDisplayWithExpand = [...this.columnsToDisplay.map(x => x.columns), 'expand'];
       else
         this.columnsToDisplayWithExpand = [...this.columnsToDisplay.map(x => x.columns)];
-
-
     })
   }
 
   ngOnChanges() {
-    console.log(this.data, "data");
-
     this.setDataSource();
-
   }
   setDataSource() {
     this.dataSource = new MatTableDataSource(this.data);
   }
+  getComponent(name: string): TemplateRef<any> | null {
+    let temp = this.innerComponents.find(x=>x.innerRowComponent==name);
+    if (temp)
+        return temp.template;
+    return null;
+}
 
   //   selectAll() {
   //     this.dataSource.forEach(x => x.select = !this.disSelectColumn(x) && this.allSelected);

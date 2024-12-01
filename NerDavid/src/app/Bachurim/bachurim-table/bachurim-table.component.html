@@ -6,5 +6,9 @@
                 <nd-bachur-details [bachurDetails]="element" ></nd-bachur-details>
             </div>
         </ng-template>
+        <ng-template innerRowComponent='status' let-data="data" let-element="element">
+         <mat-icon  matTooltip={{data.statusName}}>{{element}}</mat-icon>
+           
+          </ng-template>
     </nd-display-data>
 </div>
