@@ -1,3 +1,4 @@
+
 import { Component, contentChild, ContentChild, ContentChildren, input, Input, QueryList, TemplateRef } from '@angular/core';
 import { DisplayDataService } from './display-data.service';
 import { IDisplayData } from './IDisplayData';
@@ -9,6 +10,7 @@ import { DISPLAY_ROW_CONTENT, DisplayRowContent } from './display-row-content.di
 import { read } from 'fs';
 import { INNER_ROW_COMPONENT, InnerRowComponent } from './inner-row-component.directive';
 import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
+
 
 @Component({
   selector: 'nd-display-data',
@@ -33,38 +35,34 @@ export class DisplayDataComponent {
   @Input() columnClass!: (columnName: string, element: any) => any;
   @Input() disabled: any = (element: any) => false;
   @Input() compareFunc: (element: any, expanded: any) => Boolean = (x, y) => x == y;
-  @Input() expanded!: any;
-  @Input() tableClass: 'normal' | 'filled-table' | 'lined-table' = 'normal';
+  @Input() isExpanded!: any;
   expandedElement: any | null | undefined;
   columnsToDisplay!: IDisplayData[];
   columnsToDisplayWithExpand: any[] = []
   @Input() disSelectColumn = (element: any) => false;
+  @Input() tableClass!: 'fill-table' | 'line-table';
+
   @ContentChild(DISPLAY_ROW_CONTENT, { read: TemplateRef, static: true }) contentTemplate!: TemplateRef<DisplayRowContent>;
-  @ContentChildren(INNER_ROW_COMPONENT) innerComponents!: QueryList<InnerRowComponent>;
-
-  // @ContentChild(INNER_ROW_COMPONENT, { read: TemplateRef, static: true }) innerComponents!: TemplateRef<InnerRowComponent>;
-
+  @ContentChildren(INNER_ROW_COMPONENT) innerComponents!: QueryList<InnerRowComponent>;  
+  
   constructor(private _displayService: DisplayDataService) { }
   ngOnInit() {
     this._displayService.getColumnsToTable(this.displayDataType).subscribe(x => {
-      this.columnsToDisplay = x,
+      this.columnsToDisplay = x;
+      if (this.isExpanded)
         this.columnsToDisplayWithExpand = [...this.columnsToDisplay.map(x => x.columns), 'expand'];
-
+      else
+        this.columnsToDisplayWithExpand = [...this.columnsToDisplay.map(x => x.columns)];
     })
   }
 
   ngOnChanges() {
-    console.log(this.innerComponents,"inner");
-    console.log(this.data, "data");
     this.setDataSource();
-
   }
   setDataSource() {
     this.dataSource = new MatTableDataSource(this.data);
   }
   getComponent(name: string): TemplateRef<any> | null {
-    debugger;
-    console.log(this.innerComponents,"inner");
     let temp = this.innerComponents.find(x=>x.innerRowComponent==name);
     if (temp)
         return temp.template;

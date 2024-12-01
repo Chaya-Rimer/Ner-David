@@ -77,8 +77,5 @@ namespace NerDavidWebApp.Services
             }));
             db.SaveChanges();
         }
-
-
-
     }
 }
