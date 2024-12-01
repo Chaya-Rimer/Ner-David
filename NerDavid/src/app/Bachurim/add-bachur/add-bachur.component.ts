@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, viewChild, ViewChild, viewChildren } from '@angular/core';
+import { Component, ElementRef, Inject, signal, viewChild, ViewChild, viewChildren } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BachurimService } from '../bachurim.service';
 import { ICity, INewEditBachur, IPhones, IShiur, IYeshiva } from '../IBachurim';
@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { LimudComponent } from '../limud/limud.component';
 import { PhonesComponent } from './phones/phones.component';
 import { KeyValue } from '@angular/common';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'nd-add-bachur',
@@ -22,13 +23,17 @@ export class AddBachurComponent {
   titleCity: string = {} as string;
   yeshivaKeyValueArray: KeyValue<number,string>[] = [];
   cityArray: KeyValue<number,string>[]=[];
+  citySelected!:ICity;
   yeshivaSelected!:  KeyValue<number,string>;
   @ViewChild(LimudComponent) limudComponent: LimudComponent | undefined;
   @ViewChild(PhonesComponent) phoneComponent: PhonesComponent | undefined
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
+  accordion = viewChild.required(MatAccordion);
 
   constructor(private _BachurimSer: BachurimService, public dialogRef: MatDialogRef<AddBachurComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { name: string }) { }
+    readonly panelOpenState = signal(false);
+
   ngOnInit() {
     this.newBachurForm = new FormGroup({
       firstName: new FormControl(null),
@@ -64,7 +69,8 @@ export class AddBachurComponent {
       this._BachurimSer.getShiur().subscribe(x => this.shiurOption = x)
   }
   onSelectionCityChange(selected: KeyValue<number, string>) {
-    this.newBachur.bachur.cityId = selected.key
+    // this.newBachurForm.controls['city'].setValue(selected)
+    this.citySelected={ cityId:selected.key, cityName: selected.value}
   }
   save() {
     const array = this.limudComponent?.getModel();
@@ -77,8 +83,11 @@ export class AddBachurComponent {
 
     this.newBachur.bachur = this.newBachurForm.value
     this.newBachur.bachur.yeshivaID = this.yeshivaSelected.key;
+    this.newBachur.bachur.city=this.citySelected;
     this.newBachur.limud = this.limudComponent?.getModel();
     this.newBachur.phones = phonesObject;
     console.log(this.newBachur, "new");
+    this._BachurimSer.newBachur(this.newBachur).subscribe();
+
   }
 }

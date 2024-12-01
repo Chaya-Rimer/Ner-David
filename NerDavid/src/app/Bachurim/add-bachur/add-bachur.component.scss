@@ -4,35 +4,26 @@
     .allForm {
         padding: 10px;
         text-align: right;
-        width: 800px;
-        height: 550px;
-        border: 2px solid rgb(29, 226, 160);
+        max-width: 800px;
+        height: 400px;
         overflow-y: auto;
-    }
-    .mdc-dialog--open .mat-mdc-dialog-inner-container.mdc-dialog__container {
-        border-radius: 1px !important;
     }
     mat-select {
         text-align: right;
     }
 
-    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-        background-color: transparent !important
-    }
-
     mat-form-field {
         margin-left: 10px;
         width: 170px;
-        // width: 170px !important;
     }
 
-    .cdk-overlay-pane {
-        background-color: transparent !important;
-    }
+    // .cdk-overlay-pane {
+    //     background-color: transparent !important;
+    // }
 
     button {
         cursor: pointer;
-        height: 20px;
+        height: 30px;
         float: left;
         // position: sticky;
         bottom: 10px;
@@ -43,4 +34,28 @@
     .addLimud {
         cursor: pointer;
     }
+    // .mat-accordion .mat-expansion-panel:not(.mat-expanded), .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing){
+    //     width: 700px;
+    // }
+
 }
+
+.example-action-buttons {
+    padding-bottom: 20px;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+    margin-left: 8px;
+  }
+  mat-panel-title{
+font-weight:bolder;
+  }
+  .mat-icon {
+    margin-left: 20px;
+    color: rgb(23, 194, 137);
+  }

@@ -1,10 +1,14 @@
 <div class="table">
-    <nd-display-data [displayDataType]="1" [data]="filterData">
+    <nd-display-data [displayDataType]="1" [data]="filterData" [tableClass]="'filled-table'">
         <!-- תצוגת טבלה נפתחת -->
         <ng-template display-row-content let-element>
             <div class="details">
                 <nd-bachur-details [bachurDetails]="element" ></nd-bachur-details>
             </div>
         </ng-template>
+        <ng-template innerRowComponent='status' let-data="data" let-element="element">
+         <mat-icon  matTooltip={{data.statusName}}>{{element}}</mat-icon>
+           
+          </ng-template>
     </nd-display-data>
 </div>

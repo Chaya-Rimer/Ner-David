@@ -36,15 +36,10 @@ namespace NerDavidWebApp.Controllers
         {
             return BachurimService.GetCity();
         }
-        //[HttpGet]
-        //public List<BachurimTbl> GetBachurimTable()
-        //{
-        //    return BachurimService.GetBachurimTable();
-        //}
-        [HttpGet]
-        public List<KeyValuePair<char, string[]>> GetBachurimNames()
+        [HttpPost]
+        public void NewBachur(NewOrEditBachur newBachur)
         {
-            return BachurimService.GetBachurimNames(); 
+             BachurimService.NewBachur(newBachur);
         }
     }
 }

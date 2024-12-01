@@ -14,7 +14,7 @@ import { AutocompleteComponent } from "../../autocomplete/autocomplete.component
 export class LimudComponent {
   masecetOption: KeyValue<number,string>[] = [];
   masechet!: IMasechet[];
-  prakimNumE!: string;
+  prakimNumE: string|undefined;
   prakimNumArray: { key: number, value: string }[] = [];
   dapimNum: { letter: string, gematria: number }[] = [];
   hebrewLettersPattern = /^[\u0590-\u05FF\s]*$/;
@@ -35,7 +35,7 @@ export class LimudComponent {
   }
   createForm(): FormGroup {
     return this.fb.group({
-      masechetId: new FormControl(null,Validators.required),
+      masechet: new FormControl(null,Validators.required),
       perek: new FormControl(null),
       startValue: new FormControl(null),
       endValue: new FormControl(null),
@@ -54,7 +54,8 @@ export class LimudComponent {
     return this.form.get('formArray') as FormArray;
   }
   onSelectionChange(selected: { key: number, value: string },index:number) {
-    this.formArray.at(index).get('masechetId')?.setValue(selected.key);
+    let masechet:IMasechet={masechetId:selected.key,masechetName:selected.value}
+    this.formArray.at(index).get('masechet')?.setValue(masechet);
 
     if (selected.key != 0) {
       const p = this.masechet.find(x => x.masechetId == selected.key)

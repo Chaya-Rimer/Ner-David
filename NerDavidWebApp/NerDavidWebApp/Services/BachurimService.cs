@@ -6,28 +6,28 @@ using System.Linq;
 
 namespace NerDavidWebApp.Services
 {
-    public class BachurimService:IBachurim
+    public class BachurimService : IBachurim
     {
-       
-            NerDavidDbContext db=new NerDavidDbContext();
+
+        NerDavidDbContext db = new NerDavidDbContext();
 
 
         public List<Shiur> GetShiurByYeshivaId(int yeshivaId)
         {
-           return db.ShiurTbls.Where(x=>x.ShiurType== 
-                  db.YeshivaTbls.First(a => a.YeshivaId == yeshivaId).YeshivaType).Select(x=>new Shiur
-                  {
-                      ShiurId=x.ShiurId,
-                      ShiurName=x.ShiurName,
-                  }).ToList();
+            return db.ShiurTbls.Where(x => x.ShiurType ==
+                   db.YeshivaTbls.First(a => a.YeshivaId == yeshivaId).YeshivaType).Select(x => new Shiur
+                   {
+                       ShiurId = x.ShiurId,
+                       ShiurName = x.ShiurName,
+                   }).ToList();
         }
         public List<Shiur> GetShiur()
         {
             return db.ShiurTbls.Select(x => new Shiur
-                 {
-                     ShiurId = x.ShiurId,
-                     ShiurName = x.ShiurName,
-                 }).ToList();
+            {
+                ShiurId = x.ShiurId,
+                ShiurName = x.ShiurName,
+            }).ToList();
         }
         public List<YeshivaTbl> GetYeshiva()
         {
@@ -37,19 +37,45 @@ namespace NerDavidWebApp.Services
         {
             return db.CityTbls.ToList();
         }
-        public List<PhonesTbl> GetPhones(int bachurId) 
-        { 
-            return db.PhonesTbls.Where(x=>x.BachurId== bachurId).ToList();
-        }
-        public List<KeyValuePair<char, string[]>> GetBachurimNames()
+        public List<PhonesTbl> GetPhones(int bachurId)
         {
-            var bachurimName = db.BachurimTbls.Select(x => new KeyValuePair<char, string>(x.LastName[0], x.LastName + " " + x.FirstName)).ToList();
-            var groupedList = bachurimName.GroupBy(x => x.Key).Select(x => new KeyValuePair<char, string[]>(x.Key, x.Select(y => y.Value).ToArray())).OrderBy(x=>x.Key).ToList();
-            //var bachurimNames = db.BachurimTbls.Select(x=>x.LastName+" "+x.FirstName).ToList();
-            //var sortedNames = bachurimNames.Select(x => new BachurimNames() { Letter = x[0], Name = x }).GroupBy(x=>x.Letter).ToList();
-            //List<aa> aa = sortedNames.Select(x=> new aa() { Letter=x.Key.ToString(),Names=x.ToList().Select(x=>x.Name).ToArray() }).ToList();
-            //return aa;
-            return groupedList;
+            return db.PhonesTbls.Where(x => x.BachurId == bachurId).ToList();
+        }
+        public void NewBachur(NewOrEditBachur newBachur)
+        {
+            BachurimTbl b = new BachurimTbl()
+            {
+                FirstName = newBachur.Bachur.FirstName,
+                LastName = newBachur.Bachur.LastName,
+                Adress = newBachur.Bachur.Adress,
+                CityId = newBachur.Bachur.City.CityId,
+                ShiurId = newBachur.Bachur.ShiurId,
+                YeshivaId = newBachur.Bachur.YeshivaId
+            };
+
+            var bachur = db.BachurimTbls.Add(b);
+            db.SaveChanges();
+            var bachurID = bachur.Entity.BachurId;
+
+            newBachur.Limud.ForEach(item => db.LimudTbls.Add(new LimudTbl()
+            {
+                BachurId = bachurID,
+                MasechetId = item.MasechetId,
+                Perek = item.Perek,
+                StartValue = item.StartValue,
+                EndValue = item.EndValue
+                //ZmanId = item.ZmanId,
+                //YearId = item.YearId,
+                //Tested = item.Tested
+            }));
+            db.SaveChanges();
+
+            newBachur.Phones.ForEach(item => db.PhonesTbls.Add(new PhonesTbl()
+            {
+                BachurId = bachurID,
+                Phone = item.Phone
+            }));
+            db.SaveChanges();
         }
 
 

@@ -11,13 +11,7 @@ export class BachurLimudDetailsComponent {
   dataSource: ILimud[] = []
   constructor(private _limudService:LimudService){}
   ngOnInit(){
-    this._limudService.getBachurLimudTable(100).subscribe(x=>{
-      this.dataSource=x,
-      console.log(x,"limud data");
-      
-
-    }
-    )
+    this._limudService.getBachurLimudTable(100).subscribe(x=>{this.dataSource=x})
   }
 
 }

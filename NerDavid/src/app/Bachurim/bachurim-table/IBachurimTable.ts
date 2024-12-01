@@ -10,4 +10,6 @@ export interface IbachurimTable {
     adress?: string;
     city?: string;
     phones: IPhones[];
+    status:string;
+    statusName:string;
 }

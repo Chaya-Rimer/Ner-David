@@ -16,6 +16,8 @@ namespace NerDavidWebApp.Classes
 
         public string? YeshivaType { get; set; }
 
+        public string Status { get; set; }
+        public string StatusName { get; set; }
         public string? City { get; set; }
 
         public string? Adress { get; set; }
