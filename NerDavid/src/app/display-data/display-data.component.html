@@ -1,14 +1,13 @@
-<mat-spinner *ngIf="!dataSource"></mat-spinner>
-<p *ngIf="!dataSource" style="color: black;">אנו טוענים את הטבלה בעבורך. אנא המתן...</p>
 
-<table mat-table *ngIf="dataSource" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+
+<table mat-table *ngIf="dataSource" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" [ngClass]="tableClass">
   @for (column of columnsToDisplay; track column) {
   <ng-container matColumnDef="{{column.columns}}">
     <th mat-header-cell *matHeaderCellDef> {{column.title}} </th>
     <td mat-cell *matCellDef="let element"> {{element[column.columns]}} </td>
   </ng-container>
   }
-  <ng-container matColumnDef="expand">
+  <ng-container matColumnDef="expand" *ngIf="isExpanded">
     <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
     <td mat-cell *matCellDef="let element">
       <button mat-icon-button aria-label="expand row"

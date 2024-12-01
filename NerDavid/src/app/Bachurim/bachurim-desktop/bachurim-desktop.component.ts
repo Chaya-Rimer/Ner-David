@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild, viewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBachurComponent } from '../add-bachur/add-bachur.component';
+import { BachurimTableComponent } from '../bachurim-table/bachurim-table.component';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { AddBachurComponent } from '../add-bachur/add-bachur.component';
 })
 export class BachurimDesktopComponent {
   readonly dialog = inject(MatDialog);
-  searchValue=''
+  searchValue='';
+  @ViewChild(BachurimTableComponent) bachurimTable!:BachurimTableComponent;
 
   constructor() { }
 

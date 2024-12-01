@@ -33,7 +33,7 @@ import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
     DisplayRowContent,
     BachurimDesktopComponent,
     PhonesComponent,
-    BachurLimudDetailsComponent
+    BachurLimudDetailsComponent,
     AutocompleteComponent
   ],
   imports: [
