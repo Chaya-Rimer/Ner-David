@@ -15,4 +15,6 @@
 
 <div class="section">
 </div>
+<mat-spinner *ngIf="bachurimTable?.dataSource?.length==0"></mat-spinner>
+<p *ngIf="bachurimTable?.dataSource?.length==0" style="color: black;">אנו טוענים את הטבלה בעבורך. אנא המתן...</p>
 <app-bachurim-table [searchTerm]="searchValue"></app-bachurim-table>
