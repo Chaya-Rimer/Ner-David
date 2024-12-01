@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ICity, IPhones, IShiur, IYeshiva } from './IBachurim';
+import { ICity, INewEditBachur, IPhones, IShiur, IYeshiva } from './IBachurim';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -26,5 +26,7 @@ getCity():Observable<ICity[]>{
 getPhones(bachurId:number):Observable<IPhones[]>{
   return this.http.get<IPhones[]>(this.url+`GetPhones?bachurId=${bachurId}`)
 }
-
+newBachur(newBachur:INewEditBachur){
+  return this.http.post<INewEditBachur>(this.url+"NewBachur",newBachur)
+}
 }

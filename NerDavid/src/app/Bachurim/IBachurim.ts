@@ -15,8 +15,8 @@ export interface IShiur{
     cityName:string
 }
 export interface IPhones{
-    phoneID?:number
-    bachurID?:number
+    phoneId?:number
+    bachurId?:number
     phone:string;
 }
 
@@ -29,7 +29,7 @@ export interface IBachur{
     bachurID?:number
     firstName?:string
     lastName:string
-    cityId?:number
+    city?:ICity
     adress?:string
     yeshivaID?:number
     shiurID?:number

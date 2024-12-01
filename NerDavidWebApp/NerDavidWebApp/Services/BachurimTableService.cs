@@ -18,6 +18,8 @@ namespace NerDavidWebApp.Services
                 YeshivaType = x.Yeshiva.YeshivaType,
                 Adress = x.Adress,
                 City = x.City.CityName,
+                Status=x.Status.StatusSymbol,
+                StatusName = x.Status.Status
                 //Phones = x.PhonesTbl.Select(y => y.PhoneNumber).ToList()
                 //Status=x.Status.StatusSymbol
             }).ToList();

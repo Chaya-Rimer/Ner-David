@@ -21,7 +21,5 @@
         public string YeshivaId { get; set; }
 
         public string ZmanId { get; set; }
-
-        //public
     }
 }

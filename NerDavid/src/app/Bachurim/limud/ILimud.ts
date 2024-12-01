@@ -1,13 +1,12 @@
 export interface IMasechet{
     masechetId:number
     masechetName:string
-    prakimNum:string
+    prakimNum?:string
 }
 export interface ILimud{
     limudId?:number
     bachurId?:number
-    masechetId?:number
-    masechetName?:string;
+    masechet?:IMasechet
     perek?:string
     startValue?:string
     endValue?:string
