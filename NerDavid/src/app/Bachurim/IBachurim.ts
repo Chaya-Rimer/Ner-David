@@ -26,14 +26,14 @@ export interface IStatus{
     statusSympol?:string
 }
 export interface IBachur{
-    bachurID?:number
+    bachurId?:number
     firstName?:string
-    lastName:string
+    lastName?:string
     city?:ICity
     adress?:string
-    yeshivaID?:number
-    shiurID?:number
-    statusID?:IStatus;
+    yeshivaId?:number
+    shiurId?:number
+    statusId?:IStatus;
 }
 export interface INewEditBachur{
     bachur:IBachur;

@@ -39,6 +39,7 @@ import { DisplayRowAction } from '../display-data/display-row-action.directive';
     BachurLimudDetailsComponent,
     AutocompleteComponent,
     DisplayRowAction
+    FilterComponent
   ],
   imports: [
     CommonModule,

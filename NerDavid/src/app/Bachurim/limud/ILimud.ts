@@ -18,6 +18,14 @@ export interface ILimudDetails{
     zmanId?:number
     zmanName?:string
     tested?:boolean
-    shiurId:number
+    shiurId?:number
     shiurName:string
+}
+export interface IYears{
+    yearId:number;
+    yearName:string;
+}
+export interface IZman{
+    zmanId:number
+    zmanName?:string;
 }

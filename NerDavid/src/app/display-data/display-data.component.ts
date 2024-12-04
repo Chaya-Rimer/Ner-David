@@ -29,14 +29,12 @@ import { DISPLAY_ROW_ACTION, DisplayRowAction } from './display-row-action.direc
 export class DisplayDataComponent {
   @Input() data!: any[]
   dataSource = new MatTableDataSource<any>();
-
-  // dataSource = new MatTableDataSource<any>(); 
   @Input() displayDataType!: number;
   allSelected: boolean = false;
   @Input() columnClass!: (columnName: string, element: any) => any;
   @Input() disabled: any = (element: any) => false;
-  @Input() compareFunc: (element: any, expanded: any) => Boolean = (x, y) => x == y;
-  @Input() isExpanded!: any;
+    @Input() compareFunc: (element: any, expanded: any) => Boolean = (x, y) => x == y;
+    @Input() isExpanded!: boolean;
   @Input() selectable:boolean=false;
   expandedElement: any | null | undefined;
   columnsToDisplay!: IDisplayData[];

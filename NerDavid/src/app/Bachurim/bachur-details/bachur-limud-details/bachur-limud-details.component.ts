@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ILimudDetails } from '../../limud/ILimud';
 import { LimudService } from '../../limud/limud.service';
+import { ILimudDetails } from '../../limud/ILimud';
 
 @Component({
   selector: 'nd-bachur-limud-details',

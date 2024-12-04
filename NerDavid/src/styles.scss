@@ -7,14 +7,22 @@
 html,
 
 body {
-    //  direction: rtl;
+    //   direction: rtl;
     // // height: 100%;
     // font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #f0f2f5;
     // // color:$gn-primary;
     color: rgb(23, 194, 137);
 }
-
+// :host::ng-deep{
+//   direction: rtl;
+// }
+// ::ng-deep .mat-icon{
+//     color: rgb(23, 194, 137) !important;
+// }
+.mat-icon{
+    color:rgb(23, 194, 137);
+}
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;

@@ -43,6 +43,10 @@ namespace NerDavidWebApp.Services
                 
             return limudDetails;
         }
+        public List<ZmanTbl> GetZman()
+        {
+            return db.ZmanTbls.ToList();
+        }
 
     }
 }

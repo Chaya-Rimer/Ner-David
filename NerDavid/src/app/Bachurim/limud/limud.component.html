@@ -20,7 +20,7 @@
         (validityChange)="onValidityChange($event,i)">
         </nd-autocomplete>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label> פרק</mat-label>
           <mat-select formControlName="perek">
             <mat-option *ngFor="let item of prakimNumArray" [value]="item.value">
@@ -29,15 +29,40 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="daf">
+        <mat-form-field class="daf" appearance="outline">
           <mat-label>מדף</mat-label>
           <input matInput type="text" [pattern]="hebrewLettersPattern" formControlName="startValue">
         </mat-form-field>
 
-        <mat-form-field class="daf">
+        <mat-form-field class="daf" appearance="outline">
           <mat-label>עד דף</mat-label>
           <input matInput type="text" [pattern]="hebrewLettersPattern" formControlName="endValue">
         </mat-form-field>
+<!-- 
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>דפים</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl">
+            @for (keyword of templateKeywords(); track keyword) {
+              <mat-chip-row (removed)="removeTemplateKeyword(keyword)">
+                {{keyword}}
+                <button matChipRemove aria-label="'remove ' + keyword">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            }
+          </mat-chip-grid>
+          <input
+            placeholder="דפים"
+            [matChipInputFor]="chipGrid"
+            (matChipInputTokenEnd)="addTemplateKeyword($event,i)"
+          />
+        </mat-form-field> -->
+
+        <mat-radio-group aria-label="Select an option" >
+          <mat-radio-button value="חורף" (change)="selectZman($event.value,i)">חורף </mat-radio-button>
+          <mat-radio-button value="קיץ" (change)="selectZman($event.value,i)">קיץ </mat-radio-button>
+
+        </mat-radio-group>
 
         <mat-icon (click)="deletForm(i)">delete_forever</mat-icon>
       </div>

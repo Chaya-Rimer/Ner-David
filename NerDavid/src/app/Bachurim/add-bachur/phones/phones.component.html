@@ -2,13 +2,14 @@
 <form [formGroup]="phoneForm" class="form-container">
     <div formArrayName="telNumbers" class="tel-numbers-container">
         <div *ngFor="let tel of telNumbers.controls; let i = index;" class="tel-field">
-            <mat-form-field class="telForm">
+            <mat-form-field class="telForm" appearance="outline">
                 <mat-label>{{i+1}}</mat-label>
                 <!-- <span matTextPrefix class="span">+1 &nbsp;</span> -->
-                <input type="tel" matInput placeholder="555-555-1234" formControlName="{{i}}">
+                <input type="tel" matInput placeholder="555-555-5555" formControlName="{{i}}">
                 <mat-icon matSuffix>call</mat-icon>
+                <mat-error *ngIf="telNumbers.invalid">  הטלפון חייב להכיל רק מספרים ולא לחרוג מ-10 ספרות</mat-error>
             </mat-form-field>
-            <mat-icon (click)="removeItem(i)" style="color: black;">clear</mat-icon>
+            <button mat-icon-button class="button" (click)="removeItem(i)"><mat-icon >clear</mat-icon></button>
         </div>
     </div>
 </form>
