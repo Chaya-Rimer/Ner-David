@@ -15,7 +15,7 @@ export class PhonesComponent {
   constructor(private fb: FormBuilder) { }
   ngOnInit() {
     this.phoneForm = this.fb.group({
-      telNumbers:  this.fb.array([this.fb.control('',Validators.required)])
+      telNumbers:  this.fb.array([this.fb.control('',[Validators.required,Validators.pattern('^[0-9]{0,10}$')])])
     });
   }
   get telNumbers(): FormArray {

@@ -1,31 +1,24 @@
 :host::ng-deep {
-    direction: rtl;
-
     .allForm {
         padding: 10px;
         text-align: right;
         max-width: 800px;
-        height: 400px;
+        height: 600px;
         overflow-y: auto;
     }
+
     mat-select {
         text-align: right;
     }
 
-    mat-form-field {
-        margin-left: 10px;
-        width: 170px;
+    .mat-accordion .mat-expansion-panel:first-of-type {
+        background-color: none !important;
     }
-
-    // .cdk-overlay-pane {
-    //     background-color: transparent !important;
-    // }
 
     button {
         cursor: pointer;
         height: 30px;
         float: left;
-        // position: sticky;
         bottom: 10px;
         width: 100px;
         margin: 0 auto;
@@ -34,28 +27,27 @@
     .addLimud {
         cursor: pointer;
     }
-    // .mat-accordion .mat-expansion-panel:not(.mat-expanded), .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing){
-    //     width: 700px;
-    // }
 
+    mat-form-field {
+        margin-left: 10px;
+        width: 170px;
+    }
 }
 
-.example-action-buttons {
-    padding-bottom: 20px;
-  }
-  
-  .example-headers-align .mat-expansion-panel-header-description {
+
+.example-headers-align .mat-expansion-panel-header-description {
     justify-content: space-between;
     align-items: center;
-  }
+}
 
-  .example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
-    margin-left: 8px;
-  }
-  mat-panel-title{
-font-weight:bolder;
-  }
-  .mat-icon {
+mat-panel-title {
+    font-weight: bolder;
+}
+
+mat-icon {
     margin-left: 20px;
-    color: rgb(23, 194, 137);
-  }
+}
+
+.save {
+    background-color: rgb(23, 194, 137);
+}

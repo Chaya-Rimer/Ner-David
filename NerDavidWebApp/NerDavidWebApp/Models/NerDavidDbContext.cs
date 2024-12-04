@@ -43,7 +43,7 @@ public partial class NerDavidDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=NerDavidDB;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=SHANSUN\\MSSQLSERVER03;Database=NerDavidDB;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -107,7 +107,7 @@ public partial class NerDavidDbContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.Component)
                 .HasMaxLength(50)
-                .IsFixedLength();
+                .IsUnicode(false);
             entity.Property(e => e.Title)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -139,10 +139,18 @@ public partial class NerDavidDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Limud_Mas_fk");
 
+            entity.HasOne(d => d.Shiur).WithMany(p => p.LimudTbls)
+                .HasForeignKey(d => d.ShiurId)
+                .HasConstraintName("limud_shiur_fk");
+
             entity.HasOne(d => d.Year).WithMany(p => p.LimudTbls)
                 .HasForeignKey(d => d.YearId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Limud_Year_fk");
+
+            entity.HasOne(d => d.Yeshiva).WithMany(p => p.LimudTbls)
+                .HasForeignKey(d => d.YeshivaId)
+                .HasConstraintName("limud_yeshiva_fk");
 
             entity.HasOne(d => d.Zman).WithMany(p => p.LimudTbls)
                 .HasForeignKey(d => d.ZmanId)
@@ -228,7 +236,7 @@ public partial class NerDavidDbContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.StatusSymbol)
                 .HasMaxLength(50)
-                .IsFixedLength();
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<TestsTbl>(entity =>

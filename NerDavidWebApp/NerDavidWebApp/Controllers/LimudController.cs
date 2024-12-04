@@ -21,6 +21,11 @@ namespace NerDavidWebApp.Controllers
         {
             return service.GetBachurLimudTable(bachurId);
         }
+        [HttpGet]
+        public List<ZmanTbl> GetZman()
+        {
+            return service.GetZman();
+        }
 
     }
 }
