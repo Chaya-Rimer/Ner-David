@@ -20,12 +20,16 @@ namespace NerDavidWebApp.Services
         {
             //var bachurimLimudDetails = db.LimudTbls.Where(x => x.BachurId == bachurId)
 
-            var a = db.LimudTbls.Include(x=>x.Masechet).Where(x => x.BachurId == bachurId).ToList();
+            var a = db.LimudTbls.Include(x => x.Masechet).Where(x => x.BachurId == bachurId).ToList();
             var w = a.First().Masechet;
             //a.ForEach(x => x.Masechet = db.MasechetTbls.Where(y => y.MasechetId == x.MasechetId).First());
-                
-                
+
+
             return a;
+        }
+        public List<ZmanTbl> GetZman()
+        {
+            return db.ZmanTbls.ToList();
         }
 
     }
