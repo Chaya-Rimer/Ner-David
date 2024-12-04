@@ -1,5 +1,6 @@
 ﻿using NerDavidWebApp.Classes;
 using NerDavidWebApp.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 
 namespace NerDavidWebApp.Services
@@ -16,16 +17,35 @@ namespace NerDavidWebApp.Services
                 PrakimNum = x.PrakimNum.Trim()
             }).ToList();
         }
-        public List<LimudTbl> GetBachurLimudTable(int bachurId)
+        public List<LimudDetails> GetBachurLimudTable(int bachurId)
         {
-            //var bachurimLimudDetails = db.LimudTbls.Where(x => x.BachurId == bachurId)
-
-            var a = db.LimudTbls.Include(x=>x.Masechet).Where(x => x.BachurId == bachurId).ToList();
-            var w = a.First().Masechet;
-            //a.ForEach(x => x.Masechet = db.MasechetTbls.Where(y => y.MasechetId == x.MasechetId).First());
+            List<LimudDetails> limudDetails = db.LimudTbls.Where(x => x.BachurId == bachurId)
+                .Select(x => new LimudDetails()
+                {
+                    LimudId = x.LimudId,
+                    YearId = x.YearId,
+                    YearName = x.Year.YearName,
+                    ZmanId = x.ZmanId,
+                    ZmanName = x.Zman.ZmanName,
+                    MasechetId = x.MasechetId,
+                    MasechetName = x.Masechet.MasechetName,
+                    Perek = x.Perek,
+                    StartValue = x.StartValue,
+                    EndValue = x.EndValue,
+                    Tested = x.Tested,
+                    YeshivaId = x.YeshivaId,
+                    YeshivaName = x.Yeshiva.YeshivaName,
+                    ShiurId = x.ShiurId,
+                    ShiurName = x.Shiur.ShiurName
+                }).OrderBy(x => x.YearId)
+                .ToList();
                 
                 
-            return a;
+            return limudDetails;
+        }
+        public List<ZmanTbl> GetZman()
+        {
+            return db.ZmanTbls.ToList();
         }
 
     }

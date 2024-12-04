@@ -19,6 +19,7 @@ import { PhonesComponent } from '../Bachurim/add-bachur/phones/phones.component'
 import { BachurLimudDetailsComponent } from '../Bachurim/bachur-details/bachur-limud-details/bachur-limud-details.component';
 import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { InnerRowComponent } from '../display-data/inner-row-component.directive';
+import { DisplayRowAction } from '../display-data/display-row-action.directive';
   
 
 
@@ -36,7 +37,9 @@ import { InnerRowComponent } from '../display-data/inner-row-component.directive
     BachurimDesktopComponent,
     PhonesComponent,
     BachurLimudDetailsComponent,
-    AutocompleteComponent
+    AutocompleteComponent,
+    DisplayRowAction
+    FilterComponent
   ],
   imports: [
     CommonModule,

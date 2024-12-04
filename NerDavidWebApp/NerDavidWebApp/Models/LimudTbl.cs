@@ -23,11 +23,19 @@ public partial class LimudTbl
 
     public bool? Tested { get; set; }
 
+    public int? YeshivaId { get; set; }
+
+    public int? ShiurId { get; set; }
+
     public virtual BachurimTbl Bachur { get; set; } = null!;
 
     public virtual MasechetTbl Masechet { get; set; } = null!;
 
+    public virtual ShiurTbl? Shiur { get; set; }
+
     public virtual YearsTbl Year { get; set; } = null!;
+
+    public virtual YeshivaTbl? Yeshiva { get; set; }
 
     public virtual ZmanTbl Zman { get; set; } = null!;
 }

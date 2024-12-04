@@ -82,7 +82,7 @@ export class AddBachurComponent {
     const phonesObject: IPhones[] = values.map(value => ({ phone: value as string }));
 
     this.newBachur.bachur = this.newBachurForm.value
-    this.newBachur.bachur.yeshivaID = this.yeshivaSelected.key;
+    this.newBachur.bachur.yeshivaId = this.yeshivaSelected.key;
     this.newBachur.bachur.city=this.citySelected;
     this.newBachur.limud = this.limudComponent?.getModel();
     this.newBachur.phones = phonesObject;

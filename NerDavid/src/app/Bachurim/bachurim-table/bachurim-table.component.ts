@@ -11,7 +11,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class BachurimTableComponent {
   @Input() searchTerm: string = '';
   constructor(private BachurimTableSer: BachurimTableService) { }
-  dataSource: IbachurimTable[] = []
+  dataSource: IbachurimTable[] =[]
   filterData:IbachurimTable[]=[]
 
   ngOnInit() {

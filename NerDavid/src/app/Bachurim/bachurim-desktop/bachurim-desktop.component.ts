@@ -12,7 +12,7 @@ import { BachurimTableComponent } from '../bachurim-table/bachurim-table.compone
 export class BachurimDesktopComponent {
   readonly dialog = inject(MatDialog);
   searchValue='';
-  @ViewChild(BachurimTableComponent) bachurimTable!:BachurimTableComponent;
+  @ViewChild(BachurimTableComponent) bachurimTable:BachurimTableComponent ={}as BachurimTableComponent;
 
   constructor() { }
 

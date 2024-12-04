@@ -1,0 +1,7 @@
+<mat-icon (click)="isSearch()">search</mat-icon>
+
+<div class="allcheckbox" *ngIf="show">
+    <button mat-flat-button class="button" (click)="filter()">סנן</button>
+    <mat-checkbox [checked]="selectAll()">בחר הכל</mat-checkbox>
+    <mat-checkbox>{{dataFilter}}</mat-checkbox>
+</div>

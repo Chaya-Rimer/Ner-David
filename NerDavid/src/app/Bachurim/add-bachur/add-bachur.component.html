@@ -1,9 +1,9 @@
-<div class="allForm">
+<div class="allForm" dir="rtl">
     <h5><b> הוספת בחור חדש </b></h5>
     <form [formGroup]="newBachurForm">
         <mat-accordion class="example-headers-align" >
 
-            <mat-expansion-panel hideToggle>
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title> פרטים אישיים </mat-panel-title>
                     <mat-panel-description>
@@ -12,12 +12,12 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
-                <mat-form-field>
+                <mat-form-field  appearance="outline">
                     <mat-label>שם פרטי</mat-label>
                     <input matInput formControlName="firstName">
                 </mat-form-field>
 
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>שם משפחה</mat-label>
                     <input matInput formControlName="lastName">
                 </mat-form-field>
@@ -26,7 +26,7 @@
                     (selectionChange)="onSelectionCityChange($event)">
                 </nd-autocomplete>
 
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>כתובת </mat-label>
                     <input matInput formControlName="address">
                 </mat-form-field>
@@ -45,7 +45,7 @@
             </mat-select>
         </mat-form-field> -->
 
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label> שיעור</mat-label>
                     <mat-select formControlName="shiurID">
                         <mat-option *ngFor="let i of shiurOption" [value]="i.shiurId">
@@ -77,7 +77,7 @@
         </mat-expansion-panel>
     </mat-accordion>
         <br>
-        <button mat-flat-button class="button" (click)="save()"
+        <button mat-flat-button class="save" (click)="save()"
             [disabled]="newBachurForm.invalid || !phoneComponent?.isValid ||  !limudComponent?.isLIiudFormValid">שמירה</button>
     </form>
 </div>
