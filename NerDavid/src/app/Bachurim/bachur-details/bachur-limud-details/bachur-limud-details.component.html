@@ -1,3 +1,11 @@
-<nd-display-data [displayDataType]="2" [data]="dataSource" [tableClass]="'line-table'" [isExpanded]="false">
+<div class="LimudTable">
+    <nd-display-data [displayDataType]="2" [data]="data" [tableClass]="'line-table'" [isExpanded]="false"
+    [isSameColumn]="isSameYeshivaName" [selectable]="true" [columnClass]="yeshivaStyle">
+    <ng-template displayRowAction let-element>
+            <button mat-icon-button matTooltip="עריכה"> 
+                <mat-icon>edit</mat-icon>
+            </button>
+    </ng-template>
+    </nd-display-data>
+</div>
 
-</nd-display-data>

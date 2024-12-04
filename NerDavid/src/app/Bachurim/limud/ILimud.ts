@@ -9,7 +9,7 @@ export interface ILimudDetails{
     masechetId?:number
     masechetName?:string
     yeshivaId?:number
-    yeshivaName:string
+    yeshivaName?:string
     perek?:string
     startValue?:string
     endValue?:string
