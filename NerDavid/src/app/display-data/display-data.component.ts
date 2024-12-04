@@ -1,5 +1,5 @@
 
-import { Component, contentChild, ContentChild, ContentChildren, input, Input, QueryList, TemplateRef } from '@angular/core';
+import { Component, contentChild, ContentChild, ContentChildren, input, Input, QueryList, SimpleChange, SimpleChanges, TemplateRef } from '@angular/core';
 import { DisplayDataService } from './display-data.service';
 import { IDisplayData } from './IDisplayData';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -10,6 +10,7 @@ import { DISPLAY_ROW_CONTENT, DisplayRowContent } from './display-row-content.di
 import { read } from 'fs';
 import { INNER_ROW_COMPONENT, InnerRowComponent } from './inner-row-component.directive';
 import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
+import { DISPLAY_ROW_ACTION, DisplayRowAction } from './display-row-action.directive';
 
 
 @Component({
@@ -36,27 +37,33 @@ export class DisplayDataComponent {
   @Input() disabled: any = (element: any) => false;
   @Input() compareFunc: (element: any, expanded: any) => Boolean = (x, y) => x == y;
   @Input() isExpanded!: any;
+  @Input() selectable:boolean=false;
   expandedElement: any | null | undefined;
   columnsToDisplay!: IDisplayData[];
-  columnsToDisplayWithExpand: any[] = []
+  columns: string[] = []
   @Input() disSelectColumn = (element: any) => false;
   @Input() tableClass!: 'fill-table' | 'line-table';
-
+  @Input() isSameColumn=(element:any)=>false;
   @ContentChild(DISPLAY_ROW_CONTENT, { read: TemplateRef, static: true }) contentTemplate!: TemplateRef<DisplayRowContent>;
   @ContentChildren(INNER_ROW_COMPONENT) innerComponents!: QueryList<InnerRowComponent>;  
+  @ContentChild(DISPLAY_ROW_ACTION, { read: TemplateRef, static: true }) actionTemplate!: TemplateRef<DisplayRowAction>;
   
   constructor(private _displayService: DisplayDataService) { }
   ngOnInit() {
     this._displayService.getColumnsToTable(this.displayDataType).subscribe(x => {
       this.columnsToDisplay = x;
+      this.columns = [...this.columnsToDisplay.map(x => x.columns)];
       if (this.isExpanded)
-        this.columnsToDisplayWithExpand = [...this.columnsToDisplay.map(x => x.columns), 'expand'];
-      else
-        this.columnsToDisplayWithExpand = [...this.columnsToDisplay.map(x => x.columns)];
-    })
+        this.columns = [...this.columns, 'expand'];
+      if(this.actionTemplate!=undefined){
+        this.columns = [...this.columns,'action'];
+      }
+      
+    }
+    )
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes:SimpleChanges) {
     this.setDataSource();
   }
   setDataSource() {
@@ -69,8 +76,8 @@ export class DisplayDataComponent {
     return null;
 }
 
-  //   selectAll() {
-  //     this.dataSource.forEach(x => x.select = !this.disSelectColumn(x) && this.allSelected);
-  // }
+    selectAll() {
+      this.data.forEach(x => x.select = !this.disSelectColumn(x) && this.allSelected);
+  }
 
 }

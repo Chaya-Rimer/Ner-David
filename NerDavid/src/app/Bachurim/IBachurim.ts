@@ -1,4 +1,4 @@
-import { ILimud } from "./limud/ILimud"
+import { ILimudDetails } from "./limud/ILimud"
 
 export interface IYeshiva{
     yeshivaId:number
@@ -38,5 +38,5 @@ export interface IBachur{
 export interface INewEditBachur{
     bachur:IBachur;
     phones?:IPhones[]
-    limud?:ILimud[]
+    limud?:ILimudDetails[]
 }

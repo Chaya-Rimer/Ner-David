@@ -12,4 +12,6 @@ public partial class YeshivaTbl
     public string? YeshivaType { get; set; }
 
     public virtual ICollection<BachurimTbl> BachurimTbls { get; set; } = new List<BachurimTbl>();
+
+    public virtual ICollection<LimudTbl> LimudTbls { get; set; } = new List<LimudTbl>();
 }
