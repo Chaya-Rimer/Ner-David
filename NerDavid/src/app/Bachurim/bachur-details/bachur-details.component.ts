@@ -2,6 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { IbachurimTable } from '../bachurim-table/IBachurimTable';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBachurComponent } from '../add-bachur/add-bachur.component';
+import { BachurimService } from '../bachurim.service';
 
 @Component({
   selector: 'nd-bachur-details',
@@ -9,14 +10,10 @@ import { AddBachurComponent } from '../add-bachur/add-bachur.component';
   styleUrl: './bachur-details.component.scss'
 })
 export class BachurDetailsComponent {
-  @Input() bachurDetails!:IbachurimTable;
-  
+  @Input() bachurDetails!: IbachurimTable;
+  constructor(private _bachurSer: BachurimService) { }
   readonly dialog = inject(MatDialog);
   openDialog() {
-    this.dialog.open(AddBachurComponent, {
-      data: {
-      },
-     
-    });
+    this._bachurSer.openNewBachurDialog();
   }
 }

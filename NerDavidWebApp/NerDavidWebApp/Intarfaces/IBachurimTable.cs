@@ -4,7 +4,7 @@ namespace NerDavidWebApp.Intarfaces
 {
     public interface IBachurimTable
     {
-        public List<BachurimTable> GetBachurimTable();
+        public List<BachurimTable> GetBachurimTable(int type);
 
     }
 }

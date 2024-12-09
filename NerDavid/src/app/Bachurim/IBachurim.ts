@@ -31,7 +31,7 @@ export interface IBachur{
     lastName?:string
     city?:ICity
     adress?:string
-    yeshivaId?:number
+    yeshiva?:IYeshiva
     shiurId?:number
     statusId?:IStatus;
 }

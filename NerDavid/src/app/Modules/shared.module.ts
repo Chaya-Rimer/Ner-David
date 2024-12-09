@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
+import { PrimeNgModule } from './primeng.module';
 // import { MaterialModule } from './material.module';
 
 
@@ -9,10 +10,12 @@ import { CommonModule } from '@angular/common';
   declarations: [],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    PrimeNgModule
     ],
   exports:[
-    MaterialModule
+    MaterialModule,
+    PrimeNgModule
     ]
 })
 export class SharedModule { }

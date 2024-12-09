@@ -1,18 +1,18 @@
 <div class="allForm" dir="rtl">
     <h5><b> הוספת בחור חדש </b></h5>
     <form [formGroup]="newBachurForm">
-        <mat-accordion class="example-headers-align" >
+        <mat-accordion class="example-headers-align">
 
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title> פרטים אישיים </mat-panel-title>
                     <mat-panel-description>
                         מילוי פרטים אישיים
-                       <mat-icon>person</mat-icon>
+                        <mat-icon>person</mat-icon>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
-                <mat-form-field  appearance="outline">
+                <mat-form-field appearance="outline">
                     <mat-label>שם פרטי</mat-label>
                     <input matInput formControlName="firstName">
                 </mat-form-field>
@@ -22,7 +22,7 @@
                     <input matInput formControlName="lastName">
                 </mat-form-field>
 
-                <nd-autocomplete [options]="cityArray" [required]="true" [title]="titleCity"
+                <nd-autocomplete [options]="cityArray" [required]="true" [title]="'עיר'"
                     (selectionChange)="onSelectionCityChange($event)">
                 </nd-autocomplete>
 
@@ -30,54 +30,48 @@
                     <mat-label>כתובת </mat-label>
                     <input matInput formControlName="address">
                 </mat-form-field>
+                <br>
 
-
-                <nd-autocomplete [options]="yeshivaKeyValueArray" [title]="title" [required]="true"
+                <nd-autocomplete [options]="yeshivaKeyValueArray" [title]="'ישיבה'"
                     (selectionChange)="onSelectionChange($event)">
-
                 </nd-autocomplete>
-                <!-- <mat-form-field>
-            <mat-label> ישיבה</mat-label>
-            <mat-select formControlName="yeshiva">
-                <mat-option *ngFor="let item of yeshivaOption" (onSelectionChange)="getShiur($event)" [value]="item">
-                    {{ item.yeshivaName }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field> -->
+
 
                 <mat-form-field appearance="outline">
                     <mat-label> שיעור</mat-label>
-                    <mat-select formControlName="shiurID">
+                    <mat-select formControlName="shiurId">
                         <mat-option *ngFor="let i of shiurOption" [value]="i.shiurId">
                             {{ i.shiurName }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-         
+
+                <mat-form-field appearance="outline" *ngIf="open">
+                    <mat-label> סוג ישיבה</mat-label>
+                    <mat-select formControlName="yeshivaType">
+                        <mat-option [value]="'ג'">ישיבה גדולה </mat-option>
+                        <mat-option [value]="'ק'">ישיבה קטנה </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
 
-        <br>
-        <nd-phones></nd-phones>
-    </mat-expansion-panel>
+                <br>
+                <nd-phones></nd-phones>
+            </mat-expansion-panel>
 
-        <!-- <br> -->
-        <!-- <hr> -->
-
-
-
-        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-            <mat-expansion-panel-header>
-                <mat-panel-title>פרטי לימוד   </mat-panel-title>
-                <mat-panel-description>
-מילוי פרטי לימוד
-                   <mat-icon>local_library</mat-icon>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-        <nd-limud></nd-limud>
-        </mat-expansion-panel>
-    </mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>פרטי לימוד </mat-panel-title>
+                    <mat-panel-description>
+                        מילוי פרטי לימוד
+                        <mat-icon>local_library</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <nd-limud></nd-limud>
+            </mat-expansion-panel>
+        </mat-accordion>
         <br>
         <button mat-flat-button class="save" (click)="save()"
-            [disabled]="newBachurForm.invalid || !phoneComponent?.isValid ||  !limudComponent?.isLIiudFormValid">שמירה</button>
+            [disabled]="newBachurForm.invalid || !phoneComponent?.isValid">שמירה</button>
     </form>
 </div>

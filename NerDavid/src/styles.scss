@@ -1,4 +1,3 @@
-
 // @use 'sass:map'; 
 // @use '@angular/material' as mat; 
 // @import '../src/nd-theme.scss';
@@ -7,40 +6,35 @@
 html,
 
 body {
-    //   direction: rtl;
-    // // height: 100%;
-    // font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #f0f2f5;
-    // // color:$gn-primary;
     color: rgb(23, 194, 137);
 }
-// :host::ng-deep{
-//   direction: rtl;
-// }
-// ::ng-deep .mat-icon{
-//     color: rgb(23, 194, 137) !important;
-// }
-.mat-icon{
-    color:rgb(23, 194, 137);
+
+.mat-icon {
+    color: rgb(23, 194, 137);
 }
+
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
+
 ::-webkit-scrollbar-thumb {
     background: rgb(163, 157, 157);
     border-radius: 4px;
     margin-left: 4px;
 }
 
-// .cdk-overlay-pane{
-//     max-width: 90vw !important;
-// }
+::ng-deep .mat-mdc-dialog-inner-contanior {
+    max-width: none;
+    width: 1000px;
+}
+
+
+
+.cdk-overlay-pane{
+    max-width: 60vw !important;
+}
 /* ::-webkit-scrollbar-track {
     background: #ccc; 
 } */
-
-
-
-
-

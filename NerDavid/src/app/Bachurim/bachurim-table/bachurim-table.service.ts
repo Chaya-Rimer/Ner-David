@@ -11,8 +11,8 @@ export class BachurimTableService {
   constructor(private http:HttpClient) { }
   url='https://localhost:7178/BachurimTable/'
 
-  getBachurimTable():Observable<IbachurimTable[]>{
-   return this.http.get<IbachurimTable[]>(this.url+'GetBachurimTable')
+  getBachurimTable(type:number):Observable<IbachurimTable[]>{
+   return this.http.get<IbachurimTable[]>(this.url+`GetBachurimTable?type=${type}`)
  }
 
 }

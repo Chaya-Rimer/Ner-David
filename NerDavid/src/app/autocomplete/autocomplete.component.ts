@@ -14,7 +14,7 @@ export class AutocompleteComponent {
   @Output() selectionChange = new EventEmitter< KeyValue<number,string>>();
   @Output() validityChange = new EventEmitter<boolean>(); // אירוע לשליחת תקינות השדה
   @Input() title: string = {} as string;
-  @Input() required:boolean={}as boolean;
+  @Input() required:boolean=false;
   myControl = new FormControl();
   filteredOptions: Observable<KeyValue<number,string>[]>;
 

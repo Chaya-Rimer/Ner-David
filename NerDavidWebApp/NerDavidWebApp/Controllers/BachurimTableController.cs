@@ -12,9 +12,9 @@ namespace NerDavidWebApp.Controllers
     {
         BachurimTableService Service = new BachurimTableService();
         [HttpGet]
-        public List<BachurimTable> GetBachurimTable()
+        public List<BachurimTable> GetBachurimTable(int type)
         {
-            return Service.GetBachurimTable();
+            return Service.GetBachurimTable(type);
         }
     }
 }

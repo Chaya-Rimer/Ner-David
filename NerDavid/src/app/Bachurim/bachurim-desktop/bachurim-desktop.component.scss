@@ -1,10 +1,8 @@
 .header {
     display: flex;
     justify-content: flex-end;
-    // margin-left: 3vh;
-    width: 90%;
-    margin: auto;
-// border: solid black;
+    margin-top: 50px ,;
+    margin-left: 5%;
 }
 
 .addBachur {
@@ -19,11 +17,11 @@
 .section {
     height: 15vh;
     max-width: 95%;
-    margin-right: 3%;
-    border-top: 2px solid rgb(209, 204, 204);
-    border-bottom: 2px solid rgb(209, 204, 204);
-    background-color: rgb(247, 243, 243);
-    margin-bottom: 8vh;
+    margin: auto;
+    margin-top: 40px;
+    border-top: 1px solid rgb(23, 194, 137);
+    border-bottom: 1px solid  rgb(23, 194, 137);
+    background-color: rgb(239, 240, 239);
 }
 
 //קוד למיקום הספינר באמצע ושינוי צבעו לצהוב
@@ -54,9 +52,7 @@ mat-form-field {
     }
 }
 
-mat-icon {
-    color: rgb(29, 226, 160);
-}
+
 
 // ::ng-deep {
 //     .mdc-text-field--filled:not(.mdc-text-field--disabled) {
