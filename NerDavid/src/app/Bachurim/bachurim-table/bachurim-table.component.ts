@@ -12,10 +12,9 @@ export class BachurimTableComponent {
   @Input() searchTerm: string = '';
   constructor(private BachurimTableSer: BachurimTableService) { }
   dataSource: IbachurimTable[] =[]
-  filterData:IbachurimTable[]=[]
 
   ngOnInit() {
-    this.BachurimTableSer.getBachurimTable().subscribe(x => {
+    this.BachurimTableSer.getBachurimTable(1).subscribe(x => {
       this.dataSource = x;
   });
   }

@@ -6,5 +6,6 @@ export interface IDisplayData {
     colspan?: number
     displayType?: number
     component?:string
-    filterable?:boolean
+    filterable?:boolean;
+    searchable?:boolean;
 }

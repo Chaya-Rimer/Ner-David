@@ -1,23 +1,27 @@
-<u (click)="addForm()" class="addLimud">הוסף לימוד +</u>
 <form [formGroup]="form">
+  <div class="radio">
+
+    <mat-checkbox (change)="cli()">ישיבה</mat-checkbox>
+    <input *ngIf="checked" pInputText class="custom-otp-input" type="text" />
+  </div>
   <div formArrayName="formArray">
     <div *ngFor="let formGroup of  formArray.controls; let i = index">
       <div [formGroupName]="i">
-        <!-- <mat-form-field>
-          <mat-label> מסכת</mat-label>
-          <mat-select formControlName="masechet">
-            <mat-option *ngFor="let item of masecetOption" (onSelectionChange)="getPrakim($event)" [value]="item">
-              {{item.value}}
+
+        <nd-autocomplete *ngIf="!checked" [options]="yeshivaKeyValueArray"
+          [title]="'ישיבה'" (selectionChange)="onYeshivaSelectionChange($event,i)"></nd-autocomplete>
+
+        <mat-form-field appearance="outline">
+          <mat-label> שיעור</mat-label>
+          <mat-select formControlName="shiurID">
+            <mat-option *ngFor="let i of shiurOption" [value]="i.shiurId">
+              {{ i.shiurName }}
             </mat-option>
           </mat-select>
-        </mat-form-field> -->
+        </mat-form-field>
 
-        <nd-autocomplete 
-        [options]="masecetOption" 
-        [required]="true" 
-        [title]="title"
-        (selectionChange)="onSelectionChange($event,i)" 
-        (validityChange)="onValidityChange($event,i)">
+        <nd-autocomplete [options]="masecetOption"  [title]="'מסכת'"
+          (selectionChange)="onSelectionChange($event,i)" (validityChange)="onValidityChange($event,i)">
         </nd-autocomplete>
 
         <mat-form-field appearance="outline">
@@ -38,34 +42,12 @@
           <mat-label>עד דף</mat-label>
           <input matInput type="text" [pattern]="hebrewLettersPattern" formControlName="endValue">
         </mat-form-field>
-<!-- 
-        <mat-form-field class="example-form-field" appearance="outline">
-          <mat-label>דפים</mat-label>
-          <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl">
-            @for (keyword of templateKeywords(); track keyword) {
-              <mat-chip-row (removed)="removeTemplateKeyword(keyword)">
-                {{keyword}}
-                <button matChipRemove aria-label="'remove ' + keyword">
-                  <mat-icon>cancel</mat-icon>
-                </button>
-              </mat-chip-row>
-            }
-          </mat-chip-grid>
-          <input
-            placeholder="דפים"
-            [matChipInputFor]="chipGrid"
-            (matChipInputTokenEnd)="addTemplateKeyword($event,i)"
-          />
-        </mat-form-field> -->
 
-        <mat-radio-group aria-label="Select an option" >
-          <mat-radio-button value="חורף" (change)="selectZman($event.value,i)">חורף </mat-radio-button>
-          <mat-radio-button value="קיץ" (change)="selectZman($event.value,i)">קיץ </mat-radio-button>
 
-        </mat-radio-group>
 
         <mat-icon (click)="deletForm(i)">delete_forever</mat-icon>
       </div>
     </div>
   </div>
 </form>
+<u (click)="addForm()" class="addLimud">הוסף לימוד +</u>

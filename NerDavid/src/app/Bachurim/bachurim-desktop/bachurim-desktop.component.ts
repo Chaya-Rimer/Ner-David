@@ -2,6 +2,7 @@ import { Component, inject, ViewChild, viewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBachurComponent } from '../add-bachur/add-bachur.component';
 import { BachurimTableComponent } from '../bachurim-table/bachurim-table.component';
+import { BachurimService } from '../bachurim.service';
 
 
 @Component({
@@ -10,11 +11,10 @@ import { BachurimTableComponent } from '../bachurim-table/bachurim-table.compone
   styleUrl: './bachurim-desktop.component.scss'
 })
 export class BachurimDesktopComponent {
-  readonly dialog = inject(MatDialog);
   searchValue='';
   @ViewChild(BachurimTableComponent) bachurimTable:BachurimTableComponent ={}as BachurimTableComponent;
 
-  constructor() { }
+  constructor(private _bachurSer:BachurimService) { }
 
   ngOnInit() {
     
@@ -22,11 +22,7 @@ export class BachurimDesktopComponent {
 
 
   openDialog() {
-    this.dialog.open(AddBachurComponent, {
-      data: {
-        animal: 'panda',
-      },
-
-    });
+    this._bachurSer.openNewBachurDialog();
   }
+    
 }

@@ -6,9 +6,9 @@ namespace NerDavidWebApp.Services
     public class BachurimTableService
     {
         NerDavidDbContext db = new NerDavidDbContext();
-        public List<BachurimTable> GetBachurimTable()
+        public List<BachurimTable> GetBachurimTable(int type)
         {
-            return db.BachurimTbls.Select(x=>new BachurimTable
+            var table= db.BachurimTbls.Select(x=>new BachurimTable
             {
                 BachurId=x.BachurId,
                 LastName=x.LastName,
@@ -23,6 +23,13 @@ namespace NerDavidWebApp.Services
                 //Phones = x.PhonesTbl.Select(y => y.PhoneNumber).ToList()
                 //Status=x.Status.StatusSymbol
             }).ToList();
+            if (type == 1)
+            {
+                return table.Where(y => y.YeshivaType == "ג").ToList();
+            }
+            else
+                return table.Where(y => y.YeshivaType == "ק").ToList();
+
         }
 
     }
