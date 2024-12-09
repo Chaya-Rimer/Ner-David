@@ -43,39 +43,68 @@ namespace NerDavidWebApp.Services
         }
         public void NewBachur(NewOrEditBachur newBachur)
         {
+            var cityID = 0; var yeshivaID=0;
+            if (newBachur.Bachur.City.CityId == 0) {
+                CityTbl c=new CityTbl();
+                c.CityName = newBachur.Bachur.City.CityName;
+               var newCity= db.CityTbls.Add(c);
+                db.SaveChanges();
+                cityID = newCity.Entity.CityId;
+            }
+            else
+            {
+                 cityID = newBachur.Bachur.City.CityId;
+            }
+            if (newBachur.Bachur.Yeshiva.YeshivaId == 0)
+            {
+                YeshivaTbl y = new YeshivaTbl();
+                y.YeshivaName = newBachur.Bachur.Yeshiva.YeshivaName;
+                y.YeshivaType = newBachur.Bachur.Yeshiva.YeshivaType;
+                var NewYeshiva = db.YeshivaTbls.Add(y);
+                db.SaveChanges();
+                yeshivaID = NewYeshiva.Entity.YeshivaId;
+            }
+            else
+            {
+                yeshivaID = newBachur.Bachur.Yeshiva.YeshivaId;
+            }
             BachurimTbl b = new BachurimTbl()
             {
                 FirstName = newBachur.Bachur.FirstName,
                 LastName = newBachur.Bachur.LastName,
                 Adress = newBachur.Bachur.Adress,
-                CityId = newBachur.Bachur.City.CityId,
+                CityId = cityID,
                 ShiurId = newBachur.Bachur.ShiurId,
-                YeshivaId = newBachur.Bachur.YeshivaId
+                YeshivaId = yeshivaID
             };
 
             var bachur = db.BachurimTbls.Add(b);
             db.SaveChanges();
             var bachurID = bachur.Entity.BachurId;
-
-            newBachur.Limud.ForEach(item => db.LimudTbls.Add(new LimudTbl()
+            if (newBachur.Limud!=null)
             {
-                BachurId = bachurID,
-                MasechetId = item.MasechetId,
-                Perek = item.Perek,
-                StartValue = item.StartValue,
-                EndValue = item.EndValue
-                //ZmanId = item.ZmanId,
-                //YearId = item.YearId,
-                //Tested = item.Tested
-            }));
-            db.SaveChanges();
-
-            newBachur.Phones.ForEach(item => db.PhonesTbls.Add(new PhonesTbl()
+                newBachur.Limud.ForEach(item => db.LimudTbls.Add(new LimudTbl()
+                {
+                    BachurId = bachurID,
+                    MasechetId = item.MasechetId,
+                    Perek = item.Perek,
+                    StartValue = item.StartValue,
+                    EndValue = item.EndValue
+                    //ZmanId = item.ZmanId,
+                    //YearId = item.YearId,
+                    //Tested = item.Tested
+                }));
+                db.SaveChanges();
+            }
+            if (newBachur.Phones!=null)
             {
-                BachurId = bachurID,
-                Phone = item.Phone
-            }));
-            db.SaveChanges();
+                newBachur.Phones.ForEach(item => db.PhonesTbls.Add(new PhonesTbl()
+                {
+                    BachurId = bachurID,
+                    Phone = item.Phone
+                }));
+                db.SaveChanges();
+            }
         }
     }
 }

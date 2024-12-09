@@ -18,4 +18,6 @@ public partial class DisplayDataTbl
     public int? DisplayType { get; set; }
 
     public string? Component { get; set; }
+
+    public bool? Filterable { get; set; }
 }
