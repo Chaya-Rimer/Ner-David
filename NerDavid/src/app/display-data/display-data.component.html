@@ -1,27 +1,28 @@
-
-<table mat-table *ngIf="dataSource" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" [ngClass]="tableClass">
+<table mat-table *ngIf="dataSource" dir="rtl" [dataSource]="dataSource" multiTemplateDataRows 
+  class="mat-elevation-z0" [ngClass]="tableClass">
   @for (column of columnsToDisplay; track column) {
   <ng-container matColumnDef="{{column.columns}}">
-    <th mat-header-cell *matHeaderCellDef> {{column.title}}
-      <nd-filter class="filter" let element [dataFilter]="column.columns"></nd-filter>
+    <th mat-header-cell *matHeaderCellDef > 
+      {{column.title}}
+      <nd-filter *ngIf="column.filterable" class="filter" let element [dataSource]="data" [columnName]="column.columns" (filtered)="setFilter($event)"></nd-filter>
     </th>
-    <td mat-cell *matCellDef="let element">
-       <ng-container *ngIf="column.component else regular">
-            <ng-container
-              *ngTemplateOutlet="getComponent(column.component); context: {element: element[column.columns], data: element}">
-            </ng-container>
+    <td mat-cell *matCellDef="let element" [ngStyle]="columnClass!=undefined? columnClass(column.columns,element):{}">
+      <ng-container *ngIf="column.component else regular">
+        <ng-container
+          *ngTemplateOutlet="getComponent(column.component); context: {element: element[column.columns], data: element}">
+        </ng-container>
       </ng-container>
 
 
       <ng-template #regular>
-        <div >{{element[column.columns]}}  </div>
+        <div>{{element[column.columns]}} </div>
       </ng-template>
     </td>
   </ng-container>
   }
 
   <ng-container matColumnDef="action" *ngIf="actionTemplate">
-    <th mat-header-cell *matHeaderCellDef ></th>
+    <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
       <ng-container [ngTemplateOutlet]="actionTemplate" [ngTemplateOutletContext]="{$implicit: element}">
       </ng-container>
@@ -54,14 +55,15 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columns" class="header" ></tr>
+  <tr mat-header-row *matHeaderRowDef="columns" class="header"></tr>
   <tr mat-row *matRowDef="let element; columns: columns;" class="element-row"
     [class.example-expanded-row]="expandedElement === element"
     (click)="expandedElement = expandedElement === element ? null : element">
   </tr>
-  <ng-container >
+  <ng-container>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
   </ng-container>
 </table>
-<mat-paginator dir="rtl" [length]="data.length" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+<mat-paginator *ngIf="displayDataType==1" dir="rtl" [length]="data.length" [pageSizeOptions]="[10,20, 50, 100]"
+  aria-label="Select page">
 </mat-paginator>

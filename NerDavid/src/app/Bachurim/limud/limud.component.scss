@@ -20,3 +20,25 @@ mat-form-field{
 .auto{
     width: 80px;
 }
+
+.custom-otp-input {
+    width: 120px;
+    // font-size: 8px;
+    border: 0 none;
+    appearance: none;
+    text-align: right;
+    transition: all 0.2s;
+    background: transparent;
+    border-bottom: 1.5px solid var(--surface-500);
+    border-radius: 0px;
+    margin: 0 0.2rem;
+}
+
+.custom-otp-input:focus {
+    outline: 0 none;
+    box-shadow: none;
+    border-bottom-color: var(--primary-color);
+} 
+.radio{
+    margin-bottom: 15px;
+}

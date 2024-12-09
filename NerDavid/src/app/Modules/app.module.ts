@@ -20,6 +20,9 @@ import { BachurLimudDetailsComponent } from '../Bachurim/bachur-details/bachur-l
 import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { InnerRowComponent } from '../display-data/inner-row-component.directive';
 import { DisplayRowAction } from '../display-data/display-row-action.directive';
+import { FilterComponent } from '../filter/filter.component';
+import { SmallYeshivaBachurimComponent } from '../small-yeshiva-bachurim/small-yeshiva-bachurim.component';
+import { SmallYeshivaBachurimTableComponent } from '../small-yeshiva-bachurim/small-yeshiva-bachurim-table/small-yeshiva-bachurim-table.component';
   
 
 
@@ -38,8 +41,10 @@ import { DisplayRowAction } from '../display-data/display-row-action.directive';
     PhonesComponent,
     BachurLimudDetailsComponent,
     AutocompleteComponent,
-    DisplayRowAction
-    FilterComponent
+    DisplayRowAction,
+    FilterComponent,
+    SmallYeshivaBachurimComponent,
+    SmallYeshivaBachurimTableComponent
   ],
   imports: [
     CommonModule,
