@@ -9,6 +9,7 @@ import { ILimudDetails } from '../../limud/ILimud';
 })
 export class BachurLimudDetailsComponent {
   data: ILimudDetails[] = []
+  edit:boolean=false
   constructor(private _limudService:LimudService){}
   ngOnInit(){
     this._limudService.getBachurLimudTable(100).subscribe(x=>{this.data=x})
