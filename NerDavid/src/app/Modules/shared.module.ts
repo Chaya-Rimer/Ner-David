@@ -1,21 +1,31 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
-import { PrimeNgModule } from './primeng.module';
-// import { MaterialModule } from './material.module';
+import { PhonesComponent } from '../Bachurim/add-bachur/phones/phones.component';
+import { LimudComponent } from '../Bachurim/limud/limud.component';
+import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LimudComponent,
+    PhonesComponent,
+    AutocompleteComponent,
+
+  ],
   imports: [
     CommonModule,
     MaterialModule,
-    PrimeNgModule
+    ReactiveFormsModule,
+    FormsModule
     ],
   exports:[
     MaterialModule,
-    PrimeNgModule
-    ]
+    LimudComponent,
+    PhonesComponent,
+    AutocompleteComponent,
+  ]
 })
-export class SharedModule { }
+export class ShareModule { }

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, output, SimpleChange, SimpleCha
 import { BachurimTableService } from '../Bachurim/bachurim-table/bachurim-table.service';
 import { IbachurimTable } from '../Bachurim/bachurim-table/IBachurimTable';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { IFilterData, IFiltered } from './IFilterData';
+import { IFilterData } from './IFilterData';
 
 @Component({
   selector: 'nd-filter',

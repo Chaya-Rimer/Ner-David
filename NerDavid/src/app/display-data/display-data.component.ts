@@ -13,8 +13,6 @@ import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component'
 import { DISPLAY_ROW_ACTION, DisplayRowAction } from './display-row-action.directive';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { IFiltered } from '../filter/IFilterData';
-import { filter } from 'rxjs';
 
 
 @Component({

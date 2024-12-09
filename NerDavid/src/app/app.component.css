@@ -2,7 +2,10 @@
     direction: rtl;
 }
 header{
-    width: 50%;
-    float: right;
-    margin-top: -5px;
+    position: sticky;
+    top: 0; /* מיקום מלמעלה */
+    width: 100%; /* רוחב מלא */
+    z-index: 1000; /* לוודא שהוא מעל אלמנטים אחרים */
+    background-color: white; /* רקע כדי להפריד אותו מהתוכן מתחת */
+    
 }
