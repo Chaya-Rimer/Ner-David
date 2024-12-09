@@ -1,3 +1,9 @@
+.all {
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+}
+
 .header {
     display: flex;
     justify-content: flex-end;
@@ -5,25 +11,15 @@
     width: 90%;
     margin: auto;
 // border: solid black;
+    justify-content: space-between;
+    margin-top: 30px;
 }
 
-.addBachur {
+.title{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-right: 3px;
-}
-
-
-.section {
-    height: 15vh;
-    max-width: 95%;
-    margin-right: 3%;
-    border-top: 2px solid rgb(209, 204, 204);
-    border-bottom: 2px solid rgb(209, 204, 204);
-    background-color: rgb(247, 243, 243);
-    margin-bottom: 8vh;
+    button{
+        margin-right: 15px;
+    }
 }
 
 //קוד למיקום הספינר באמצע ושינוי צבעו לצהוב

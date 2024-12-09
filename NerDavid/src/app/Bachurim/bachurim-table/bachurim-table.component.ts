@@ -17,18 +17,8 @@ export class BachurimTableComponent {
   ngOnInit() {
     this.BachurimTableSer.getBachurimTable().subscribe(x => {
       this.dataSource = x;
-      this.filterData = x;
-  })
+  });
   }
-  ngOnChanges(change:SimpleChanges):void{
-    if(change['searchTerm']){
-      this.filterData = this.dataSource.filter(x=>{
-        const fullName = (x.firstName?x.firstName+" ":"") + (x.lastName?x.lastName:"")
-        return fullName?.includes(this.searchTerm)
-      })
-    }
-  }
-
 }
 
 

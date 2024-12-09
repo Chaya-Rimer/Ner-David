@@ -5,21 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { routes } from '../app.routes';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from './shared.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { BachurimTableComponent } from '../Bachurim/bachurim-table/bachurim-table.component';
-import { BachurimDesktopComponent } from '../Bachurim/bachurim-desktop/bachurim-desktop.component';
-import { DisplayDataComponent } from '../display-data/display-data.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddBachurComponent } from '../Bachurim/add-bachur/add-bachur.component';
-import { BachurDetailsComponent } from '../Bachurim/bachur-details/bachur-details.component';
-import { LimudComponent } from '../Bachurim/limud/limud.component';
-import { DisplayRowContent } from '../display-data/display-row-content.directive';
-import { PhonesComponent } from '../Bachurim/add-bachur/phones/phones.component';
-import { BachurLimudDetailsComponent } from '../Bachurim/bachur-details/bachur-limud-details/bachur-limud-details.component';
-import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
-import { InnerRowComponent } from '../display-data/inner-row-component.directive';
-import { DisplayRowAction } from '../display-data/display-row-action.directive';
+import { BachurimModule } from './bachurim.module';
+import { YeshivaKtanaModule } from './yeshiva-ktana.module';
+import { DisplayDataModule } from './display-data.module';
+import { LoginComponent } from '../login/login.component';
+import { TabsComponent } from '../tabs/tabs.component';
   
 
 
@@ -27,28 +19,17 @@ import { DisplayRowAction } from '../display-data/display-row-action.directive';
 @NgModule({
   declarations: [
     AppComponent,
-    BachurimTableComponent,
-    BachurDetailsComponent,
-    DisplayDataComponent,
-    AddBachurComponent,
-    LimudComponent,
-    DisplayRowContent,
-    InnerRowComponent,
-    BachurimDesktopComponent,
-    PhonesComponent,
-    BachurLimudDetailsComponent,
-    AutocompleteComponent,
-    DisplayRowAction
-    FilterComponent
+    LoginComponent,
+    TabsComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
-    ReactiveFormsModule,
-    FormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    SharedModule
+    BachurimModule,
+    YeshivaKtanaModule,
+    DisplayDataModule
   ],
   bootstrap:[
     AppComponent

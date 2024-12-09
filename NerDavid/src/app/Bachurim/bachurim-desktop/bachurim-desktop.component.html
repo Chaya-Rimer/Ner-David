@@ -1,18 +1,22 @@
-<div class="header" dir="rtl">
-  <div>
-    <mat-form-field appearance="outline">
-      <mat-label>חיפוש</mat-label>
-      <input matInput type="text" [(ngModel)]="searchValue">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
+<div class="all">
+  <div class="header" dir="rtl">
+    <div class="title">
+      <h5><b>בני ישיבות גדולות</b></h5>
+      <button mat-icon-button matTooltip="בחור חדש"  (click)="openDialog()"> <mat-icon>person_add</mat-icon></button>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>חיפוש</mat-label>
+        <input matInput type="text" [(ngModel)]="searchValue">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+   
   </div>
-  <div (click)="openDialog()" class="addBachur">
-    <button mat-icon-button  matTooltip="בחור חדש"> <mat-icon>person_add</mat-icon></button>
-  </div>
-</div>
 
-<div class="section">
+  <!-- <div class="section">
+</div> -->
+  <mat-spinner *ngIf="bachurimTable?.dataSource?.length==0"></mat-spinner>
+  <p *ngIf="bachurimTable?.dataSource?.length==0" style="color: black;">אנו טוענים את הטבלה בעבורך. אנא המתן...</p>
+  <app-bachurim-table [searchTerm]="searchValue"></app-bachurim-table>
 </div>
-<mat-spinner *ngIf="bachurimTable?.dataSource?.length==0"></mat-spinner>
-<p *ngIf="bachurimTable?.dataSource?.length==0" style="color: black;">אנו טוענים את הטבלה בעבורך. אנא המתן...</p>
-<app-bachurim-table [searchTerm]="searchValue"></app-bachurim-table>
