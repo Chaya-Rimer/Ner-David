@@ -9,9 +9,11 @@ public partial class YeshivaTbl
 
     public string? YeshivaName { get; set; }
 
-    public string? YeshivaType { get; set; }
+    public int? YeshivaType { get; set; }
 
     public virtual ICollection<BachurimTbl> BachurimTbls { get; set; } = new List<BachurimTbl>();
 
     public virtual ICollection<LimudTbl> LimudTbls { get; set; } = new List<LimudTbl>();
+
+    public virtual YeshivaTypeTbl? YeshivaTypeNavigation { get; set; }
 }

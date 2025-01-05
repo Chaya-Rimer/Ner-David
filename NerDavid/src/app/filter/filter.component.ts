@@ -11,19 +11,20 @@ import { IFilterData } from './IFilterData';
 })
 export class FilterComponent {
   @Input() columnName!: any;
-  @Input()dataSource!:any[];
-  allSelected:boolean=false;
-  dataFilter:IFilterData[]=[];
+  @Input() dataSource!: any[];
+  allSelected: boolean = false;
+  dataFilter: IFilterData[] = [];
   show: boolean = false;
-  myAnyFiter: any;
-  @Output() filtered = new EventEmitter<{  filter:string[],columnName:string}>();
+  isStatus: boolean = false;
+  @Output() filtered = new EventEmitter<{ filter: string[], columnName: string }>();
   constructor() { }
 
   ngOnChanges(change: SimpleChanges): void {
-    if (change['columnName']&& change['dataSource']) {
-      this.myAnyFiter = this.columnName;
-        const uniqueValues = new Set(this.dataSource.map(item => item[this.myAnyFiter]).filter(value => value !== undefined && value != null));
-        this.dataFilter=Array.from(uniqueValues).map(x=>({data:x,checked:false}))
+    if (change['columnName'] && change['dataSource']) {
+      if (this.columnName == "status")
+        this.isStatus = true;
+      const uniqueValues = new Set(this.dataSource.map(item => item[this.columnName]).filter(value => value !== undefined && value != null));
+      this.dataFilter = Array.from(uniqueValues).map(x => ({ data: x, checked: false }))
     };
   }
   isSearch() {
@@ -31,11 +32,11 @@ export class FilterComponent {
   }
 
   filter() {
-    const filter:string[]=this.dataFilter.filter(x=>x.checked==true).map(x=>x.data);
-    this.filtered.emit({filter:filter,columnName:this.myAnyFiter})
-    this.show=!this.show
+    const filter: string[] = this.dataFilter.filter(x => x.checked == true).map(x => x.data);
+    this.filtered.emit({ filter: filter, columnName: this.columnName })
+    this.show = !this.show
   }
   selectAll() {
-     this.dataFilter.forEach(x=>x.checked = this.allSelected);
+    this.dataFilter.forEach(x => x.checked = this.allSelected);
   }
 }

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace NerDavidWebApp.Models;
 
 public partial class NerDavidDbContext : DbContext
 {
-    public NerDavidDbContext()
-    {
-    }
 
-    public NerDavidDbContext(DbContextOptions<NerDavidDbContext> options)
+    private readonly IConfiguration _configuration;
+
+    public NerDavidDbContext(DbContextOptions<NerDavidDbContext> options, IConfiguration configuration)
         : base(options)
     {
+        _configuration = configuration;
     }
 
     public virtual DbSet<BachurimTbl> BachurimTbls { get; set; }
@@ -24,6 +25,8 @@ public partial class NerDavidDbContext : DbContext
     public virtual DbSet<LimudTbl> LimudTbls { get; set; }
 
     public virtual DbSet<MasechetTbl> MasechetTbls { get; set; }
+
+    public virtual DbSet<PersonsTbl> PersonsTbls { get; set; }
 
     public virtual DbSet<PhonesTbl> PhonesTbls { get; set; }
 
@@ -39,11 +42,19 @@ public partial class NerDavidDbContext : DbContext
 
     public virtual DbSet<YeshivaTbl> YeshivaTbls { get; set; }
 
+    public virtual DbSet<YeshivaTypeTbl> YeshivaTypeTbls { get; set; }
+
     public virtual DbSet<ZmanTbl> ZmanTbls { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=SHANSUN\\MSSQLSERVER03;Database=NerDavidDB;Trusted_Connection=True;TrustServerCertificate=True");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var connectionString = _configuration.GetConnectionString("MyDatabase");
+            optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies(); ;
+        }
+    }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -170,6 +181,26 @@ public partial class NerDavidDbContext : DbContext
                 .IsFixedLength();
         });
 
+        modelBuilder.Entity<PersonsTbl>(entity =>
+        {
+            entity.HasKey(e => e.PersonId).HasName("per_ID_pk");
+
+            entity.ToTable("PersonsTbl");
+
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.UserName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<PhonesTbl>(entity =>
         {
             entity.HasKey(e => e.PhoneId).HasName("ph_ID_pk");
@@ -220,9 +251,10 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.ShiurName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.ShiurType)
-                .HasMaxLength(10)
-                .IsFixedLength();
+
+            entity.HasOne(d => d.ShiurTypeNavigation).WithMany(p => p.ShiurTbls)
+                .HasForeignKey(d => d.ShiurType)
+                .HasConstraintName("shiType_ID_fk");
         });
 
         modelBuilder.Entity<StatusTbl>(entity =>
@@ -280,9 +312,21 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.YeshivaName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.YeshivaType)
-                .HasMaxLength(10)
-                .IsFixedLength();
+
+            entity.HasOne(d => d.YeshivaTypeNavigation).WithMany(p => p.YeshivaTbls)
+                .HasForeignKey(d => d.YeshivaType)
+                .HasConstraintName("yeshType_ID_fk");
+        });
+
+        modelBuilder.Entity<YeshivaTypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.YeshivaTypeId).HasName("yeshType_ID_pk");
+
+            entity.ToTable("YeshivaTypeTbl");
+
+            entity.Property(e => e.Type)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<ZmanTbl>(entity =>

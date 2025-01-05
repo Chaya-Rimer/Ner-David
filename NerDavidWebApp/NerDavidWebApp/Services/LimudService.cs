@@ -7,7 +7,12 @@ namespace NerDavidWebApp.Services
 {
     public class LimudService
     {
-        NerDavidDbContext db = new NerDavidDbContext();
+        private readonly NerDavidDbContext db;
+
+        public LimudService(NerDavidDbContext context)
+        {
+            db = context;
+        }
         public List<MasechetTbl> GetMasechets()
         {
             return db.MasechetTbls.Select(x => new MasechetTbl

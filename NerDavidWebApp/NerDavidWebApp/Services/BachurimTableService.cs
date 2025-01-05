@@ -5,7 +5,12 @@ namespace NerDavidWebApp.Services
 {
     public class BachurimTableService
     {
-        NerDavidDbContext db = new NerDavidDbContext();
+        private readonly NerDavidDbContext db;
+
+        public BachurimTableService(NerDavidDbContext context)
+        {
+            db = context;
+        }
         public List<BachurimTable> GetBachurimTable(int type)
         {
             var table= db.BachurimTbls.Select(x=>new BachurimTable
@@ -15,20 +20,21 @@ namespace NerDavidWebApp.Services
                 FirstName=x.FirstName,
                 Yeshiva=x.Yeshiva.YeshivaName,
                 Shiur=x.Shiur.ShiurName,
-                YeshivaType = x.Yeshiva.YeshivaType,
+                YeshivaType = x.Yeshiva.YeshivaTypeNavigation.Type,
                 Adress = x.Adress,
                 City = x.City.CityName,
                 Status=x.Status.StatusSymbol,
-                StatusName = x.Status.Status
+                StatusName = x.Status.Status,
+                Phones=db.PhonesTbls.Where(y=>y.BachurId==x.BachurId).Select(y=>y.Phone).ToList()
                 //Phones = x.PhonesTbl.Select(y => y.PhoneNumber).ToList()
                 //Status=x.Status.StatusSymbol
             }).ToList();
             if (type == 1)
             {
-                return table.Where(y => y.YeshivaType == "ג").ToList();
+                return table.Where(y => y.YeshivaType == "ישיבה גדולה").ToList();
             }
             else
-                return table.Where(y => y.YeshivaType == "ק").ToList();
+                return table.Where(y => y.YeshivaType == "ישיבה קטנה").ToList();
 
         }
 

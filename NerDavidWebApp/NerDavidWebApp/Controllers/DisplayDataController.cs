@@ -9,11 +9,16 @@ namespace NerDavidWebApp.Controllers
     [ApiController]
     public class DisplayDataController : ControllerBase
     {
-        DisplayDataService service = new DisplayDataService();
+        private readonly DisplayDataService _service;
+
+        public DisplayDataController(DisplayDataService myService)
+        {
+            _service = myService;
+        }
         [HttpGet]
         public List<DisplayDataTbl> GetColumnsToTable(int displayType)
         {
-            return service.GetColumnsToTable(displayType);
+            return _service.GetColumnsToTable(displayType);
         }
     }
 }

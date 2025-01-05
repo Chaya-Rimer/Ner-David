@@ -16,6 +16,13 @@
                     <b>סוג ישיבה: </b>{{bachurDetails.yeshivaType}}<br>
                     <b>עיר: </b>{{bachurDetails.city}}<br>
                     <b>כתובת: </b>{{bachurDetails.adress}}<br>
+                    <b>טלפונים: </b>
+                    
+                    <span *ngFor="let pn of bachurDetails.phones">
+                         <p>{{pn}}</p>
+                    </span>
+                    <br>
+
                 </mat-card-content>
             </mat-card>
         </div>

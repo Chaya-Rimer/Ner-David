@@ -2,16 +2,28 @@
 using NerDavidWebApp.Intarfaces;
 using NerDavidWebApp.Models;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace NerDavidWebApp.Services
 {
     public class BachurimService : IBachurim
     {
+        private readonly NerDavidDbContext db;
 
-        NerDavidDbContext db = new NerDavidDbContext();
+        public BachurimService(NerDavidDbContext context)
+        {
+            db = context;
+        }
 
+        public BachurimTbl GetBachurDetail(int bachurId)
+        {
+                return db.BachurimTbls.Include(x => x.PhonesTbls).Include(x => x.LimudTbls).FirstOrDefault(x => x.BachurId == bachurId);
 
+            //NewOrEditBachur editBachur = new NewOrEditBachur();
+            //editBachur.Bachur = bachur;
+            //return editBachur;
+        }
         public List<Shiur> GetShiurByYeshivaId(int yeshivaId)
         {
             return db.ShiurTbls.Where(x => x.ShiurType ==
@@ -75,7 +87,8 @@ namespace NerDavidWebApp.Services
                 Adress = newBachur.Bachur.Adress,
                 CityId = cityID,
                 ShiurId = newBachur.Bachur.ShiurId,
-                YeshivaId = yeshivaID
+                YeshivaId = yeshivaID,
+                StatusId=1
             };
 
             var bachur = db.BachurimTbls.Add(b);
