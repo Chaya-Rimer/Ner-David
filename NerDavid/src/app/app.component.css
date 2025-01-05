@@ -1,11 +1,26 @@
 :host{
     direction: rtl;
 }
-header{
-    position: sticky;
-    top: 0; /* מיקום מלמעלה */
-    width: 100%; /* רוחב מלא */
-    z-index: 1000; /* לוודא שהוא מעל אלמנטים אחרים */
-    background-color: white; /* רקע כדי להפריד אותו מהתוכן מתחת */
-    
+
+
+header {
+    position: fixed; /* או absolute, תלוי בצורך שלך */
+    right: 0; /* ממקם את ה-header בצד ימין */
+    top: 0; /* ממקם את ה-header בחלק העליון */
+    height: 100%; /* אם אתה רוצה שה-header יתפרס לגובה */
+    width: 200px; /* או כל רוחב שתרצה */
+    background-color: #f0f0f0; /* צבע רקע לדוגמה */
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.5);
+
+    img{
+        width: 150px;
+        margin-right: 25px;
+        margin-top: 10px;
+    }
 }
+.content{
+    margin-right: 200px; /* מרווח שווה לרוחב התפריט */
+    /* padding: 20px; ריפוד לתוכן */
+}
+
+

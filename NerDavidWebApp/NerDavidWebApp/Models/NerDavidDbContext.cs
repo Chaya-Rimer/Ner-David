@@ -9,10 +9,12 @@ public partial class NerDavidDbContext : DbContext
     public NerDavidDbContext()
     {
     }
+    private readonly IConfiguration _configuration;
 
-    public NerDavidDbContext(DbContextOptions<NerDavidDbContext> options)
+    public NerDavidDbContext(DbContextOptions<NerDavidDbContext> options, IConfiguration configuration)
         : base(options)
     {
+        _configuration = configuration;
     }
 
     public virtual DbSet<BachurimTbl> BachurimTbls { get; set; }
@@ -24,6 +26,8 @@ public partial class NerDavidDbContext : DbContext
     public virtual DbSet<LimudTbl> LimudTbls { get; set; }
 
     public virtual DbSet<MasechetTbl> MasechetTbls { get; set; }
+
+    public virtual DbSet<PersonsTbl> PersonsTbls { get; set; }
 
     public virtual DbSet<PhonesTbl> PhonesTbls { get; set; }
 
@@ -42,8 +46,13 @@ public partial class NerDavidDbContext : DbContext
     public virtual DbSet<ZmanTbl> ZmanTbls { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=NerDavidDB;Trusted_Connection=True;TrustServerCertificate=True");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var connectionsString = _configuration.GetConnectionString("MyDatabase");
+            optionsBuilder.UseSqlServer(connectionsString);
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -170,6 +179,27 @@ public partial class NerDavidDbContext : DbContext
                 .IsFixedLength();
         });
 
+        modelBuilder.Entity<PersonsTbl>(entity =>
+        {
+            entity.HasKey(e => e.PersonId).HasName("per_ID_pk");
+
+            entity.ToTable("PersonsTbl");
+
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Token).IsUnicode(false);
+            entity.Property(e => e.UserName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<PhonesTbl>(entity =>
         {
             entity.HasKey(e => e.PhoneId).HasName("ph_ID_pk");
@@ -281,8 +311,8 @@ public partial class NerDavidDbContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.YeshivaType)
-                .HasMaxLength(10)
-                .IsFixedLength();
+                .HasMaxLength(11)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<ZmanTbl>(entity =>

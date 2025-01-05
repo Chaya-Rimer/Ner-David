@@ -5,11 +5,19 @@ namespace NerDavidWebApp.Services
 {
     public class DisplayDataService
     {
-        NerDavidDbContext db = new NerDavidDbContext();
+        NerDavidDbContext db;
+
+        public DisplayDataService(NerDavidDbContext context)
+        {
+            db = context;
+        }
+
 
         public List<DisplayDataTbl>GetColumnsToTable(int displayType)
         {
-         return db.DisplayDataTbls.Where(x => x.DisplayType == displayType).OrderBy(x=>x.OrderBy).ToList();
+            var a= db.DisplayDataTbls.Where(x => x.DisplayType == displayType).OrderBy(x => x.OrderBy).ToList();
+            return a;
+
         }
     }
 }

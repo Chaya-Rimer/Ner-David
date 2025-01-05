@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NerDavidWebApp.Classes;
 using NerDavidWebApp.Intarfaces;
@@ -7,14 +8,17 @@ using NerDavidWebApp.Services;
 
 namespace NerDavidWebApp.Controllers
 {
+    [Authorize]
     [Route("[controller]/[action]")]
-
     [ApiController]
     public class BachurimController : ControllerBase
     {
      
-        public readonly BachurimService BachurimService=new BachurimService();
-
+        public readonly BachurimService BachurimService;
+        public BachurimController(NerDavidDbContext context)
+        {
+            BachurimService = new BachurimService(context);
+        }
 
         [HttpGet]
         public List<Shiur> GetShiurByYeshivaId(int yeshivaId)

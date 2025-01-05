@@ -1,1 +1,30 @@
-<p>login works!</p>
+<mat-card class="login-card">
+    <mat-card-title>כניסה למערכת</mat-card-title>
+    <mat-card-content>
+        <form class="login-form" [formGroup]="loginForm" >
+            <mat-form-field appearance="fill">
+                <mat-label>שם משתמש</mat-label>
+                <input matInput required formControlName="userName" autocomplete="username">
+                <mat-error *ngIf="loginForm.controls['userName'].touched && loginForm.controls['userName'].invalid">חובה
+                    להכניס שם משתמש</mat-error>
+
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>סיסמא</mat-label>
+                <input matInput [type]="hide() ? 'password' : 'text'" required formControlName="password" autocomplete="current-password"/>
+                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">חובה
+                    להכניס סיסמא</mat-error> 
+            </mat-form-field>
+            <label>
+            <mat-checkbox formControlName="rememberMe">זכור אותי</mat-checkbox>
+
+                <!-- <input type="checkbox" name="rememberMe" id="rememberMe" /> זכור אותי -->
+              </label>
+            <button mat-raised-button [disabled]="loginForm.invalid" color="primary" class="enter" (click)="login()">כניסה</button>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,27 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 55px;
+    // height: 100%;
+  }
+  .login-button{
+    background-color: #f0f0f0;
+    height: 30px;
+    width: 80%;
+    margin: auto;
+    color: rgb(23, 194, 137);
+  }
+  .login-button mat-icon {
+    margin: auto 2px auto 2px;
+}
+// ::ng-deep mat-button:focus{
+// background-color:white !important;
+// }
+.login-button:hover {
+    background-color: rgba(23, 194, 137, 0.4); /* צבע רקע כהה יותר בעת ריחוף */
+    color: #f0f0f0;
+    mat-icon{
+        color: #f0f0f0;
+    }
+
+}

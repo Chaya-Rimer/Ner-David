@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NerDavidWebApp.Classes;
 using NerDavidWebApp.Models;
@@ -6,11 +7,16 @@ using NerDavidWebApp.Services;
 
 namespace NerDavidWebApp.Controllers
 {
+    [Authorize]
     [Route("[controller]/[action]")]
     [ApiController]
     public class LimudController : ControllerBase
     {
-        LimudService service = new LimudService();
+        public readonly LimudService service;
+        public LimudController(NerDavidDbContext context)
+        {
+            service = new LimudService(context);
+        }
 
         [HttpGet]
         public List<MasechetTbl> GetMasechets()

@@ -9,8 +9,12 @@ namespace NerDavidWebApp.Services
     public class BachurimService : IBachurim
     {
 
-        NerDavidDbContext db = new NerDavidDbContext();
+        NerDavidDbContext db;
 
+        public BachurimService(NerDavidDbContext context)
+        {
+            this.db = context;
+        }
 
         public List<Shiur> GetShiurByYeshivaId(int yeshivaId)
         {

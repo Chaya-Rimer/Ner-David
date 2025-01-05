@@ -5,7 +5,11 @@ namespace NerDavidWebApp.Services
 {
     public class BachurimTableService
     {
-        NerDavidDbContext db = new NerDavidDbContext();
+        NerDavidDbContext db;
+        public BachurimTableService(NerDavidDbContext context)
+        {
+            db = context;
+        }
         public List<BachurimTable> GetBachurimTable(int type)
         {
             var table= db.BachurimTbls.Select(x=>new BachurimTable
