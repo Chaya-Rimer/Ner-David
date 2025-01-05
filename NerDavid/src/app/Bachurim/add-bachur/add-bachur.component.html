@@ -28,11 +28,11 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>כתובת </mat-label>
-                    <input matInput formControlName="address">
+                    <input matInput formControlName="adress">
                 </mat-form-field>
                 <br>
 
-                <nd-autocomplete [options]="yeshivaKeyValueArray" [title]="'ישיבה'"
+                <nd-autocomplete [options]="yeshivaKeyValueArray" [title]="'ישיבה'" formControlName="yeshiva"
                     (selectionChange)="onSelectionChange($event)">
                 </nd-autocomplete>
 
@@ -46,11 +46,11 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" *ngIf="open">
+                <mat-form-field appearance="outline" *ngIf="isOpen">
                     <mat-label> סוג ישיבה</mat-label>
                     <mat-select formControlName="yeshivaType">
-                        <mat-option [value]="'ג'">ישיבה גדולה </mat-option>
-                        <mat-option [value]="'ק'">ישיבה קטנה </mat-option>
+                        <mat-option value="1">ישיבה גדולה </mat-option>
+                        <mat-option value="2">ישיבה קטנה </mat-option>
                     </mat-select>
                 </mat-form-field>
 

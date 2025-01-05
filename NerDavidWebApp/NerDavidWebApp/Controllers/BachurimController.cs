@@ -13,38 +13,44 @@ namespace NerDavidWebApp.Controllers
     [ApiController]
     public class BachurimController : ControllerBase
     {
-     
-        public readonly BachurimService BachurimService;
-        public BachurimController(NerDavidDbContext context)
+
+        private readonly BachurimService _bachurimService;
+
+        public BachurimController(BachurimService myService)
         {
-            BachurimService = new BachurimService(context);
+            _bachurimService = myService;
+        }
+        [HttpGet]
+        public BachurimTbl GetBachurDetail(int bachurId)
+        {
+            return _bachurimService.GetBachurDetail(bachurId);
         }
 
         [HttpGet]
         public List<Shiur> GetShiurByYeshivaId(int yeshivaId)
         {
-            return BachurimService.GetShiurByYeshivaId(yeshivaId);
+            return _bachurimService.GetShiurByYeshivaId(yeshivaId);
         }
         [HttpGet]
         public List<Shiur> GetShiur()
         {
-            return BachurimService.GetShiur();
+            return _bachurimService.GetShiur();
         }
         [HttpGet]
         public List<YeshivaTbl> GetYeshiva()
         {
-            return BachurimService.GetYeshiva();
+            return _bachurimService.GetYeshiva();
         }
         [HttpGet]
         public List<CityTbl> GetCity()
         {
-            return BachurimService.GetCity();
+            return _bachurimService.GetCity();
         }
 
         [HttpPost]
         public void NewBachur(NewOrEditBachur newBachur)
         {
-             BachurimService.NewBachur(newBachur);
+            _bachurimService.NewBachur(newBachur);
         }
 
     }

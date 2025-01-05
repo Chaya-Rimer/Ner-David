@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace NerDavidWebApp.Models;
 
 public partial class NerDavidDbContext : DbContext
 {
-    public NerDavidDbContext()
-    {
-    }
+
     private readonly IConfiguration _configuration;
 
     public NerDavidDbContext(DbContextOptions<NerDavidDbContext> options, IConfiguration configuration)
@@ -43,16 +42,19 @@ public partial class NerDavidDbContext : DbContext
 
     public virtual DbSet<YeshivaTbl> YeshivaTbls { get; set; }
 
+    public virtual DbSet<YeshivaTypeTbl> YeshivaTypeTbls { get; set; }
+
     public virtual DbSet<ZmanTbl> ZmanTbls { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
         {
-            var connectionsString = _configuration.GetConnectionString("MyDatabase");
-            optionsBuilder.UseSqlServer(connectionsString);
+            var connectionString = _configuration.GetConnectionString("MyDatabase");
+            optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies(); ;
         }
     }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -200,6 +202,26 @@ public partial class NerDavidDbContext : DbContext
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<PersonsTbl>(entity =>
+        {
+            entity.HasKey(e => e.PersonId).HasName("per_ID_pk");
+
+            entity.ToTable("PersonsTbl");
+
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.UserName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<PhonesTbl>(entity =>
         {
             entity.HasKey(e => e.PhoneId).HasName("ph_ID_pk");
@@ -310,8 +332,20 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.YeshivaName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.YeshivaType)
-                .HasMaxLength(11)
+
+            entity.HasOne(d => d.YeshivaTypeNavigation).WithMany(p => p.YeshivaTbls)
+                .HasForeignKey(d => d.YeshivaType)
+                .HasConstraintName("yeshType_ID_fk");
+        });
+
+        modelBuilder.Entity<YeshivaTypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.YeshivaTypeId).HasName("yeshType_ID_pk");
+
+            entity.ToTable("YeshivaTypeTbl");
+
+            entity.Property(e => e.Type)
+                .HasMaxLength(50)
                 .IsUnicode(false);
         });
 

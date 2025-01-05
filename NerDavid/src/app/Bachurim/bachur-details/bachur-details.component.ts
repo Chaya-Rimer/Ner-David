@@ -14,6 +14,6 @@ export class BachurDetailsComponent {
   constructor(private _bachurSer: BachurimService) { }
   readonly dialog = inject(MatDialog);
   openDialog() {
-    this._bachurSer.openNewBachurDialog();
+    this._bachurSer.openNewBachurDialog(this.bachurDetails);
   }
 }

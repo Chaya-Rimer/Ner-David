@@ -12,16 +12,12 @@ namespace NerDavidWebApp.Controllers
     [ApiController]
     public class BachurimTableController : ControllerBase
     {
+        private readonly BachurimTableService Service;
 
-        readonly BachurimTableService Service;
-
-
-        public BachurimTableController(NerDavidDbContext context)
+        public BachurimTableController(BachurimTableService myService)
         {
-            Service = new BachurimTableService(context);
+            Service = myService;
         }
-
-
         [HttpGet]
         public List<BachurimTable> GetBachurimTable(int type)
         {

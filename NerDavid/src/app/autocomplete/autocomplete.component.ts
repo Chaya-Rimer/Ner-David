@@ -19,7 +19,6 @@ export class AutocompleteComponent {
   filteredOptions: Observable<KeyValue<number,string>[]>;
 
   constructor() {
-    console.log(this.options,"op");
     
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),

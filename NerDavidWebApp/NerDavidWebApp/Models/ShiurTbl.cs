@@ -9,9 +9,11 @@ public partial class ShiurTbl
 
     public string? ShiurName { get; set; }
 
-    public string? ShiurType { get; set; }
+    public int? ShiurType { get; set; }
 
     public virtual ICollection<BachurimTbl> BachurimTbls { get; set; } = new List<BachurimTbl>();
 
     public virtual ICollection<LimudTbl> LimudTbls { get; set; } = new List<LimudTbl>();
+
+    public virtual YeshivaTypeTbl? ShiurTypeNavigation { get; set; }
 }

@@ -12,26 +12,26 @@ namespace NerDavidWebApp.Controllers
     [ApiController]
     public class LimudController : ControllerBase
     {
-        public readonly LimudService service;
-        public LimudController(NerDavidDbContext context)
-        {
-            service = new LimudService(context);
-        }
+        private readonly LimudService _service;
 
+        public LimudController(LimudService myService)
+        {
+            _service = myService;
+        }
         [HttpGet]
         public List<MasechetTbl> GetMasechets()
         {
-            return service.GetMasechets();
+            return _service.GetMasechets();
         }
         [HttpGet]
         public List<LimudDetails> GetBachurLimudTable(int bachurId)
         {
-            return service.GetBachurLimudTable(bachurId);
+            return _service.GetBachurLimudTable(bachurId);
         }
         [HttpGet]
         public List<ZmanTbl> GetZman()
         {
-            return service.GetZman();
+            return _service.GetZman();
         }
 
     }

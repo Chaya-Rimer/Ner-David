@@ -49,11 +49,10 @@ newBachur(newBachur:INewEditBachur){
 //   })
 //   return this.yeshivaKeyValueArray;
 // }
-openNewBachurDialog() {
+openNewBachurDialog(bachurimDetail?:any) {
+  
   this.dialog.open(AddBachurComponent, {
-    data: {
-     
-    },
+    data: bachurimDetail,
     panelClass:'new-bachur-dialog'
   });
 }
