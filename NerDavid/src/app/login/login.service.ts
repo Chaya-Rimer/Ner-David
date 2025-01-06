@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ILogin } from './ILogin';
-import { Observable } from 'rxjs';
+import { IPerson } from './IPerson';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { error } from 'console';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -11,24 +12,37 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
   url = 'https://localhost:7178/Login/'
-
+  loggedIn:boolean=false;
   constructor(private http: HttpClient, private router: Router) { }
   private _snackBar = inject(MatSnackBar);
-
+  // register(model:ILogin):Observable<string>{
+  //   this.http.post<string>(this.url + "Register", model);
+  // }
   login(model: ILogin) {
-    this.http.post<ILogin>(this.url + "Login", model).subscribe(x => {
-
-      localStorage.setItem('token', x.token),
-        console.log(localStorage.getItem('token'), "tokennnnn");
-      this.router.navigate(['/bachurim'])
-    },
+     this.http.post<IPerson>(this.url + "Login", model).subscribe(
+      x => {
+        console.log(x, "per");
+        localStorage.setItem('userName', x.firstName + " " + x.lastName);
+        localStorage.setItem('token', x.token);
+        this.loggedIn=true
+        this.router.navigate(['/bachurim']);
+      },
       error => {
         this._snackBar.open(error.error, 'אישור', {
-          // duration: 3000,
-          horizontalPosition:'start',
-          verticalPosition:'bottom',
-          panelClass: ['custom-snackbar']
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+          // panelClass: ['custom-snackbar']
         });
-      });
+      }
+    )
+  }
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
+
+  logout() {
+    this.loggedIn = false; // לשים את המשתנה ל-false כאשר מתנתבים לעמוד הלוגין
+    localStorage.removeItem('userName');
+    localStorage.removeItem('token');
   }
 }

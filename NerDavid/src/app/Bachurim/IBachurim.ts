@@ -1,4 +1,5 @@
-import { ILimudDetails } from "./limud/ILimud"
+import { KeyValue } from "@angular/common"
+import { ILimud } from "./limud/ILimud"
 
 export interface IYeshiva{
     yeshivaId:number
@@ -29,14 +30,14 @@ export interface IBachur{
     bachurId?:number
     firstName?:string
     lastName?:string
-    city?:ICity
+    city?:KeyValue<number,string>
     adress?:string
-    yeshiva?:IYeshiva
-    shiurId?:number
-    statusId?:IStatus;
+    yeshiva:IYeshiva
+    shiur?:KeyValue<number,string>
+    status?:KeyValue<number,string>;
 }
 export interface INewEditBachur{
     bachur:IBachur;
-    phones?:IPhones[]
-    limud?:ILimudDetails[]
+    phones:IPhones[]
+    limud?:ILimud[]
 }

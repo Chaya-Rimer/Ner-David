@@ -4,7 +4,7 @@
         <!-- תצוגת טבלה נפתחת -->
         <ng-template display-row-content let-element>
             <div class="details">
-                <nd-bachur-details [bachurDetails]="element" ></nd-bachur-details>
+                <nd-bachur-details [bachurId]="element.bachurId" ></nd-bachur-details>
             </div>
         </ng-template>
         <ng-template innerRowComponent='status' let-data="data" let-element="element">

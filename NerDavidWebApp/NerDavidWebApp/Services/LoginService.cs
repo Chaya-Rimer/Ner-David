@@ -6,7 +6,7 @@ namespace NerDavidWebApp.Services
 {
     public class LoginService :ILogin
     {
-        NerDavidDbContext db = new NerDavidDbContext();
+        //NerDavidDbContext db = new NerDavidDbContext();
 
         //public PersonsTbl Login(Login model)
         //{

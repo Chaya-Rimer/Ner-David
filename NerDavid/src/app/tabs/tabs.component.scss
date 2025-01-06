@@ -23,5 +23,9 @@
     mat-icon{
         color: #f0f0f0;
     }
-
+}
+    
+.mat-mdc-menu-item, .mat-mdc-menu-item:visited, .mat-mdc-menu-item:link {
+    text-align: center; 
+    color:rgb(23, 194, 137); 
 }

@@ -22,7 +22,7 @@
                     <input matInput formControlName="lastName">
                 </mat-form-field>
 
-                <nd-autocomplete [options]="cityArray" [required]="true" [title]="'עיר'"
+                <nd-autocomplete [options]="cityArray" [required]="true" [title]="'עיר'" formControlName="city"
                     (selectionChange)="onSelectionCityChange($event)">
                 </nd-autocomplete>
 
@@ -39,9 +39,9 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label> שיעור</mat-label>
-                    <mat-select formControlName="shiurId">
-                        <mat-option *ngFor="let i of shiurOption" [value]="i.shiurId">
-                            {{ i.shiurName }}
+                    <mat-select formControlName="shiur">
+                        <mat-option *ngFor="let i of shiurOption" [value]="i">
+                            {{ i.value }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

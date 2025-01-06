@@ -12,7 +12,6 @@ export class DisplayDataService {
   url='https://localhost:7178/DisplayData/'
 
   getColumnsToTable(displayType:number):Observable<IDisplayData[]>{
-    debugger;
    return this.http.get<IDisplayData[]>(this.url+`GetColumnsToTable?displayType=${displayType}`)
  }
 }

@@ -1,11 +1,12 @@
-﻿using NerDavidWebApp.Classes;
+﻿using Microsoft.AspNetCore.Mvc;
+using NerDavidWebApp.Classes;
 using NerDavidWebApp.Models;
 
 namespace NerDavidWebApp.Intarfaces
 {
     public interface IBachurim
     {
-        public BachurimTbl GetBachurDetail(int bachurId);
+        public NewOrEditBachur GetBachurDetail(int bachurId);
         public List<Shiur> GetShiurByYeshivaId(int yeshivaId);
         public List<YeshivaTbl> GetYeshiva();
         public List<CityTbl> GetCity();

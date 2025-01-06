@@ -1,6 +1,6 @@
 ﻿namespace NerDavidWebApp.Classes
 {
-    public class LimudDetails
+    public class LimudDetailsTable
     {
         public int LimudId { get; set; }
 

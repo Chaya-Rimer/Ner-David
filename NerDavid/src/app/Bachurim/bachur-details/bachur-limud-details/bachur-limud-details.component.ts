@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LimudService } from '../../limud/limud.service';
-import { ILimudDetails } from '../../limud/ILimud';
+import { ILimudDetailsTable } from '../../limud/ILimud';
 
 @Component({
   selector: 'nd-bachur-limud-details',
@@ -8,11 +8,12 @@ import { ILimudDetails } from '../../limud/ILimud';
   styleUrl: './bachur-limud-details.component.scss'
 })
 export class BachurLimudDetailsComponent {
-  data: ILimudDetails[] = []
+  data: ILimudDetailsTable[] = []
   edit:boolean=false
   constructor(private _limudService:LimudService){}
   ngOnInit(){
-    this._limudService.getBachurLimudTable(100).subscribe(x=>{this.data=x})
+    this._limudService.getBachurLimudTable(100).subscribe(x=>{this.data=x,console.log(this.data,"limud");
+    })
   }
 
   isSameYeshivaName(element:any):boolean{

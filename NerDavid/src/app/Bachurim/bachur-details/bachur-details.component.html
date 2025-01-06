@@ -9,18 +9,15 @@
                       </button>
                 </mat-card-header>
                 <mat-card-content>
-                    <b>משפחה: </b>{{bachurDetails.lastName}}<br>
-                    <b>שם: </b>{{bachurDetails.firstName}}<br>
-                    <b>ישיבה: </b>{{bachurDetails.yeshiva}}<br>
-                    <b>שיעור: </b>{{bachurDetails.shiur}}<br>
-                    <b>סוג ישיבה: </b>{{bachurDetails.yeshivaType}}<br>
-                    <b>עיר: </b>{{bachurDetails.city}}<br>
-                    <b>כתובת: </b>{{bachurDetails.adress}}<br>
+                    <b>משפחה: </b>{{bachurDetails.bachur.lastName}}<br>
+                    <b>שם: </b>{{bachurDetails.bachur.firstName}}<br>
+                    <b>ישיבה: </b>{{bachurDetails.bachur.yeshiva.yeshivaName}}<br>
+                    <b>שיעור: </b>{{bachurDetails.bachur.shiur?.value}}<br>
+                    <b>סוג ישיבה: </b>{{bachurDetails.bachur.yeshiva.yeshivaType}}<br>
+                    <b>עיר: </b>{{bachurDetails.bachur.city?.value}}<br>
+                    <b>כתובת: </b>{{bachurDetails.bachur.adress}}<br>
                     <b>טלפונים: </b>
-                    
-                    <span *ngFor="let pn of bachurDetails.phones">
-                         <p>{{pn}}</p>
-                    </span>
+                    <p *ngFor="let pn of bachurDetails.phones">{{pn.phone}}</p>
                     <br>
 
                 </mat-card-content>

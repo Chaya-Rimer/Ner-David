@@ -1,10 +1,9 @@
-﻿using NerDavidWebApp.Classes;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NerDavidWebApp.Classes;
 using NerDavidWebApp.Intarfaces;
 using NerDavidWebApp.Models;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-
 namespace NerDavidWebApp.Services
 {
     public class BachurimService : IBachurim
@@ -16,13 +15,56 @@ namespace NerDavidWebApp.Services
             db = context;
         }
 
-        public BachurimTbl GetBachurDetail(int bachurId)
+        public NewOrEditBachur GetBachurDetail(int bachurId)
         {
-                return db.BachurimTbls.Include(x => x.PhonesTbls).Include(x => x.LimudTbls).FirstOrDefault(x => x.BachurId == bachurId);
+            //return db.BachurimTbls
+            //            //.Include(b => b.Shiur)
+            //            .FirstOrDefault(b => b.BachurId == bachurId);
 
-            //NewOrEditBachur editBachur = new NewOrEditBachur();
-            //editBachur.Bachur = bachur;
-            //return editBachur;
+            //if (bachur == null)
+            //{
+            //    return new BachurimTbl();
+            //}
+
+            NewOrEditBachur editBachur = new NewOrEditBachur();
+            bachur bachur = db.BachurimTbls.Where(x => x.BachurId == bachurId).Select(x => new bachur()
+            {
+                BachurId = x.BachurId,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                City = new KeyValuePair<int, string>((int)x.CityId, x.City.CityName),
+                Adress = x.Adress,
+                Yeshiva = new Yeshiva{
+                    YeshivaId= (int)x.YeshivaId,
+                    YeshivaName= x.Yeshiva.YeshivaName,
+                    YeshivaType= x.Yeshiva.YeshivaType 
+                },
+                Shiur = new KeyValuePair<int, string>((int)x.ShiurId, x.Shiur.ShiurName),
+                Status = new KeyValuePair<int, string>((int)x.StatusId, x.Status.StatusSymbol),
+            }).FirstOrDefault();
+            List<PhonesTbl> phones = db.PhonesTbls.Where(x => x.BachurId == bachurId).ToList();
+            List<Limud> limuds = db.LimudTbls.Where(x => x.BachurId == bachurId).Select(x=>new Limud()
+            {
+                LimudId=x.LimudId,
+                Masechet= new KeyValuePair<int, string>((int)x.MasechetId, x.Masechet.MasechetName),
+                Perek = x.Perek,
+                StartValue = x.StartValue,
+                EndValue=x.EndValue,
+                Year = new KeyValuePair<int, string>((int)x.YearId, x.Year.YearName),
+                Zman = new KeyValuePair<int, string>((int)x.ZmanId, x.Zman.ZmanName),
+                Tested=x.Tested,
+                Shiur = new KeyValuePair<int, string>((int)x.ShiurId, x.Shiur.ShiurName),
+                Yeshiva  = new Yeshiva
+                {
+                    YeshivaId = (int)x.YeshivaId,
+                    YeshivaName = x.Yeshiva.YeshivaName,
+                    YeshivaType = x.Yeshiva.YeshivaType
+                },
+            }).ToList();
+            editBachur.Bachur = bachur;
+            editBachur.Phones = phones;
+            editBachur.Limud = limuds;
+            return editBachur;
         }
         public List<Shiur> GetShiurByYeshivaId(int yeshivaId)
         {
@@ -56,16 +98,16 @@ namespace NerDavidWebApp.Services
         public void NewBachur(NewOrEditBachur newBachur)
         {
             var cityID = 0; var yeshivaID=0;
-            if (newBachur.Bachur.City.CityId == 0) {
+            if (newBachur.Bachur.City.Key == 0) {
                 CityTbl c=new CityTbl();
-                c.CityName = newBachur.Bachur.City.CityName;
+                c.CityName = newBachur.Bachur.City.Value;
                var newCity= db.CityTbls.Add(c);
                 db.SaveChanges();
                 cityID = newCity.Entity.CityId;
             }
             else
             {
-                 cityID = newBachur.Bachur.City.CityId;
+                 cityID = newBachur.Bachur.City.Key;
             }
             if (newBachur.Bachur.Yeshiva.YeshivaId == 0)
             {
@@ -86,7 +128,7 @@ namespace NerDavidWebApp.Services
                 LastName = newBachur.Bachur.LastName,
                 Adress = newBachur.Bachur.Adress,
                 CityId = cityID,
-                ShiurId = newBachur.Bachur.ShiurId,
+                ShiurId = newBachur.Bachur.Shiur.Key,
                 YeshivaId = yeshivaID,
                 StatusId=1
             };
@@ -99,7 +141,7 @@ namespace NerDavidWebApp.Services
                 newBachur.Limud.ForEach(item => db.LimudTbls.Add(new LimudTbl()
                 {
                     BachurId = bachurID,
-                    MasechetId = item.MasechetId,
+                    MasechetId = item.Masechet.Key,
                     Perek = item.Perek,
                     StartValue = item.StartValue,
                     EndValue = item.EndValue

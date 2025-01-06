@@ -1,7 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { BachurimTableService } from './bachurim-table.service';
 import { IbachurimTable } from './IBachurimTable';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-bachurim-table',
@@ -14,9 +13,7 @@ export class BachurimTableComponent {
   dataSource: IbachurimTable[] =[]
 
   ngOnInit() {
-    this.BachurimTableSer.getBachurimTable(1).subscribe(x => {
-      this.dataSource = x;
-  });
+    this.BachurimTableSer.getBachurimTable(1).subscribe(x =>this.dataSource = x);
   }
 }
 

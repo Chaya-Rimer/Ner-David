@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './tabs.component.scss'
 })
 export class TabsComponent {
-  onClick(){
-    
-  }
+  username!:string;
+ constructor(){}
+ ngOnInit(){
+ this.username= localStorage.getItem('userName')!
+ }
 }

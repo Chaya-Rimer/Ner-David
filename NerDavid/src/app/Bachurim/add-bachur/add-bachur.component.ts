@@ -18,69 +18,82 @@ import { open } from 'fs';
 export class AddBachurComponent {
   newBachurForm!: FormGroup;
   yeshivaOption!: IYeshiva[];
-  shiurOption!: IShiur[];
+  shiurOption:KeyValue<number,string>[]=[];
   newBachur: INewEditBachur = {} as INewEditBachur;
   filteredOptions!: string[];
   cityArray: KeyValue<number, string>[] = [];
-  citySelected!: ICity;
+  citySelected!: KeyValue<number, string>;
   yeshivaSelected!: KeyValue<number, string>;
   yeshivaKeyValueArray: KeyValue<number, string>[] = [];
   isOpen: boolean = false;
+  phonesNumber: string[] = [];
   @ViewChild(LimudComponent) limudComponent: LimudComponent | undefined;
   @ViewChild(PhonesComponent) phoneComponent: PhonesComponent | undefined
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   accordion = viewChild.required(MatAccordion);
 
   constructor(public _BachurimSer: BachurimService, public dialogRef: MatDialogRef<AddBachurComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: INewEditBachur) { }
   readonly panelOpenState = signal(false);
   private _snackBar = inject(MatSnackBar);
   ngOnInit() {
     this.newBachurForm = new FormGroup({
       firstName: new FormControl(null),
       lastName: new FormControl(''),
+      city: new FormControl(),
       adress: new FormControl(''),
-      yeshiva:new FormControl(''),
-      shiurId: new FormControl(''),
+      yeshiva: new FormControl(),
+      shiur: new FormControl(),
       yeshivaType: new FormControl('')
     });
-   
+
     this._BachurimSer.getCity().subscribe(x => {
-      this.cityArray = x.map(item => ({ key: item.cityId, value: item.cityName })),
-        console.log(this.cityArray, "arr");
+      this.cityArray = x.map(item => ({ key: item.cityId, value: item.cityName }))
     })
-    this._BachurimSer.getYeshiva().subscribe(x =>{
+    this._BachurimSer.getYeshiva().subscribe(x => {
       this.yeshivaKeyValueArray = x;
-      if(this.data){
-        console.log(this.yeshivaKeyValueArray.filter(x=>x.value==this.data.yeshiva),"filter");
+      if (this.data) {
+        // console.log(this.yeshivaKeyValueArray.filter(x=>x.value==this.data.bachur.yeshiva?.yeshivaName),"filter");
 
       }
     });
 
-    if(this.data){
-      console.log(this.data,"data");
-      this.newBachurForm.patchValue(this.data)
-      console.log(this.newBachurForm.value,"form");
-      
+    if (this.data) {
+      this.phonesNumber = this.data.phones.map(x => x.phone);
+      this.newBachurForm.patchValue(this.data.bachur)
+      let yeshiva: KeyValue<number, string> = {
+        key: this.data.bachur.yeshiva?.yeshivaId,
+        value: this.data.bachur.yeshiva?.yeshivaName
+      }
+      this.newBachurForm.controls['yeshiva'].setValue(yeshiva)
+      this.newBachurForm.controls['city'].setValue(this.data.bachur.city)
+      this.newBachurForm.controls['shiur'].setValue(this.data.bachur.shiur)
+      this.newBachurForm.controls['yeshivaType'].setValue(this.data.bachur.yeshiva.yeshivaType)
+
+      // this.newBachurForm.patchValue(this.data)
+      console.log(this.newBachurForm.value, "form");
+
     }
   }
 
   onSelectionChange(selected: KeyValue<number, string>) {
     // this.yeshivaSelected = selected;
-    if (selected.key != 0){
-      this._BachurimSer.getShiurByYeshivaId(selected.key).subscribe(x => this.shiurOption = x)
-    }
-    else {
-      this._BachurimSer.getShiur().subscribe(x => this.shiurOption = x)
-      this.isOpen = true;
-    }
+      if (selected.key != 0) {
+        this._BachurimSer.getShiurByYeshivaId(selected.key).subscribe(x =>
+           this.shiurOption = x.map(y=>({key:y.shiurId,value:y.shiurName !== undefined ? y.shiurName : 'default'})))
+      }
+      else {
+        this._BachurimSer.getShiur().subscribe(x => 
+          this.shiurOption = x.map(y=>({key:y.shiurId,value:y.shiurName !== undefined ? y.shiurName : 'default'})))
+          this.isOpen = true;
+      }
   }
   onSelectionCityChange(selected: KeyValue<number, string>) {
     // this.newBachurForm.controls['city'].setValue(selected)
-    this.citySelected = { cityId: selected.key, cityName: selected.value }
+    this.citySelected = selected;
   }
   save() {
-    
+
     const array = this.limudComponent?.getModel();
 
     const phoneArray = this.phoneComponent?.getModel();
@@ -92,12 +105,12 @@ export class AddBachurComponent {
     let yeshiva: IYeshiva =
     {
       // yeshivaId: this.yeshivaSelected.key,
-      yeshivaId:this.newBachurForm.controls['yeshiva'].value.key,
+      yeshivaId: this.newBachurForm.controls['yeshiva'].value.key,
       yeshivaName: this.yeshivaSelected.value,
       yeshivaType: this.newBachurForm.controls['yeshivaType'].value
     }
-    console.log(yeshiva,"y");
-    
+    console.log(yeshiva, "y");
+
     this.newBachur.bachur.yeshiva = yeshiva;
     this.newBachur.bachur.city = this.citySelected;
     // this.newBachur.limud = this.limudComponent?.getModel();

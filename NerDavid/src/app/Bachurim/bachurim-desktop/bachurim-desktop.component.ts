@@ -1,6 +1,4 @@
-import { Component, inject, ViewChild, viewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AddBachurComponent } from '../add-bachur/add-bachur.component';
+import { ChangeDetectorRef, Component, inject, ViewChild, viewChild } from '@angular/core';
 import { BachurimTableComponent } from '../bachurim-table/bachurim-table.component';
 import { BachurimService } from '../bachurim.service';
 
@@ -14,12 +12,15 @@ export class BachurimDesktopComponent {
   searchValue='';
   @ViewChild(BachurimTableComponent) bachurimTable:BachurimTableComponent ={}as BachurimTableComponent;
 
-  constructor(private _bachurSer:BachurimService) { }
-
+  constructor(private _bachurSer:BachurimService,private cdr: ChangeDetectorRef) { }
   ngOnInit() {
     
   }
+  onSearchChange(event:any){
+    this.searchValue=event.target.value;
+    this.cdr.detectChanges(); // דרישת בדיקת שינויים
 
+  }
 
   openDialog() {
     this._bachurSer.openNewBachurDialog();

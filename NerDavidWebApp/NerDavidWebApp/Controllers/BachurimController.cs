@@ -21,7 +21,7 @@ namespace NerDavidWebApp.Controllers
             _bachurimService = myService;
         }
         [HttpGet]
-        public BachurimTbl GetBachurDetail(int bachurId)
+        public NewOrEditBachur GetBachurDetail(int bachurId)
         {
             return _bachurimService.GetBachurDetail(bachurId);
         }

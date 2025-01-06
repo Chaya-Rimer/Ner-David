@@ -1,7 +1,6 @@
 ﻿using NerDavidWebApp.Classes;
 using NerDavidWebApp.Models;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace NerDavidWebApp.Services
 {
@@ -22,10 +21,10 @@ namespace NerDavidWebApp.Services
                 PrakimNum = x.PrakimNum.Trim()
             }).ToList();
         }
-        public List<LimudDetails> GetBachurLimudTable(int bachurId)
+        public List<LimudDetailsTable> GetBachurLimudTable(int bachurId)
         {
-            List<LimudDetails> limudDetails = db.LimudTbls.Where(x => x.BachurId == bachurId)
-                .Select(x => new LimudDetails()
+            List<LimudDetailsTable> limudDetails = db.LimudTbls.Where(x => x.BachurId == bachurId)
+                .Select(x => new LimudDetailsTable()
                 {
                     LimudId = x.LimudId,
                     YearId = x.YearId,

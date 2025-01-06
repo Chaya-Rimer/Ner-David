@@ -1,3 +1,5 @@
+<img src="logo.png" width="180px" style="display: block; margin: 0 auto;"/>
+
 <mat-card class="login-card">
     <mat-card-title>כניסה למערכת</mat-card-title>
     <mat-card-content>
@@ -19,11 +21,10 @@
                 <mat-error *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">חובה
                     להכניס סיסמא</mat-error> 
             </mat-form-field>
-            <label>
+            <!-- <label>
             <mat-checkbox formControlName="rememberMe">זכור אותי</mat-checkbox>
-
-                <!-- <input type="checkbox" name="rememberMe" id="rememberMe" /> זכור אותי -->
-              </label>
+              </label> -->
+              <!-- <button (click)="register()">הירשם</button> -->
             <button mat-raised-button [disabled]="loginForm.invalid" color="primary" class="enter" (click)="login()">כניסה</button>
         </form>
     </mat-card-content>

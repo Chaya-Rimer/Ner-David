@@ -24,7 +24,7 @@ namespace NerDavidWebApp.Controllers
             return _service.GetMasechets();
         }
         [HttpGet]
-        public List<LimudDetails> GetBachurLimudTable(int bachurId)
+        public List<LimudDetailsTable> GetBachurLimudTable(int bachurId)
         {
             return _service.GetBachurLimudTable(bachurId);
         }

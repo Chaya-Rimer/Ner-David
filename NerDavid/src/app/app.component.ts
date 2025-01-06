@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { LoginService } from './login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,9 @@ import { MenuItem } from 'primeng/api';
 })
 export class AppComponent {
   title = 'NerDavid';
-  constructor() { }
+  isLogin!:boolean;
+  constructor(public _loginServce:LoginService) { }
   ngOnInit() {
+    this.isLogin=this._loginServce.isLoggedIn();
   }
 }

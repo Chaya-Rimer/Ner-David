@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NerDavidWebApp.Classes;
 using NerDavidWebApp.Models;
-using System.Data.Entity;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -34,10 +34,14 @@ namespace NerDavidWebApp.Controllers
             {
                 return BadRequest("Invalid client request");
             }
-            var person =  _context.PersonsTbls
-                .FirstOrDefault(p => p.UserName == model.UserName && p.Password == model.Password);
+            //לאחסן סיסמה
+            string salt = BCrypt.Net.BCrypt.GenerateSalt();
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password, salt);
 
-            if (person == null)
+            var person = _context.PersonsTbls
+                .FirstOrDefault(p => p.UserName == model.UserName);
+
+            if (person == null || !BCrypt.Net.BCrypt.Verify(model.Password, person.Password))
             {
                 return Unauthorized("שם משתמש או סיסמה אינם נכונים");
             }
@@ -65,7 +69,36 @@ namespace NerDavidWebApp.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
             //var token = tokenHandler.CreateToken(tokenDescriptor);
-            return Ok(new Login { Token = tokenHandler.WriteToken(token) });
+            return Ok(new PersonsTbl { Token = tokenHandler.WriteToken(token), FirstName=person.FirstName,LastName=person.LastName });
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] Login model)
+        {
+            if (model == null || string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
+            {
+                return BadRequest("Invalid client request");
+            }
+
+            // יצירת סיסמה מוצפנת
+            string salt = BCrypt.Net.BCrypt.GenerateSalt();
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password, salt);
+            bool isExist = _context.PersonsTbls.Any(x => x.UserName == model.UserName);
+            if(isExist)
+                _context.PersonsTbls.FirstOrDefault(x => x.UserName == model.UserName).Password = hashedPassword;
+            else
+            {
+                // צור אובייקט משתמש חדש והגדר את הסיסמה המוצפנת
+                var newUser = new PersonsTbl
+                {
+                    UserName = model.UserName,
+                    Password = hashedPassword, // אחסן את הסיסמה המוצפנת
+                };
+                _context.PersonsTbls.Add(newUser);
+            }
+            
+            await _context.SaveChangesAsync();
+
+            return Ok("User registered successfully.");
         }
 
     }
