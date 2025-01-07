@@ -19,8 +19,9 @@ header {
     }
 }
 .content{
+    position: relative; /* כדי לשמור על תצוגה יציבה */
+    padding: 20px; /* ריפוד לתוכן */
     margin-right: 200px; /* מרווח שווה לרוחב התפריט */
-    /* padding: 20px; ריפוד לתוכן */
 }
 
 

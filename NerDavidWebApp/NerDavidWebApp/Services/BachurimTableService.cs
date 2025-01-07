@@ -25,7 +25,6 @@ namespace NerDavidWebApp.Services
                 City = x.City.CityName,
                 Status=x.Status.StatusSymbol,
                 StatusName = x.Status.Status,
-                Phones=db.PhonesTbls.Where(y=>y.BachurId==x.BachurId).Select(y=>y.Phone).ToList()
                 //Phones = x.PhonesTbl.Select(y => y.PhoneNumber).ToList()
                 //Status=x.Status.StatusSymbol
             }).ToList();

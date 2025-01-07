@@ -53,6 +53,7 @@ export class LimudComponent {
   createForm(): FormGroup {
     return this.fb.group({
       masechet: new FormControl(null),
+      shiurID: new FormControl(''),
       perek: new FormControl(''),
       startValue: new FormControl(''),
       endValue: new FormControl(''),

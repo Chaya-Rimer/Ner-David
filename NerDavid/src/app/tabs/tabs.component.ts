@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'nd-tabs',
@@ -7,8 +8,11 @@ import { Component } from '@angular/core';
 })
 export class TabsComponent {
   username!:string;
- constructor(){}
+ constructor(private _loginService:LoginService){}
  ngOnInit(){
  this.username= localStorage.getItem('userName')!
+ }
+ logOut(){
+   this._loginService.logout();
  }
 }

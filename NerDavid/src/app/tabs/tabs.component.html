@@ -1,8 +1,8 @@
 <div class="menu">
-  <a mat-fab extended  matTooltip="החלף משתמש" routerLink="/login" class="login-button">
+  <a mat-fab extended  matTooltip="החלף משתמש" (click)="logOut()" class="login-button">
     <mat-icon >person_outline</mat-icon>
 {{username}} </a>
-  <button mat-button [matMenuTriggerFor]="aboveMenu" style="text-align: center;">בחורים</button>
+  <button mat-button [matMenuTriggerFor]="aboveMenu" style="text-align: center;"  [routerLink]="['/bachurim/yeshivaGdola']">בחורים</button>
   <mat-menu #aboveMenu="matMenu" yPosition="below">
     <button mat-menu-item [routerLink]="['/bachurim/yeshivaKtana']">ישיבה קטנה</button>
     <button mat-menu-item [routerLink]="['/bachurim/yeshivaGdola']">ישיבה גדולה</button>

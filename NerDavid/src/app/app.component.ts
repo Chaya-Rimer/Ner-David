@@ -7,13 +7,13 @@ import { LoginService } from './login/login.service';
   // standalone: true,
   // imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'NerDavid';
   isLogin!:boolean;
   constructor(public _loginServce:LoginService) { }
   ngOnInit() {
-    this.isLogin=this._loginServce.isLoggedIn();
+    this.isLogin=this._loginServce.isLoggedIn;
   }
 }

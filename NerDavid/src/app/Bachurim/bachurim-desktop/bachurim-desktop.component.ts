@@ -16,11 +16,7 @@ export class BachurimDesktopComponent {
   ngOnInit() {
     
   }
-  onSearchChange(event:any){
-    this.searchValue=event.target.value;
-    this.cdr.detectChanges(); // דרישת בדיקת שינויים
-
-  }
+ 
 
   openDialog() {
     this._bachurSer.openNewBachurDialog();

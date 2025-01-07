@@ -82,11 +82,6 @@ namespace NerDavidWebApp.Controllers
             // יצירת סיסמה מוצפנת
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password, salt);
-            bool isExist = _context.PersonsTbls.Any(x => x.UserName == model.UserName);
-            if(isExist)
-                _context.PersonsTbls.FirstOrDefault(x => x.UserName == model.UserName).Password = hashedPassword;
-            else
-            {
                 // צור אובייקט משתמש חדש והגדר את הסיסמה המוצפנת
                 var newUser = new PersonsTbl
                 {
@@ -94,7 +89,6 @@ namespace NerDavidWebApp.Controllers
                     Password = hashedPassword, // אחסן את הסיסמה המוצפנת
                 };
                 _context.PersonsTbls.Add(newUser);
-            }
             
             await _context.SaveChangesAsync();
 

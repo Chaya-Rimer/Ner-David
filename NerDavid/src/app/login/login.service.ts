@@ -36,7 +36,7 @@ export class LoginService {
       }
     )
   }
-  isLoggedIn(): boolean {
+  get isLoggedIn(): boolean {
     return this.loggedIn;
   }
 
@@ -44,5 +44,6 @@ export class LoginService {
     this.loggedIn = false; // לשים את המשתנה ל-false כאשר מתנתבים לעמוד הלוגין
     localStorage.removeItem('userName');
     localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
