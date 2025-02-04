@@ -20,7 +20,6 @@ export class BachurimDesktopComponent {
     this.searchValue=event.target.value;
 
   }
-  }
 
   openDialog() {
     this._bachurSer.openNewBachurDialog();

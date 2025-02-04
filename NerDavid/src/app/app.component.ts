@@ -14,6 +14,6 @@ export class AppComponent {
   constructor(public _authService:AuthService) { }
 
   ngOnInit() {
-    this.isLogin=this._loginServce.isLoggedIn;
+    this.isLogin=this._authService.isAuthenticated();
   }
 }
