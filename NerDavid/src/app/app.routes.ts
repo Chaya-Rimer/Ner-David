@@ -10,6 +10,6 @@ export const routes: Routes = [
         {path:'',redirectTo:'yeshivaGdola',pathMatch:"full"},
         {path:'yeshivaGdola',loadChildren:()=>import('./Modules/bachurim.module').then(m=>m.BachurimModule), canActivate: [AuthGuard]},
         {path:'yeshivaKtana',loadChildren:()=>import('./Modules/yeshiva-ktana.module').then(m=>m.YeshivaKtanaModule), canActivate: [AuthGuard]},
-    ]}
-
+    ]},
+    {path:'**',redirectTo:'login',pathMatch:'full'},
 ];

@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
-import { MenuItem } from 'primeng/api';
 import { LoginService } from './login/login.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
-  // standalone: true,
-  // imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'NerDavid';
   isLogin!:boolean;
-  constructor(public _loginServce:LoginService) { }
+
+  constructor(public _authService:AuthService) { }
+
   ngOnInit() {
-    this.isLogin=this._loginServce.isLoggedIn();
+    console.log("isLogin", this.isLogin);
+    
+    this.isLogin = this._authService.isAuthenticated();
   }
 }

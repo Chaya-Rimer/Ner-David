@@ -1,18 +1,17 @@
 <div class="LimudTable">
     <nd-display-data [displayDataType]="2" [data]="data" [tableClass]="'line-table'" [isExpanded]="false"
-    [isSameColumn]="isSameYeshivaName" [selectable]="true" [columnClass]="yeshivaStyle">
-    <ng-template displayRowAction let-element>
-        <div  (click)="edit=!edit" > 
-            <mat-icon *ngIf="!edit" matTooltip="עריכה">edit</mat-icon>
-            <span *ngIf="edit" class="save">שמור</span>
-        </div>
-</ng-template>
-<ng-template innerRowComponent="tested" let-element="element">
+        [isSameColumn]="isSameYeshivaName" [selectable]="true" [columnClass]="yeshivaStyle">
+        <ng-template displayRowAction let-element>
+            <div (click)="edit=!edit">
+                <mat-icon *ngIf="!edit" matTooltip="עריכה">edit</mat-icon>
+                <span *ngIf="edit" class="save">שמור</span>
+            </div>
+        </ng-template>
+        <ng-template innerRowComponent="tested" let-element="element">
 
-            <input *ngIf="edit" class="input-field" [value]="element"/>
+            <input *ngIf="edit" class="input-field" [value]="element" />
             <span *ngIf="!edit">{{element?'V':'X'}}</span>
-    
-</ng-template>
+
+        </ng-template>
     </nd-display-data>
 </div>
-

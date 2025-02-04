@@ -1,0 +1,20 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    position: relative; /* מגדיר קונטקסט עבור התמונה */
+    height: 94vh; /* גובה 100% מהגובה של החלון */
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../../public/under-construction.jpg');
+    background-size: cover; /* או 'contain' אם אתה רוצה לשמור על יחס הגובה-רוחב */
+    background-position: center;
+}

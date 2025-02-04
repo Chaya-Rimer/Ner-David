@@ -12,18 +12,17 @@ export class BachurimDesktopComponent {
   searchValue='';
   @ViewChild(BachurimTableComponent) bachurimTable:BachurimTableComponent ={}as BachurimTableComponent;
 
-  constructor(private _bachurSer:BachurimService,private cdr: ChangeDetectorRef) { }
+  constructor(private _bachurSer:BachurimService) { }
   ngOnInit() {
     
   }
   onSearchChange(event:any){
     this.searchValue=event.target.value;
-    this.cdr.detectChanges(); // דרישת בדיקת שינויים
 
   }
 
   openDialog() {
     this._bachurSer.openNewBachurDialog();
   }
-    
+
 }

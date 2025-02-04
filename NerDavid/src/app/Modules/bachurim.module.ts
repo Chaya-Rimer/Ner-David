@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DisplayDataModule } from './display-data.module';
 import { ShareModule } from './shared.module';
 import {  RouterModule, Routes } from '@angular/router';
+import { TestDesktopComponent } from '../Bachurim/test-desktop/test-desktop.component';
 
 const routes:Routes=[
 {path:'',component:BachurimDesktopComponent}
@@ -22,6 +23,7 @@ const routes:Routes=[
     AddBachurComponent,
     BachurimDesktopComponent,
     BachurLimudDetailsComponent,
+    TestDesktopComponent
 
   ],
   imports: [

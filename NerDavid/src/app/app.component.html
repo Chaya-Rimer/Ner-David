@@ -1,5 +1,5 @@
 
-<header *ngIf="_loginServce.isLoggedIn()">
+<header *ngIf="isLogin">
     <img src="logo.png"/>
     <nd-tabs></nd-tabs>
 </header>
@@ -7,4 +7,4 @@
     <router-outlet></router-outlet>
 </div>
 
-<footer *ngIf="_loginServce.isLoggedIn()"></footer>
+<footer *ngIf="isLogin"></footer>

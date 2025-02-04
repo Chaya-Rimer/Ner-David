@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace NerDavidWebApp.Models;
 
 public partial class NerDavidDbContext : DbContext
 {
+    public NerDavidDbContext()
+    {
+    }
 
-    private readonly IConfiguration _configuration;
-
-    public NerDavidDbContext(DbContextOptions<NerDavidDbContext> options, IConfiguration configuration)
+    public NerDavidDbContext(DbContextOptions<NerDavidDbContext> options)
         : base(options)
     {
-        _configuration = configuration;
     }
 
     public virtual DbSet<BachurimTbl> BachurimTbls { get; set; }
@@ -47,14 +46,7 @@ public partial class NerDavidDbContext : DbContext
     public virtual DbSet<ZmanTbl> ZmanTbls { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            var connectionString = _configuration.GetConnectionString("MyDatabase");
-            optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies(); ;
-        }
-    }
-
+        => optionsBuilder.UseSqlServer("Name=MyDataBase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -193,30 +185,8 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Password)
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            entity.Property(e => e.Password).IsUnicode(false);
             entity.Property(e => e.Token).IsUnicode(false);
-            entity.Property(e => e.UserName)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-        });
-
-        modelBuilder.Entity<PersonsTbl>(entity =>
-        {
-            entity.HasKey(e => e.PersonId).HasName("per_ID_pk");
-
-            entity.ToTable("PersonsTbl");
-
-            entity.Property(e => e.FirstName)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.LastName)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Password)
-                .HasMaxLength(50)
-                .IsUnicode(false);
             entity.Property(e => e.UserName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -272,9 +242,10 @@ public partial class NerDavidDbContext : DbContext
             entity.Property(e => e.ShiurName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.ShiurType)
-                .HasMaxLength(10)
-                .IsFixedLength();
+
+            entity.HasOne(d => d.ShiurTypeNavigation).WithMany(p => p.ShiurTbls)
+                .HasForeignKey(d => d.ShiurType)
+                .HasConstraintName("shiType_ID_fk");
         });
 
         modelBuilder.Entity<StatusTbl>(entity =>

@@ -33,9 +33,6 @@ import { AuthInterceptor } from '../authInterceptor';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    BachurimModule,
-    YeshivaKtanaModule,
-    DisplayDataModule,
     MaterialModule
   ],
   bootstrap: [

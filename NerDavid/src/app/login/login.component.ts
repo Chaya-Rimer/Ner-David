@@ -19,8 +19,8 @@ export class LoginComponent {
   constructor(private _loginService:LoginService) { }
 
   ngOnInit() {
-    debugger;
-    this._loginService.logout(); // לשים את המשתנה ל-false כאשר מתנתבים לעמוד הלוגין
+    
+    // this._loginService.logout(); // לשים את המשתנה ל-false כאשר מתנתבים לעמוד הלוגין
 
     // // טען את הנתונים מה-localStorage
     // const savedUserName = localStorage.getItem('username');
