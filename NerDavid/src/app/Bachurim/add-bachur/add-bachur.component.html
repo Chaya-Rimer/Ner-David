@@ -22,7 +22,7 @@
                     <input matInput formControlName="lastName">
                 </mat-form-field>
 
-                <nd-autocomplete [options]="cityArray" [required]="true" [title]="'עיר'" formControlName="city"
+                <nd-autocomplete [options]="cityArray" [required]="true" [title]="'עיר'" 
                     (selectionChange)="onSelectionCityChange($event)">
                 </nd-autocomplete>
 
@@ -32,7 +32,7 @@
                 </mat-form-field>
                 <br>
 
-                <nd-autocomplete [options]="yeshivaKeyValueArray" [title]="'ישיבה'" formControlName="yeshiva"
+                <nd-autocomplete [options]="yeshivaKeyValueArray" [title]="'ישיבה'" 
                     (selectionChange)="onSelectionChange($event)">
                 </nd-autocomplete>
 

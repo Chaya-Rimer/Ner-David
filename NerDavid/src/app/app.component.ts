@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   isLogin!:boolean;
@@ -14,8 +14,6 @@ export class AppComponent {
   constructor(public _authService:AuthService) { }
 
   ngOnInit() {
-    console.log("isLogin", this.isLogin);
-    
-    this.isLogin = this._authService.isAuthenticated();
+    this.isLogin=this._loginServce.isLoggedIn;
   }
 }
